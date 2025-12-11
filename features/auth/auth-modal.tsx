@@ -73,6 +73,7 @@ export const AuthModal = ({
 
   return (
     <Modal
+      panelClassName="max-w-[480px]"
       open={open}
       title={mode === "login" ? "Welcome back" : "Create your account"}
       description="Authenticate to access the admin dashboard and submit reports."

@@ -12,6 +12,7 @@ type ModalProps = {
   onClose: () => void
   children: React.ReactNode
   footer?: React.ReactNode
+  panelClassName?: string
 }
 
 export const Modal = ({
@@ -21,6 +22,7 @@ export const Modal = ({
   onClose,
   children,
   footer,
+  panelClassName,
 }: ModalProps) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -64,18 +66,24 @@ export const Modal = ({
     >
       <div
         className={cn(
-          "relative w-full max-w-lg rounded-xl border border-border bg-card p-6 shadow-2xl",
-          "animate-in fade-in zoom-in-95 duration-200"
+          "relative w-full max-w-5xl animate-in fade-in zoom-in-95 duration-200",
+          "rounded-xl border border-border bg-card p-6 shadow-2xl",
+          "max-h-[90vh] overflow-y-auto",
+          panelClassName
         )}
       >
-        <div className="space-y-2 pb-4">
-          <h2 className="text-xl font-semibold text-foreground">{title}</h2>
-          {description ? (
-            <p className="text-sm text-muted-foreground">{description}</p>
-          ) : null}
+        <div className="flex h-full flex-col gap-0">
+          <div className="space-y-2 pb-4">
+            <h2 className="text-xl font-semibold text-foreground">{title}</h2>
+            {description ? (
+              <p className="text-sm text-muted-foreground">{description}</p>
+            ) : null}
+          </div>
+          <div className="flex-1 min-h-0 space-y-4 overflow-y-auto pr-1">
+            {children}
+          </div>
+          {footer ? <div className="pt-6">{footer}</div> : null}
         </div>
-        <div className="space-y-4">{children}</div>
-        {footer ? <div className="pt-6">{footer}</div> : null}
       </div>
     </div>
   )

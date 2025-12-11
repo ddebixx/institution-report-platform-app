@@ -2,9 +2,9 @@ export const supportedLocales = ["en", "pl", "uk"] as const
 
 export type SupportedLocale = (typeof supportedLocales)[number]
 
-export const defaultLocale: SupportedLocale = "en"
+export const defaultLocale: SupportedLocale = "pl"
 
-type Messages = Record<string, unknown>
+type Messages = Record<string, {}>
 
 type MessagesByLocale = Record<SupportedLocale, Messages>
 
@@ -59,6 +59,120 @@ export const messagesByLocale: MessagesByLocale = {
       title: "Institution Report Platform",
       subtitle: "Confidential channel for institution reports and follow-ups",
     },
+    reportModal: {
+      title: "Submit a report",
+      description: {
+        step1: "Step 1 of 2: Provide institution and contact details.",
+        step2: "Step 2 of 2: Review the PDF, highlight issues, and compare regulations.",
+      },
+      steps: {
+        details: "Institution details",
+        review: "Document review",
+      },
+      progress: {
+        stepLabel: "Step {current} of {total}: {label}",
+        footer: "Step {current} of {total} · PDF only, max 10MB recommended",
+      },
+      footer: {
+        authenticated: "Authenticated as {email}",
+        loginRequired: "Please log in to enable submission",
+      },
+      actions: {
+        continue: "Continue to document review",
+        submit: "Submit report",
+        loginRequired: "Login required",
+        back: "Back to details",
+      },
+      fields: {
+        reporterName: { label: "Reporter name", placeholder: "Jane Doe" },
+        reporterEmail: { label: "Reporter email", placeholder: "jane.doe@example.com" },
+        institutionName: {
+          label: "Institution name",
+          placeholder: "Springfield University",
+          helper: "Optional: Add the institution display name.",
+        },
+        institutionSearch: {
+          placeholder: "Search for an institution by name or ID",
+          helper: "Provide at least 5 characters to see matching institutions.",
+          status: {
+            minChars: "Type at least {count} characters to search.",
+            loading: "Searching institutions...",
+            empty: "No institutions match this search.",
+            error: "Unable to load institution suggestions.",
+            idle: "",
+          },
+        },
+        numerRspo: { label: "Institution ID / Numer RSPO", placeholder: "123456" },
+        reportDescription: {
+          label: "Report description",
+          placeholder: "Provide a short summary of the issue.",
+        },
+      },
+      success: {
+        title: "Report submitted",
+        description: "Report ID: {id}",
+      },
+      errors: {
+        login: "Please login before submitting a report.",
+        pdfRequired: "A PDF file is required.",
+        submit: "Unable to submit report",
+      },
+      validation: {
+        reporterName: "Reporter name is required",
+        reporterEmail: "Valid email is required",
+        findingDetail: "Highlight detail is required",
+      },
+      regulations: {
+        primary: {
+          title: "Primary regulation",
+          description: "Check if the document follows the main accreditation standards.",
+        },
+        secondary: {
+          title: "Safety and compliance",
+          description: "Verify documented safeguards and compliance requirements.",
+        },
+        tertiary: {
+          title: "Quality and reporting",
+          description: "Confirm reporting formats, audit trails, and quality metrics.",
+        },
+      },
+      compare: {
+        upload: {
+          title: "Upload and preview",
+          placeholder: "Choose a PDF file to review",
+          helper: "View the uploaded document directly and confirm it matches the reported issues.",
+          replace: "Replace PDF",
+          cta: "Upload PDF",
+          uploadedTitle: "Uploaded PDF",
+          empty: "Upload a PDF to preview it here and to start highlighting findings.",
+        },
+        reference: {
+          title: "Reference regulation",
+          open: "Open in new tab",
+        },
+        regulations: {
+          title: "Current regulations",
+          description: "Cross-check the document against these references and link findings where applicable.",
+        },
+        highlights: {
+          title: "Highlights for moderators",
+          description: "Capture specific sections, deviations, or errors to guide moderator review.",
+          pagePlaceholder: "Page or section",
+          regulationPlaceholder: "Link to regulation (optional)",
+          detailPlaceholder: "Describe the issue, inconsistency, or highlight for moderators.",
+          add: "Add highlight",
+          empty: "No highlights added yet. Add notes to help moderators focus on the right areas.",
+          pageLabel: "Page/section: {page}",
+          regulationLabel: "Regulation: {regulation}",
+          remove: "Remove",
+        },
+        comparison: {
+          title: "Comparison notes",
+          placeholder: "Summarize how the document aligns with current regulations and list remaining concerns.",
+          description: "These notes are sent to moderators along with your highlights and the PDF.",
+        },
+      },
+    },
   },
   pl: {
     navbar: {
@@ -111,6 +225,120 @@ export const messagesByLocale: MessagesByLocale = {
       title: "Platforma zgłaszania instytucji",
       subtitle: "Poufny kanał zgłoszeń i dalszych działań",
     },
+    reportModal: {
+      title: "Submit a report",
+      description: {
+        step1: "Step 1 of 2: Provide institution and contact details.",
+        step2: "Step 2 of 2: Review the PDF, highlight issues, and compare regulations.",
+      },
+      steps: {
+        details: "Institution details",
+        review: "Document review",
+      },
+      progress: {
+        stepLabel: "Step {current} of {total}: {label}",
+        footer: "Step {current} of {total} · PDF only, max 10MB recommended",
+      },
+      footer: {
+        authenticated: "Authenticated as {email}",
+        loginRequired: "Please log in to enable submission",
+      },
+      actions: {
+        continue: "Continue to document review",
+        submit: "Submit report",
+        loginRequired: "Login required",
+        back: "Back to details",
+      },
+      fields: {
+        reporterName: { label: "Reporter name", placeholder: "Jane Doe" },
+        reporterEmail: { label: "Reporter email", placeholder: "jane.doe@example.com" },
+        institutionName: {
+          label: "Institution name",
+          placeholder: "Springfield University",
+          helper: "Optional: Add the institution display name.",
+        },
+        institutionSearch: {
+          placeholder: "Search for an institution by name or ID",
+          helper: "Provide at least 5 characters to see matching institutions.",
+          status: {
+            minChars: "Type at least {count} characters to search.",
+            loading: "Searching institutions...",
+            empty: "No institutions match this search.",
+            error: "Unable to load institution suggestions.",
+            idle: "",
+          },
+        },
+        numerRspo: { label: "Institution ID / Numer RSPO", placeholder: "123456" },
+        reportDescription: {
+          label: "Report description",
+          placeholder: "Provide a short summary of the issue.",
+        },
+      },
+      success: {
+        title: "Report submitted",
+        description: "Report ID: {id}",
+      },
+      errors: {
+        login: "Please login before submitting a report.",
+        pdfRequired: "A PDF file is required.",
+        submit: "Unable to submit report",
+      },
+      validation: {
+        reporterName: "Reporter name is required",
+        reporterEmail: "Valid email is required",
+        findingDetail: "Highlight detail is required",
+      },
+      regulations: {
+        primary: {
+          title: "Primary regulation",
+          description: "Check if the document follows the main accreditation standards.",
+        },
+        secondary: {
+          title: "Safety and compliance",
+          description: "Verify documented safeguards and compliance requirements.",
+        },
+        tertiary: {
+          title: "Quality and reporting",
+          description: "Confirm reporting formats, audit trails, and quality metrics.",
+        },
+      },
+      compare: {
+        upload: {
+          title: "Upload and preview",
+          placeholder: "Choose a PDF file to review",
+          helper: "View the uploaded document directly and confirm it matches the reported issues.",
+          replace: "Replace PDF",
+          cta: "Upload PDF",
+          uploadedTitle: "Uploaded PDF",
+          empty: "Upload a PDF to preview it here and to start highlighting findings.",
+        },
+        reference: {
+          title: "Reference regulation",
+          open: "Open in new tab",
+        },
+        regulations: {
+          title: "Current regulations",
+          description: "Cross-check the document against these references and link findings where applicable.",
+        },
+        highlights: {
+          title: "Highlights for moderators",
+          description: "Capture specific sections, deviations, or errors to guide moderator review.",
+          pagePlaceholder: "Page or section",
+          regulationPlaceholder: "Link to regulation (optional)",
+          detailPlaceholder: "Describe the issue, inconsistency, or highlight for moderators.",
+          add: "Add highlight",
+          empty: "No highlights added yet. Add notes to help moderators focus on the right areas.",
+          pageLabel: "Page/section: {page}",
+          regulationLabel: "Regulation: {regulation}",
+          remove: "Remove",
+        },
+        comparison: {
+          title: "Comparison notes",
+          placeholder: "Summarize how the document aligns with current regulations and list remaining concerns.",
+          description: "These notes are sent to moderators along with your highlights and the PDF.",
+        },
+      },
+    },
   },
   uk: {
     navbar: {
@@ -161,6 +389,120 @@ export const messagesByLocale: MessagesByLocale = {
     footer: {
       title: "Платформа звітів про заклади",
       subtitle: "Конфіденційний канал для звітів та подальших дій",
+    },
+    reportModal: {
+      title: "Submit a report",
+      description: {
+        step1: "Step 1 of 2: Provide institution and contact details.",
+        step2: "Step 2 of 2: Review the PDF, highlight issues, and compare regulations.",
+      },
+      steps: {
+        details: "Institution details",
+        review: "Document review",
+      },
+      progress: {
+        stepLabel: "Step {current} of {total}: {label}",
+        footer: "Step {current} of {total} · PDF only, max 10MB recommended",
+      },
+      footer: {
+        authenticated: "Authenticated as {email}",
+        loginRequired: "Please log in to enable submission",
+      },
+      actions: {
+        continue: "Continue to document review",
+        submit: "Submit report",
+        loginRequired: "Login required",
+        back: "Back to details",
+      },
+      fields: {
+        reporterName: { label: "Reporter name", placeholder: "Jane Doe" },
+        reporterEmail: { label: "Reporter email", placeholder: "jane.doe@example.com" },
+        institutionName: {
+          label: "Institution name",
+          placeholder: "Springfield University",
+          helper: "Optional: Add the institution display name.",
+        },
+        institutionSearch: {
+          placeholder: "Search for an institution by name or ID",
+          helper: "Provide at least 5 characters to see matching institutions.",
+          status: {
+            minChars: "Type at least {count} characters to search.",
+            loading: "Searching institutions...",
+            empty: "No institutions match this search.",
+            error: "Unable to load institution suggestions.",
+            idle: "",
+          },
+        },
+        numerRspo: { label: "Institution ID / Numer RSPO", placeholder: "123456" },
+        reportDescription: {
+          label: "Report description",
+          placeholder: "Provide a short summary of the issue.",
+        },
+      },
+      success: {
+        title: "Report submitted",
+        description: "Report ID: {id}",
+      },
+      errors: {
+        login: "Please login before submitting a report.",
+        pdfRequired: "A PDF file is required.",
+        submit: "Unable to submit report",
+      },
+      validation: {
+        reporterName: "Reporter name is required",
+        reporterEmail: "Valid email is required",
+        findingDetail: "Highlight detail is required",
+      },
+      regulations: {
+        primary: {
+          title: "Primary regulation",
+          description: "Check if the document follows the main accreditation standards.",
+        },
+        secondary: {
+          title: "Safety and compliance",
+          description: "Verify documented safeguards and compliance requirements.",
+        },
+        tertiary: {
+          title: "Quality and reporting",
+          description: "Confirm reporting formats, audit trails, and quality metrics.",
+        },
+      },
+      compare: {
+        upload: {
+          title: "Upload and preview",
+          placeholder: "Choose a PDF file to review",
+          helper: "View the uploaded document directly and confirm it matches the reported issues.",
+          replace: "Replace PDF",
+          cta: "Upload PDF",
+          uploadedTitle: "Uploaded PDF",
+          empty: "Upload a PDF to preview it here and to start highlighting findings.",
+        },
+        reference: {
+          title: "Reference regulation",
+          open: "Open in new tab",
+        },
+        regulations: {
+          title: "Current regulations",
+          description: "Cross-check the document against these references and link findings where applicable.",
+        },
+        highlights: {
+          title: "Highlights for moderators",
+          description: "Capture specific sections, deviations, or errors to guide moderator review.",
+          pagePlaceholder: "Page or section",
+          regulationPlaceholder: "Link to regulation (optional)",
+          detailPlaceholder: "Describe the issue, inconsistency, or highlight for moderators.",
+          add: "Add highlight",
+          empty: "No highlights added yet. Add notes to help moderators focus on the right areas.",
+          pageLabel: "Page/section: {page}",
+          regulationLabel: "Regulation: {regulation}",
+          remove: "Remove",
+        },
+        comparison: {
+          title: "Comparison notes",
+          placeholder: "Summarize how the document aligns with current regulations and list remaining concerns.",
+          description: "These notes are sent to moderators along with your highlights and the PDF.",
+        },
+      },
     },
   },
 }
