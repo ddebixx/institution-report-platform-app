@@ -25,7 +25,7 @@ export type CreateReportPayload = {
 
 export const createReport = async (
   payload: CreateReportPayload,
-  accessToken: string
+  accessToken?: string
 ): Promise<CreateReportResponse> => {
   const formData = new FormData()
   formData.append("reporterName", payload.reporterName)
@@ -61,31 +61,65 @@ export const createReport = async (
 
   formData.append("pdf", payload.pdf)
 
-  const response = await fetch(`${clientEnv.NEXT_PUBLIC_API_BASE_URL}/reports`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: formData,
-  })
-
-  if (!response.ok) {
-    const errorBody = await response.json().catch(() => null)
-    const errorMessage =
-      typeof errorBody?.message === "string"
-        ? errorBody.message
-        : Array.isArray(errorBody?.message)
-          ? errorBody.message.join(", ")
-          : "Failed to submit the report"
-    throw new Error(errorMessage)
+  const headers: HeadersInit = {}
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`
   }
 
-  const parsed = createReportResponseSchema.safeParse(await response.json())
-
-  if (!parsed.success) {
-    throw new Error("Unexpected response from the reports API")
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
+  const apiUrl = `${baseUrl}/reports`
+  
+  if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+    console.log("[createReport] Attempting to connect to:", apiUrl)
   }
 
-  return parsed.data
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers,
+      body: formData,
+    })
+
+    if (!response.ok) {
+      const errorBody = await response.json().catch(() => null)
+      const errorMessage =
+        typeof errorBody?.message === "string"
+          ? errorBody.message
+          : Array.isArray(errorBody?.message)
+            ? errorBody.message.join(", ")
+            : `Failed to submit the report (${response.status} ${response.statusText})`
+      throw new Error(errorMessage)
+    }
+
+    const responseData = await response.json()
+    const parsed = createReportResponseSchema.safeParse(responseData)
+
+    if (!parsed.success) {
+      throw new Error("Unexpected response from the reports API")
+    }
+
+    return parsed.data
+  } catch (error) {
+    if (error instanceof TypeError && error.message === "Failed to fetch") {
+      const errorMessage = `Unable to connect to the API at ${apiUrl}. Please check:
+1. The API server is running (Docker container should be up)
+2. The API URL is correct (expected: http://localhost:8080 for Docker)
+3. CORS is enabled on the backend
+4. Environment variable NEXT_PUBLIC_API_BASE_URL is set correctly`
+      
+      if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+        console.error("[createReport] Connection failed:", {
+          apiUrl,
+          baseUrl,
+          error: error instanceof Error ? error.message : String(error),
+          envVar: process.env.NEXT_PUBLIC_API_BASE_URL,
+        })
+      }
+      
+      throw new Error(errorMessage)
+    }
+    
+    throw error
+  }
 }
 

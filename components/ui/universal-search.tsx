@@ -128,14 +128,6 @@ export const UniversalSearchInput = ({
     onValueChange(event.target.value)
   }, [onValueChange])
 
-  const handleSelect = useCallback(
-    (option: UniversalSearchOption) => {
-      onSelect(option)
-      setIsOpen(false)
-    },
-    [onSelect]
-  )
-
   const handleOptionMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>, option: UniversalSearchOption) => {
       event.preventDefault()
