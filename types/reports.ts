@@ -46,3 +46,24 @@ export type ReportDocumentCompareProps = {
   onComparisonNotesChange: (value: string) => void
 }
 
+export type ReportStatus = "pending" | "assigned" | "completed"
+
+export type ModeratorReport = {
+  id: string
+  reporterName: string
+  reporterEmail: string
+  reportedInstitution?: string
+  institutionName?: string
+  institutionId?: string
+  numerRspo?: string
+  reportDescription?: string
+  reportReason?: string
+  status: ReportStatus
+  assignedTo?: string
+  assignedAt?: string
+  completedAt?: string
+  createdAt: string
+  updatedAt: string
+  pdfPath?: string
+}
+

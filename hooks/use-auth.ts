@@ -55,14 +55,9 @@ export const useAuthController = (): AuthController => {
 
       const {
         data: authSubscription,
-        error: subscriptionError,
       } = supabaseClient.auth.onAuthStateChange((_event, nextSession) => {
         handleSessionUpdate(nextSession)
       })
-
-      if (subscriptionError) {
-        setSession(null)
-      }
 
       return () => {
         authSubscription.subscription.unsubscribe()

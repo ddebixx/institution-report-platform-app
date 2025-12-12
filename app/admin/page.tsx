@@ -1,11 +1,10 @@
 "use client"
 
-import { useCallback, useEffect } from "react"
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { ShieldCheckIcon } from "lucide-react"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
-import { Button } from "@/components/ui/button"
+import { ModeratorDashboard } from "@/features/moderator/moderator-dashboard"
 
 const AdminPage = () => {
   const router = useRouter()
@@ -21,34 +20,23 @@ const AdminPage = () => {
     handleUnauthenticatedRedirect()
   }, [isInitializing, router, user])
 
-  const handleBackHome = useCallback(() => {
-    router.push("/")
-  }, [router])
+  if (isInitializing || !user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    )
+  }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 via-white to-slate-100 px-6">
-      <div className="w-full max-w-xl rounded-2xl border border-border/60 bg-card p-8 text-center shadow-xl">
-        <div className="mx-auto flex size-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <ShieldCheckIcon className="size-7" />
-        </div>
-        <h1 className="mt-4 text-2xl font-semibold text-foreground">
-          Admin dashboard
-        </h1>
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-foreground">Moderator Dashboard</h1>
         <p className="mt-2 text-muted-foreground">
-          {user
-            ? `You are authenticated as ${user.email ?? "an admin user"}.`
-            : "Redirecting to the homepage..."}
+          Manage and review reports assigned to you
         </p>
-        <div className="mt-6 flex items-center justify-center gap-3">
-          <Button
-            variant="outline"
-            className="font-semibold"
-            onClick={handleBackHome}
-          >
-            Back to home
-          </Button>
-        </div>
       </div>
+      <ModeratorDashboard />
     </div>
   )
 }

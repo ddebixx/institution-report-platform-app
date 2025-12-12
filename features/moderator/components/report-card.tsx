@@ -1,0 +1,135 @@
+"use client"
+
+import { useCallback } from "react"
+import { CalendarIcon, FileTextIcon, MailIcon, UserIcon } from "lucide-react"
+import { twMerge } from "tailwind-merge"
+
+import { Button } from "@/components/ui/button"
+import type { ModeratorReport } from "@/types/reports"
+
+type ReportCardProps = {
+  report: ModeratorReport
+  onAssign?: (reportId: string) => void
+  isAssigning?: boolean
+  showAssignButton?: boolean
+}
+
+export const ReportCard = ({
+  report,
+  onAssign,
+  isAssigning = false,
+  showAssignButton = false,
+}: ReportCardProps) => {
+  const handleAssign = useCallback(() => {
+    if (onAssign) {
+      onAssign(report.id)
+    }
+  }, [onAssign, report.id])
+
+  const formatDate = useCallback((dateString?: string) => {
+    if (!dateString) return "N/A"
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }, [])
+
+  const getStatusBadgeClass = useCallback((status: string) => {
+    switch (status) {
+      case "pending":
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
+      case "assigned":
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+      case "completed":
+        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+      default:
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400"
+    }
+  }, [])
+
+  return (
+    <div className="group rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:shadow-md">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 space-y-4">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1">
+              <h3 className="text-lg font-semibold text-foreground">
+                {report.institutionName || report.reportedInstitution || "Unnamed Institution"}
+              </h3>
+              {report.numerRspo && (
+                <p className="mt-1 text-sm text-muted-foreground">
+                  RSPO: {report.numerRspo}
+                </p>
+              )}
+            </div>
+            <span
+              className={twMerge(
+                "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium capitalize",
+                getStatusBadgeClass(report.status)
+              )}
+            >
+              {report.status}
+            </span>
+          </div>
+
+          {report.reportDescription && (
+            <p className="line-clamp-2 text-sm text-muted-foreground">
+              {report.reportDescription}
+            </p>
+          )}
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <UserIcon className="size-4 shrink-0" />
+              <span className="truncate">{report.reporterName}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <MailIcon className="size-4 shrink-0" />
+              <span className="truncate">{report.reporterEmail}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <CalendarIcon className="size-4 shrink-0" />
+              <span>Created: {formatDate(report.createdAt)}</span>
+            </div>
+            {report.assignedAt && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CalendarIcon className="size-4 shrink-0" />
+                <span>Assigned: {formatDate(report.assignedAt)}</span>
+              </div>
+            )}
+            {report.completedAt && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <CalendarIcon className="size-4 shrink-0" />
+                <span>Completed: {formatDate(report.completedAt)}</span>
+              </div>
+            )}
+          </div>
+
+          {report.reportReason && (
+            <div className="flex items-start gap-2 rounded-md bg-muted/50 p-3">
+              <FileTextIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+              <p className="text-sm text-muted-foreground">
+                <span className="font-medium">Reason:</span> {report.reportReason}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {showAssignButton && onAssign && (
+        <div className="mt-4 flex justify-end border-t border-border pt-4">
+          <Button
+            onClick={handleAssign}
+            disabled={isAssigning}
+            size="sm"
+            className="min-w-[120px]"
+          >
+            {isAssigning ? "Assigning..." : "Assign to Me"}
+          </Button>
+        </div>
+      )}
+    </div>
+  )
+}
+
