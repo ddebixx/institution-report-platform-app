@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useTranslations } from "next-intl"
 
-import { Navbar } from "@/components/navigation/navbar"
+import { Navbar } from "@/components/layout/navbar"
 
 type SiteShellProps = {
   children: React.ReactNode

@@ -308,3 +308,47 @@ export const assignReportToSelf = async (
   }
 }
 
+export type UpdateReportReviewPayload = {
+  findings: Array<{
+    id: string
+    detail: string
+    regulationId?: string
+    pageReference?: string
+  }>
+  comparisonNotes: string
+}
+
+export const updateReportReview = async (
+  reportId: string,
+  payload: UpdateReportReviewPayload,
+  accessToken: string
+): Promise<void> => {
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
+  const apiUrl = `${baseUrl}/reports/${reportId}/review`
+
+  const response = await fetch(apiUrl, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      reportContent: {
+        findings: payload.findings,
+        comparisonNotes: payload.comparisonNotes,
+      },
+    }),
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null)
+    const errorMessage =
+      typeof errorBody?.message === "string"
+        ? errorBody.message
+        : Array.isArray(errorBody?.message)
+          ? errorBody.message.join(", ")
+          : `Failed to update report review (${response.status} ${response.statusText})`
+    throw new Error(errorMessage)
+  }
+}
+

@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback } from "react"
-import { CalendarIcon, FileTextIcon, MailIcon, UserIcon } from "lucide-react"
+import { CalendarIcon, FileTextIcon, MailIcon, UserIcon, EyeIcon, FileCheckIcon } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 
 import { Button } from "@/components/ui/button"
@@ -10,6 +10,8 @@ import type { ModeratorReport } from "@/types/reports"
 type ReportCardProps = {
   report: ModeratorReport
   onAssign?: (reportId: string) => void
+  onPreview?: (report: ModeratorReport) => void
+  onReview?: (report: ModeratorReport) => void
   isAssigning?: boolean
   showAssignButton?: boolean
 }
@@ -17,6 +19,8 @@ type ReportCardProps = {
 export const ReportCard = ({
   report,
   onAssign,
+  onPreview,
+  onReview,
   isAssigning = false,
   showAssignButton = false,
 }: ReportCardProps) => {
@@ -25,6 +29,18 @@ export const ReportCard = ({
       onAssign(report.id)
     }
   }, [onAssign, report.id])
+
+  const handlePreview = useCallback(() => {
+    if (onPreview) {
+      onPreview(report)
+    }
+  }, [onPreview, report])
+
+  const handleReview = useCallback(() => {
+    if (onReview) {
+      onReview(report)
+    }
+  }, [onReview, report])
 
   const formatDate = useCallback((dateString?: string) => {
     if (!dateString) return "N/A"
@@ -117,8 +133,29 @@ export const ReportCard = ({
         </div>
       </div>
 
-      {showAssignButton && onAssign && (
-        <div className="mt-4 flex justify-end border-t border-border pt-4">
+      <div className="mt-4 flex items-center justify-end gap-2 border-t border-border pt-4">
+        {onPreview && (
+          <Button
+            variant="outline"
+            onClick={handlePreview}
+            size="sm"
+            className="gap-2"
+          >
+            <EyeIcon className="size-4" />
+            Preview
+          </Button>
+        )}
+        {report.status === "assigned" && onReview && (
+          <Button
+            onClick={handleReview}
+            size="sm"
+            className="gap-2"
+          >
+            <FileCheckIcon className="size-4" />
+            Review
+          </Button>
+        )}
+        {showAssignButton && onAssign && (
           <Button
             onClick={handleAssign}
             disabled={isAssigning}
@@ -127,8 +164,8 @@ export const ReportCard = ({
           >
             {isAssigning ? "Assigning..." : "Assign to Me"}
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

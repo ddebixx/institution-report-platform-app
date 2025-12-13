@@ -14,6 +14,8 @@ import {
 } from "@/fetchers/reports"
 import type { ModeratorReport } from "@/types/reports"
 import { ReportsList } from "./components/reports-list"
+import { ReportPreviewModal } from "./components/report-preview-modal"
+import { ReportReviewModal } from "./components/report-review-modal"
 
 type TabId = "available" | "assigned" | "completed"
 
@@ -37,6 +39,8 @@ export const ModeratorDashboard = () => {
   const [completedReports, setCompletedReports] = useState<ModeratorReport[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [assigningReportId, setAssigningReportId] = useState<string | null>(null)
+  const [previewReport, setPreviewReport] = useState<ModeratorReport | null>(null)
+  const [reviewReport, setReviewReport] = useState<ModeratorReport | null>(null)
 
   const loadReports = useCallback(async () => {
     if (!accessToken) return
@@ -92,6 +96,47 @@ export const ModeratorDashboard = () => {
   const handleTabChange = useCallback((tabId: TabId) => {
     setActiveTab(tabId)
   }, [])
+
+  const handlePreview = useCallback((report: ModeratorReport) => {
+    setPreviewReport(report)
+  }, [])
+
+  const handleReview = useCallback((report: ModeratorReport) => {
+    setReviewReport(report)
+  }, [])
+
+  const handleClosePreview = useCallback(() => {
+    setPreviewReport(null)
+  }, [])
+
+  const handleCloseReview = useCallback(() => {
+    setReviewReport(null)
+  }, [])
+
+  const handlePreviewAssign = useCallback(
+    async (reportId: string) => {
+      if (!accessToken) return
+
+      setAssigningReportId(reportId)
+      try {
+        await assignReportToSelf(reportId, accessToken)
+        toast.success("Report assigned successfully")
+        setPreviewReport(null)
+        await loadReports()
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Failed to assign report"
+        toast.error(errorMessage)
+      } finally {
+        setAssigningReportId(null)
+      }
+    },
+    [accessToken, loadReports]
+  )
+
+  const handleReviewUpdate = useCallback(async () => {
+    await loadReports()
+  }, [loadReports])
 
   const getCurrentReports = useCallback(() => {
     switch (activeTab) {
@@ -228,6 +273,7 @@ export const ModeratorDashboard = () => {
           <ReportsList
             reports={currentReports}
             onAssign={handleAssign}
+            onPreview={handlePreview}
             assigningReportId={assigningReportId}
             showAssignButton={true}
             emptyMessage="No available reports to assign"
@@ -236,16 +282,34 @@ export const ModeratorDashboard = () => {
         {activeTab === "assigned" && (
           <ReportsList
             reports={currentReports}
+            onPreview={handlePreview}
+            onReview={handleReview}
             emptyMessage="No assigned reports"
           />
         )}
         {activeTab === "completed" && (
           <ReportsList
             reports={currentReports}
+            onPreview={handlePreview}
             emptyMessage="No completed reports"
           />
         )}
       </div>
+
+      {/* Modals */}
+      <ReportPreviewModal
+        open={previewReport !== null}
+        report={previewReport}
+        onClose={handleClosePreview}
+        onAssign={handlePreviewAssign}
+        isAssigning={assigningReportId !== null}
+      />
+      <ReportReviewModal
+        open={reviewReport !== null}
+        report={reviewReport}
+        onClose={handleCloseReview}
+        onUpdate={handleReviewUpdate}
+      />
     </div>
   )
 }
