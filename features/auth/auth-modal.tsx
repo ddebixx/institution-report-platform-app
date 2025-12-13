@@ -2,13 +2,13 @@
 
 import { FormEvent, useCallback, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
-import { toast } from "sonner"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Modal } from "@/components/ui/modal"
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field"
+import { handleAuthSubmit } from "@/handlers/auth-modal"
 
 type AuthModalMode = "login" | "register"
 
@@ -49,24 +49,16 @@ export const AuthModal = ({
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
-
-      try {
-        if (mode === "login") {
-          await signIn(email, password)
-          toast.success("Logged in successfully")
-        } else {
-          await signUp(email, password)
-          toast.success("Registered and signed in")
-        }
-
-        handleClose()
-        router.push("/admin")
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : "Authentication failed"
-        toast.error(message)
-      }
+      await handleAuthSubmit({
+        event,
+        email,
+        password,
+        mode,
+        signIn,
+        signUp,
+        handleClose,
+        router,
+      })
     },
     [email, password, mode, signIn, signUp, handleClose, router]
   )

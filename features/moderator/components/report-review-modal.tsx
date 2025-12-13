@@ -25,7 +25,7 @@ import { getPdfUrl } from "@/lib/storage"
 import { REFERENCE_REGULATION_URL } from "@/consts/reports"
 import { createRegulationReferences } from "@/lib/reports"
 import { useTranslations } from "next-intl"
-import { updateReportReview } from "@/fetchers/reports"
+import { updateReportReview } from "@/mutations/reports"
 import { useAuthContext } from "@/components/auth/auth-provider"
 
 type ReportReviewModalProps = {

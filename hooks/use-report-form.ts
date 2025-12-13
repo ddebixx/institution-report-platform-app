@@ -9,7 +9,7 @@ import type { UniversalSearchOption } from "@/components/ui/universal-search"
 import { DEFAULT_REPORT_FORM_VALUES } from "@/consts/reports"
 import { createReportFormSchema } from "@/lib/schemas/report-form"
 import { buildReportPayload } from "@/lib/reports"
-import { createReport } from "@/fetchers/reports"
+import { createReport } from "@/mutations/reports"
 
 type UseReportFormOptions = {
   accessToken: string | null

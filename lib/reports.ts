@@ -1,7 +1,7 @@
 import type { RegulationReference } from "@/types/reports"
 import type { InstitutionSearchResult } from "@/fetchers/institutions"
 import type { UniversalSearchOption } from "@/components/ui/universal-search"
-import type { CreateReportPayload } from "@/fetchers/reports"
+import type { CreateReportPayload } from "@/mutations/reports"
 import type { ReportFormValues } from "@/types/reports"
 import type { useTranslations } from "next-intl"
 

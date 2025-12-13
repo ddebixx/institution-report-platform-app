@@ -3,16 +3,14 @@
 import { useCallback, useEffect, useState } from "react"
 import { CheckCircleIcon, ClockIcon, FileCheckIcon, LoaderIcon } from "lucide-react"
 import { twMerge } from "tailwind-merge"
-import { toast } from "sonner"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
-import {
-  assignReportToSelf,
-  fetchAssignedReports,
-  fetchAvailableReports,
-  fetchCompletedReports,
-} from "@/fetchers/reports"
 import type { ModeratorReport } from "@/types/reports"
+import {
+  handleAssign as handleAssignReport,
+  handlePreviewAssign as handlePreviewAssignReport,
+  loadReports as loadReportsHandler,
+} from "@/handlers/moderator-dashboard"
 import { ReportsList } from "./components/reports-list"
 import { ReportPreviewModal } from "./components/report-preview-modal"
 import { ReportReviewModal } from "./components/report-review-modal"
@@ -45,24 +43,13 @@ export const ModeratorDashboard = () => {
   const loadReports = useCallback(async () => {
     if (!accessToken) return
 
-    setIsLoading(true)
-    try {
-      const [available, assigned, completed] = await Promise.all([
-        fetchAvailableReports(accessToken),
-        fetchAssignedReports(accessToken),
-        fetchCompletedReports(accessToken),
-      ])
-
-      setAvailableReports(available)
-      setAssignedReports(assigned)
-      setCompletedReports(completed)
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Failed to load reports"
-      toast.error(errorMessage)
-    } finally {
-      setIsLoading(false)
-    }
+    await loadReportsHandler({
+      accessToken,
+      setAvailableReports,
+      setAssignedReports,
+      setCompletedReports,
+      setIsLoading,
+    })
   }, [accessToken])
 
   useEffect(() => {
@@ -77,18 +64,12 @@ export const ModeratorDashboard = () => {
     async (reportId: string) => {
       if (!accessToken) return
 
-      setAssigningReportId(reportId)
-      try {
-        await assignReportToSelf(reportId, accessToken)
-        toast.success("Report assigned successfully")
-        await loadReports()
-      } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : "Failed to assign report"
-        toast.error(errorMessage)
-      } finally {
-        setAssigningReportId(null)
-      }
+      await handleAssignReport({
+        reportId,
+        accessToken,
+        setAssigningReportId,
+        loadReports,
+      })
     },
     [accessToken, loadReports]
   )
@@ -117,19 +98,13 @@ export const ModeratorDashboard = () => {
     async (reportId: string) => {
       if (!accessToken) return
 
-      setAssigningReportId(reportId)
-      try {
-        await assignReportToSelf(reportId, accessToken)
-        toast.success("Report assigned successfully")
-        setPreviewReport(null)
-        await loadReports()
-      } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : "Failed to assign report"
-        toast.error(errorMessage)
-      } finally {
-        setAssigningReportId(null)
-      }
+      await handlePreviewAssignReport({
+        reportId,
+        accessToken,
+        setAssigningReportId,
+        setPreviewReport,
+        loadReports,
+      })
     },
     [accessToken, loadReports]
   )

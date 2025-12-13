@@ -17,6 +17,12 @@ import { useAuthContext } from "@/components/auth/auth-provider"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import {
+  handleDashboardNavigate as handleDashboardNavigateHandler,
+  handleLogout as handleLogoutHandler,
+  handleLogin as handleLoginHandler,
+  handleRegister as handleRegisterHandler,
+} from "@/handlers/navbar"
 
 export const Navbar = () => {
   const router = useRouter()
@@ -31,23 +37,19 @@ export const Navbar = () => {
   )
 
   const handleDashboardNavigate = useCallback(() => {
-    router.push("/admin")
-    setIsMobileMenuOpen(false)
+    handleDashboardNavigateHandler({ router, setIsMobileMenuOpen })
   }, [router])
 
   const handleLogout = useCallback(async () => {
-    await signOut()
-    setIsMobileMenuOpen(false)
+    await handleLogoutHandler({ signOut, setIsMobileMenuOpen })
   }, [signOut])
 
   const handleLogin = useCallback(() => {
-    openLogin()
-    setIsMobileMenuOpen(false)
+    handleLoginHandler({ openLogin, setIsMobileMenuOpen })
   }, [openLogin])
 
   const handleRegister = useCallback(() => {
-    openRegister()
-    setIsMobileMenuOpen(false)
+    handleRegisterHandler({ openRegister, setIsMobileMenuOpen })
   }, [openRegister])
 
   const toggleMobileMenu = useCallback(() => {

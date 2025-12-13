@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
 import { Modal } from "@/components/ui/modal"
-import { searchInstitutions } from "@/fetchers/institutions"
 import type { ReportModalProps } from "@/types/reports"
+import { handleInstitutionSearch as handleInstitutionSearchHandler } from "@/handlers/report-modal"
 import { REFERENCE_REGULATION_URL } from "@/consts/reports"
 import {
   createRegulationReferences,
@@ -35,7 +35,7 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
 
   const handleInstitutionSearch = useCallback(
     async (query: string) => {
-      return await searchInstitutions(query, accessToken ?? undefined)
+      return await handleInstitutionSearchHandler({ query, accessToken })
     },
     [accessToken]
   )
