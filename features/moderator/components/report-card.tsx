@@ -65,12 +65,14 @@ export const ReportCard = ({
   }, [])
 
   return (
-    <div className="group rounded-lg border border-border bg-card p-6 shadow-sm transition-all hover:shadow-md">
-      <div className="flex items-start justify-between gap-4">
+    <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:from-primary/3 group-hover:to-primary/3" />
+      
+      <div className="relative flex items-start justify-between gap-4">
         <div className="flex-1 space-y-4">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-foreground">
+              <h3 className="text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
                 {report.institutionName || report.reportedInstitution || "Unnamed Institution"}
               </h3>
               {report.numerRspo && (
@@ -81,7 +83,7 @@ export const ReportCard = ({
             </div>
             <span
               className={twMerge(
-                "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium capitalize",
+                "relative z-10 inline-flex items-center rounded-full px-3 py-1 text-xs font-medium capitalize shadow-sm transition-all duration-300",
                 getStatusBadgeClass(report.status)
               )}
             >
@@ -123,8 +125,8 @@ export const ReportCard = ({
           </div>
 
           {report.reportReason && (
-            <div className="flex items-start gap-2 rounded-md bg-muted/50 p-3">
-              <FileTextIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+            <div className="flex items-start gap-2 rounded-lg border border-border/30 bg-muted/30 p-3 backdrop-blur-sm transition-all duration-300 group-hover:border-primary/20 group-hover:bg-muted/40">
+              <FileTextIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors duration-300 group-hover:text-primary" />
               <p className="text-sm text-muted-foreground">
                 <span className="font-medium">Reason:</span> {report.reportReason}
               </p>
@@ -133,7 +135,7 @@ export const ReportCard = ({
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-end gap-2 border-t border-border pt-4">
+      <div className="relative mt-4 flex items-center justify-end gap-2 border-t border-border/50 pt-4">
         {onPreview && (
           <Button
             variant="outline"

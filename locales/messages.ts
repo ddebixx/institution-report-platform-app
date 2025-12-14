@@ -55,6 +55,81 @@ export const messagesByLocale: MessagesByLocale = {
         desc: "What happens after a report is received.",
       },
     },
+    features: {
+      title: "Powerful Features",
+      subtitle: "Everything you need to report and manage institutional issues",
+      secure: {
+        title: "Secure & Confidential",
+        desc: "End-to-end encryption ensures your reports remain private and protected throughout the entire process.",
+      },
+      pdf: {
+        title: "PDF Document Analysis",
+        desc: "Upload PDF evidence, preview documents, and highlight specific findings with page-level precision.",
+      },
+      regulations: {
+        title: "Regulation Compliance",
+        desc: "Compare documents against current regulations and link findings to specific compliance requirements.",
+      },
+      tracking: {
+        title: "Real-time Tracking",
+        desc: "Monitor your report status from submission through review to resolution with live updates.",
+      },
+      moderation: {
+        title: "Expert Moderation",
+        desc: "Experienced administrators review each report with detailed findings and comparison notes.",
+      },
+      dashboard: {
+        title: "Admin Dashboard",
+        desc: "Comprehensive dashboard for moderators to manage, assign, and review reports efficiently.",
+      },
+    },
+    howItWorks: {
+      title: "How It Works",
+      subtitle: "Simple, secure, and efficient reporting process",
+      step1: {
+        title: "Submit Your Report",
+        desc: "Fill in institution details, upload PDF evidence, and provide a clear description of the issue.",
+      },
+      step2: {
+        title: "Document Review",
+        desc: "Preview your PDF, highlight specific findings, and compare against current regulations.",
+      },
+      step3: {
+        title: "Moderator Review",
+        desc: "Expert moderators review your submission, analyze findings, and verify compliance.",
+      },
+      step4: {
+        title: "Resolution",
+        desc: "Receive updates on your report status and follow up on any actions taken.",
+      },
+    },
+    benefits: {
+      title: "Why Choose Our Platform",
+      subtitle: "Built for transparency, security, and efficiency",
+      transparency: {
+        title: "Full Transparency",
+        desc: "Track every step of your report's journey from submission to resolution.",
+      },
+      security: {
+        title: "Enterprise Security",
+        desc: "Bank-level encryption and secure storage protect your sensitive information.",
+      },
+      efficiency: {
+        title: "Streamlined Process",
+        desc: "Intuitive interface and automated workflows reduce reporting time by 70%.",
+      },
+      compliance: {
+        title: "Regulatory Compliance",
+        desc: "Built-in compliance checks ensure all reports meet current regulatory standards.",
+      },
+    },
+    stats: {
+      title: "Trusted by Institutions",
+      reportsSubmitted: "Reports Submitted",
+      activeModerators: "Active Moderators",
+      avgResponseTime: "Avg Response Time",
+      complianceRate: "Compliance Rate",
+    },
     footer: {
       title: "Institution Report Platform",
       subtitle: "Confidential channel for institution reports and follow-ups",
@@ -222,6 +297,81 @@ export const messagesByLocale: MessagesByLocale = {
         desc: "Co dzieje się po otrzymaniu zgłoszenia.",
       },
     },
+    features: {
+      title: "Potężne funkcje",
+      subtitle: "Wszystko czego potrzebujesz do zgłaszania i zarządzania problemami instytucjonalnymi",
+      secure: {
+        title: "Bezpieczne i poufne",
+        desc: "Szyfrowanie end-to-end zapewnia, że Twoje zgłoszenia pozostają prywatne i chronione przez cały proces.",
+      },
+      pdf: {
+        title: "Analiza dokumentów PDF",
+        desc: "Prześlij dowody PDF, podglądaj dokumenty i zaznaczaj konkretne ustalenia z precyzją na poziomie strony.",
+      },
+      regulations: {
+        title: "Zgodność z regulacjami",
+        desc: "Porównuj dokumenty z aktualnymi regulacjami i łącz ustalenia z konkretnymi wymaganiami zgodności.",
+      },
+      tracking: {
+        title: "Śledzenie w czasie rzeczywistym",
+        desc: "Monitoruj status swojego zgłoszenia od przesłania przez przegląd do rozwiązania z aktualizacjami na żywo.",
+      },
+      moderation: {
+        title: "Ekspercka moderacja",
+        desc: "Doświadczeni administratorzy przeglądają każde zgłoszenie z szczegółowymi ustaleniami i notatkami porównawczymi.",
+      },
+      dashboard: {
+        title: "Panel administratora",
+        desc: "Kompleksowy panel dla moderatorów do zarządzania, przypisywania i przeglądania zgłoszeń efektywnie.",
+      },
+    },
+    howItWorks: {
+      title: "Jak to działa",
+      subtitle: "Prosty, bezpieczny i efektywny proces zgłaszania",
+      step1: {
+        title: "Prześlij swoje zgłoszenie",
+        desc: "Wypełnij dane instytucji, prześlij dowody PDF i podaj jasny opis problemu.",
+      },
+      step2: {
+        title: "Przegląd dokumentu",
+        desc: "Podglądaj swój PDF, zaznaczaj konkretne ustalenia i porównuj z aktualnymi regulacjami.",
+      },
+      step3: {
+        title: "Przegląd moderatora",
+        desc: "Eksperccy moderatorzy przeglądają Twoje zgłoszenie, analizują ustalenia i weryfikują zgodność.",
+      },
+      step4: {
+        title: "Rozwiązanie",
+        desc: "Otrzymuj aktualizacje dotyczące statusu swojego zgłoszenia i śledź podjęte działania.",
+      },
+    },
+    benefits: {
+      title: "Dlaczego wybrać naszą platformę",
+      subtitle: "Zbudowana dla transparentności, bezpieczeństwa i efektywności",
+      transparency: {
+        title: "Pełna transparentność",
+        desc: "Śledź każdy krok swojej zgłoszenia od przesłania do rozwiązania.",
+      },
+      security: {
+        title: "Bezpieczeństwo na poziomie przedsiębiorstwa",
+        desc: "Szyfrowanie na poziomie bankowym i bezpieczne przechowywanie chronią Twoje wrażliwe informacje.",
+      },
+      efficiency: {
+        title: "Usprawniony proces",
+        desc: "Intuicyjny interfejs i zautomatyzowane przepływy pracy skracają czas zgłaszania o 70%.",
+      },
+      compliance: {
+        title: "Zgodność regulacyjna",
+        desc: "Wbudowane kontrole zgodności zapewniają, że wszystkie zgłoszenia spełniają aktualne standardy regulacyjne.",
+      },
+    },
+    stats: {
+      title: "Zaufane przez instytucje",
+      reportsSubmitted: "Zgłoszeń przesłanych",
+      activeModerators: "Aktywnych moderatorów",
+      avgResponseTime: "Średni czas odpowiedzi",
+      complianceRate: "Wskaźnik zgodności",
+    },
     footer: {
       title: "Platforma zgłaszania instytucji",
       subtitle: "Poufny kanał zgłoszeń i dalszych działań",
@@ -387,6 +537,81 @@ export const messagesByLocale: MessagesByLocale = {
         name: "Процес перевірки",
         desc: "Що відбувається після отримання звіту.",
       },
+    },
+    features: {
+      title: "Потужні функції",
+      subtitle: "Все, що потрібно для звітування та управління проблемами закладів",
+      secure: {
+        title: "Безпечно та конфіденційно",
+        desc: "Шифрування end-to-end забезпечує, що ваші звіти залишаються приватними та захищеними протягом усього процесу.",
+      },
+      pdf: {
+        title: "Аналіз документів PDF",
+        desc: "Завантажте PDF-докази, переглядайте документи та виділяйте конкретні знахідки з точністю на рівні сторінки.",
+      },
+      regulations: {
+        title: "Відповідність регуляціям",
+        desc: "Порівнюйте документи з поточними регуляціями та пов'язуйте знахідки з конкретними вимогами відповідності.",
+      },
+      tracking: {
+        title: "Відстеження в реальному часі",
+        desc: "Відстежуйте статус вашого звіту від подання через перегляд до вирішення з оновленнями в реальному часі.",
+      },
+      moderation: {
+        title: "Експертна модерація",
+        desc: "Досвідчені адміністратори переглядають кожен звіт з детальними знахідками та порівняльними нотатками.",
+      },
+      dashboard: {
+        title: "Адмін-панель",
+        desc: "Комплексна панель для модераторів для ефективного управління, призначення та перегляду звітів.",
+      },
+    },
+    howItWorks: {
+      title: "Як це працює",
+      subtitle: "Простий, безпечний та ефективний процес звітування",
+      step1: {
+        title: "Надішліть свій звіт",
+        desc: "Заповніть дані про заклад, завантажте PDF-докази та надайте чіткий опис проблеми.",
+      },
+      step2: {
+        title: "Перегляд документа",
+        desc: "Перегляньте свій PDF, виділіть конкретні знахідки та порівняйте з поточними регуляціями.",
+      },
+      step3: {
+        title: "Перегляд модератора",
+        desc: "Експертні модератори переглядають ваше подання, аналізують знахідки та перевіряють відповідність.",
+      },
+      step4: {
+        title: "Вирішення",
+        desc: "Отримуйте оновлення про статус вашого звіту та відстежуйте вжиті дії.",
+      },
+    },
+    benefits: {
+      title: "Чому обрати нашу платформу",
+      subtitle: "Побудована для прозорості, безпеки та ефективності",
+      transparency: {
+        title: "Повна прозорість",
+        desc: "Відстежуйте кожен крок вашого звіту від подання до вирішення.",
+      },
+      security: {
+        title: "Корпоративна безпека",
+        desc: "Шифрування банківського рівня та безпечне зберігання захищають вашу конфіденційну інформацію.",
+      },
+      efficiency: {
+        title: "Оптимізований процес",
+        desc: "Інтуїтивний інтерфейс та автоматизовані робочі процеси зменшують час звітування на 70%.",
+      },
+      compliance: {
+        title: "Регуляторна відповідність",
+        desc: "Вбудовані перевірки відповідності забезпечують, що всі звіти відповідають поточним регуляторним стандартам.",
+      },
+    },
+    stats: {
+      title: "Довіряють заклади",
+      reportsSubmitted: "Звітів надіслано",
+      activeModerators: "Активних модераторів",
+      avgResponseTime: "Середній час відповіді",
+      complianceRate: "Показник відповідності",
     },
     footer: {
       title: "Платформа звітів про заклади",

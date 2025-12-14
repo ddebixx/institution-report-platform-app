@@ -9,7 +9,7 @@ type ModalProps = {
   open: boolean
   title: string
   description?: string
-  onClose: () => void
+  onClose?: () => void
   children: React.ReactNode
   footer?: React.ReactNode
   panelClassName?: string
@@ -26,7 +26,7 @@ export const Modal = ({
 }: ModalProps) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && onClose) {
         onClose()
       }
     },
@@ -35,7 +35,7 @@ export const Modal = ({
 
   const handleBackdropClick = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
-      if (event.target === event.currentTarget) {
+      if (event.target === event.currentTarget && onClose) {
         onClose()
       }
     },
@@ -43,7 +43,7 @@ export const Modal = ({
   )
 
   useEffect(() => {
-    if (!open) {
+    if (!open || !onClose) {
       return
     }
 
@@ -51,7 +51,7 @@ export const Modal = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [handleKeyDown, open])
+  }, [handleKeyDown, open, onClose])
 
   if (!open) {
     return null
@@ -62,7 +62,7 @@ export const Modal = ({
       role="dialog"
       aria-modal="true"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
-      onClick={handleBackdropClick}
+      onClick={onClose ? handleBackdropClick : undefined}
     >
       <div
         className={cn(
