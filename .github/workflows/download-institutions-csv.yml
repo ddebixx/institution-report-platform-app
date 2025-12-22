@@ -1,0 +1,51 @@
+name: Download Institutions CSV
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  download-csv:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download CSV file
+        run: |
+          mkdir -p data
+          
+          curl -X POST \
+            -H "Content-Type: application/json" \
+            -H "Accept: text/csv, application/csv, */*" \
+            -H "User-Agent: GitHub-Actions" \
+            -d '{}' \
+            -o data/institutions.csv \
+            "https://rspo.gov.pl/api/Institution/Csv?IsDescending=false&OrderBy="
+      
+      - name: Verify CSV download
+        run: |
+          if [ ! -f data/institutions.csv ] || [ ! -s data/institutions.csv ]; then
+            echo "Error: CSV file was not downloaded or is empty"
+            exit 1
+          fi
+          
+          ls -lh data/institutions.csv
+          echo "CSV file downloaded successfully"
+      
+      - name: Commit and push CSV file
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          if git diff --quiet data/institutions.csv; then
+            echo "No changes to commit"
+          else
+            git add data/institutions.csv
+            git commit -m "chore: update institutions CSV [skip ci]"
+            git push
+          fi

@@ -17,7 +17,6 @@ export type CreateReportPayload = {
   reportDescription?: string
   reportContent?: Record<string, unknown>
   institutionName?: string
-  institutionId?: string
   numerRspo?: string
   reportReason?: string
   pdf: File
@@ -45,10 +44,6 @@ export const createReport = async (
 
   if (payload.institutionName) {
     formData.append("institutionName", payload.institutionName)
-  }
-
-  if (payload.institutionId) {
-    formData.append("institutionId", payload.institutionId)
   }
 
   if (payload.numerRspo) {

@@ -68,10 +68,10 @@ export function useReportForm({
         shouldValidate: true,
       })
       setValue("reportedInstitution", option.title, { shouldDirty: true })
-      setValue("institutionId", option.id, { shouldDirty: true })
-
-      if (option.meta) {
-        setValue("numerRspo", option.meta, { shouldDirty: true })
+      
+      const rspoNumber = option.meta || option.id
+      if (rspoNumber) {
+        setValue("numerRspo", rspoNumber, { shouldDirty: true })
       }
     },
     [setValue]

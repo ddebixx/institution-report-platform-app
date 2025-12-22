@@ -37,10 +37,10 @@ export const searchInstitutions = async (
   }
 
   const response = await fetch(
-    `${clientEnv.NEXT_PUBLIC_API_BASE_URL}/institutions/search?q=${encodeURIComponent(trimmedQuery)}`,
+    `/api/institutions/search?q=${encodeURIComponent(trimmedQuery)}`,
     {
       headers: {
-        ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        'Content-Type': 'application/json',
       },
     }
   )

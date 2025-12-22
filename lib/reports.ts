@@ -28,13 +28,15 @@ export function createRegulationLookup(
 export function mapInstitutionToOption(
   institution: InstitutionSearchResult
 ): UniversalSearchOption {
+  const rspoNumber = institution.numerRspo || institution.id
+  
   return {
-    id: institution.id,
+    id: rspoNumber,
     title: institution.name,
     subtitle: [institution.city, institution.country]
       .filter(Boolean)
       .join(", ") || undefined,
-    meta: institution.numerRspo,
+    meta: rspoNumber,
   }
 }
 
@@ -61,7 +63,6 @@ export function buildReportPayload(values: ReportFormValues): CreateReportPayloa
     reportDescription: values.reportDescription || undefined,
     reportContent: reportContentPayload,
     institutionName: values.institutionName || undefined,
-    institutionId: values.institutionId || undefined,
     numerRspo: values.numerRspo || undefined,
     reportReason: values.reportReason || undefined,
     pdf: values.pdf,
