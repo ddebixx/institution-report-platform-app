@@ -113,7 +113,7 @@ export const StatsSection = () => {
             <div
               key={stat.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 text-center shadow-lg backdrop-blur-sm transition-all duration-700 sm:p-8",
+                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 text-center shadow-xs backdrop-blur-sm transition-all duration-700 sm:p-8",
                 isVisible
                   ? "translate-y-0 opacity-100 scale-100"
                   : "translate-y-8 opacity-0 scale-95"

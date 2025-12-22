@@ -67,7 +67,7 @@ export const Modal = ({
       <div
         className={cn(
           "relative w-full max-w-5xl animate-in fade-in zoom-in-95 duration-200",
-          "rounded-xl border border-border bg-card p-6 shadow-2xl",
+          "rounded-xl border border-border bg-card p-6 shadow-md",
           "max-h-[90vh] overflow-y-auto",
           panelClassName
         )}

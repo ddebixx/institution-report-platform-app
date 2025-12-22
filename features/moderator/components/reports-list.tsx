@@ -16,9 +16,11 @@ import { ReportCard } from "./report-card"
 type ReportsListProps = {
   reports: ModeratorReport[]
   onAssign?: (reportId: string) => void
+  onUnassign?: (reportId: string) => void
   onPreview?: (report: ModeratorReport) => void
   onReview?: (report: ModeratorReport) => void
   assigningReportId?: string | null
+  unassigningReportId?: string | null
   showAssignButton?: boolean
   emptyMessage?: string
 }
@@ -26,9 +28,11 @@ type ReportsListProps = {
 export const ReportsList = ({
   reports,
   onAssign,
+  onUnassign,
   onPreview,
   onReview,
   assigningReportId,
+  unassigningReportId,
   showAssignButton = false,
   emptyMessage = "No reports available",
 }: ReportsListProps) => {
@@ -39,6 +43,15 @@ export const ReportsList = ({
       }
     },
     [onAssign]
+  )
+
+  const handleUnassign = useCallback(
+    (reportId: string) => {
+      if (onUnassign) {
+        onUnassign(reportId)
+      }
+    },
+    [onUnassign]
   )
 
   if (reports.length === 0) {
@@ -62,9 +75,11 @@ export const ReportsList = ({
           key={report.id}
           report={report}
           onAssign={handleAssign}
+          onUnassign={handleUnassign}
           onPreview={onPreview}
           onReview={onReview}
           isAssigning={assigningReportId === report.id}
+          isUnassigning={unassigningReportId === report.id}
           showAssignButton={showAssignButton}
         />
       ))}

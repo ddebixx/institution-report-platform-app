@@ -88,7 +88,7 @@ export const RegulationsSection = () => {
             <article
               key={regulation.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 shadow-lg backdrop-blur-sm transition-all duration-700",
+                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
                 isVisible && "opacity-100 scale-100"
               )}
               style={animationStyle}
@@ -97,7 +97,7 @@ export const RegulationsSection = () => {
 
               <div className="relative z-10">
                 <div className="mb-4 flex items-center gap-3 text-primary">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20 group-hover:shadow-lg group-hover:shadow-primary/20">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20 group-hover:shadow-xs group-hover:shadow-primary/20">
                     <Icon className="size-5 transition-all duration-300 group-hover:scale-110" />
                   </div>
                   <span className="text-lg font-semibold transition-colors duration-300 group-hover:text-primary">

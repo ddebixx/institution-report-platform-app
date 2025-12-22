@@ -1,6 +1,6 @@
 import { toast } from "sonner"
 
-import { assignReportToSelf } from "@/mutations/reports"
+import { assignReportToSelf, unassignReportFromSelf } from "@/mutations/reports"
 import {
   fetchAssignedReports,
   fetchAvailableReports,
@@ -102,6 +102,67 @@ export const handlePreviewAssign = async ({
     toast.error(errorMessage)
   } finally {
     setAssigningReportId(null)
+  }
+}
+
+type HandleUnassignParams = {
+  reportId: string
+  accessToken: string
+  setUnassigningReportId: (id: string | null) => void
+  loadReports: () => Promise<void>
+}
+
+export const handleUnassign = async ({
+  reportId,
+  accessToken,
+  setUnassigningReportId,
+  loadReports,
+}: HandleUnassignParams): Promise<void> => {
+  setUnassigningReportId(reportId)
+  try {
+    await unassignReportFromSelf(reportId, accessToken)
+    toast.success("Report unassigned successfully")
+    await loadReports()
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to unassign report"
+    toast.error(errorMessage)
+  } finally {
+    setUnassigningReportId(null)
+  }
+}
+
+type HandlePreviewUnassignParams = {
+  reportId: string
+  accessToken: string
+  setUnassigningReportId: (id: string | null) => void
+  setPreviewReport: (report: ModeratorReport | null) => void
+  loadReports: () => Promise<void>
+}
+
+export const handlePreviewUnassign = async ({
+  reportId,
+  accessToken,
+  setUnassigningReportId,
+  setPreviewReport,
+  loadReports,
+}: HandlePreviewUnassignParams): Promise<void> => {
+  setUnassigningReportId(reportId)
+  try {
+    await unassignReportFromSelf(reportId, accessToken)
+    
+    toast.success("Report unassigned successfully")
+    
+    setPreviewReport(null)
+    
+    await loadReports()
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Failed to unassign report"
+    
+    toast.error(errorMessage)
+  } finally {
+    setUnassigningReportId(null)
   }
 }
 

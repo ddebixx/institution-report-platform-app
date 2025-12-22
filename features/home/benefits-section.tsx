@@ -90,7 +90,7 @@ export const BenefitsSection = () => {
             <div
               key={benefit.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-8 shadow-lg backdrop-blur-sm transition-all duration-700",
+                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-8 shadow-xs backdrop-blur-sm transition-all duration-700",
                 isVisible && "opacity-100"
               )}
               style={animationStyle}
@@ -99,7 +99,7 @@ export const BenefitsSection = () => {
 
               <div className="relative z-10 flex gap-6">
                 <div className="shrink-0">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-lg group-hover:shadow-primary/30">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30">
                     <Icon className="size-8 transition-all duration-300 group-hover:scale-110" />
                   </div>
                 </div>

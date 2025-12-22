@@ -93,15 +93,15 @@ export const HowItWorksSection = () => {
               <div key={step.key} className="relative" style={animationStyle}>
                 <div
                   className={twMerge(
-                    "group relative flex flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-8 shadow-lg backdrop-blur-sm transition-all duration-700",
+                    "group relative flex flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-8 shadow-xs backdrop-blur-sm transition-all duration-700",
                     isVisible && "opacity-100 scale-100"
                   )}
                 >
-                  <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+                  <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.3)]">
                     {step.number}
                   </div>
 
-                  <div className="mb-6 mt-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-lg group-hover:shadow-primary/30">
+                  <div className="mb-6 mt-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30">
                     <Icon className="size-10 transition-all duration-300 group-hover:scale-110" />
                   </div>
 

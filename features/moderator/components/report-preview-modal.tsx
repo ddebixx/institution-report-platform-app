@@ -25,7 +25,9 @@ type ReportPreviewModalProps = {
   report: ModeratorReport | null
   onClose: () => void
   onAssign?: (reportId: string) => void
+  onUnassign?: (reportId: string) => void
   isAssigning?: boolean
+  isUnassigning?: boolean
 }
 
 export const ReportPreviewModal = ({
@@ -33,7 +35,9 @@ export const ReportPreviewModal = ({
   report,
   onClose,
   onAssign,
+  onUnassign,
   isAssigning = false,
+  isUnassigning = false,
 }: ReportPreviewModalProps) => {
   const pdfUrl = useMemo(() => {
     if (!report?.pdfPath) {
@@ -72,6 +76,12 @@ export const ReportPreviewModal = ({
     }
   }, [report, onAssign])
 
+  const handleUnassign = useCallback(() => {
+    if (report && onUnassign) {
+      onUnassign(report.id)
+    }
+  }, [report, onUnassign])
+
   if (!report) {
     return null
   }
@@ -88,11 +98,22 @@ export const ReportPreviewModal = ({
           <Button variant="ghost" onClick={onClose}>
             Close
           </Button>
-          {onAssign && (
-            <Button onClick={handleAssign} disabled={isAssigning}>
-              {isAssigning ? "Assigning..." : "Assign to Me"}
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            {report?.status === "assigned" && onUnassign && (
+              <Button
+                variant="outline"
+                onClick={handleUnassign}
+                disabled={isUnassigning}
+              >
+                {isUnassigning ? "Unassigning..." : "Unassign"}
+              </Button>
+            )}
+            {onAssign && (
+              <Button onClick={handleAssign} disabled={isAssigning}>
+                {isAssigning ? "Assigning..." : "Assign to Me"}
+              </Button>
+            )}
+          </div>
         </div>
       }
     >

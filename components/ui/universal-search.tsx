@@ -186,7 +186,7 @@ export const UniversalSearchInput = ({
       </div>
 
       {shouldShowDropdown ? (
-        <div className="absolute z-50 mt-1 w-full min-w-88 max-w-xl overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md">
+        <div className="absolute z-50 mt-1 w-full min-w-88 max-w-xl overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-xs">
           {isLoading ? (
             <div className="flex items-center gap-2 px-3 py-2 text-sm">
               <Loader2 className="size-4 animate-spin" />

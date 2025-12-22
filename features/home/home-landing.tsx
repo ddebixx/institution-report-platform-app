@@ -76,7 +76,7 @@ export const HomeLanding = () => {
           <div className="relative z-10 mx-auto max-w-4xl text-center">
             <div className="space-y-8">
               <div 
-                className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm transition-all duration-500 hover:bg-primary/20 hover:scale-105 hover:shadow-lg hover:shadow-primary/20"
+                className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm transition-all duration-500 hover:bg-primary/20 hover:scale-105 hover:shadow-xs hover:shadow-primary/20"
                 style={{
                   animation: heroVisible ? "scale-in 0.6s ease-out 0ms both" : undefined
                 }}
@@ -108,7 +108,7 @@ export const HomeLanding = () => {
               >
                 <Button
                   size="lg"
-                  className="group relative overflow-hidden font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                  className="group relative overflow-hidden font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xs hover:shadow-primary/30"
                   onClick={openReportModal}
                 >
                   <FileTextIcon className="size-5 transition-all duration-300" />
@@ -118,7 +118,7 @@ export const HomeLanding = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="group font-semibold transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-lg"
+                  className="group font-semibold transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-xs"
                   onClick={isAuthenticated ? openReportModal : openLogin}
                 >
                   <ArrowRightIcon className="size-5 transition-transform duration-300 group-hover:translate-x-1" />

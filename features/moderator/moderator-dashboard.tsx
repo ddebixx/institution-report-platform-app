@@ -9,6 +9,8 @@ import type { ModeratorReport } from "@/types/reports"
 import {
   handleAssign as handleAssignReport,
   handlePreviewAssign as handlePreviewAssignReport,
+  handleUnassign as handleUnassignReport,
+  handlePreviewUnassign as handlePreviewUnassignReport,
   loadReports as loadReportsHandler,
 } from "@/handlers/moderator-dashboard"
 import { ReportsList } from "./components/reports-list"
@@ -39,6 +41,7 @@ export const ModeratorDashboard = () => {
   const [completedReports, setCompletedReports] = useState<ModeratorReport[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [assigningReportId, setAssigningReportId] = useState<string | null>(null)
+  const [unassigningReportId, setUnassigningReportId] = useState<string | null>(null)
   const [previewReport, setPreviewReport] = useState<ModeratorReport | null>(null)
   const [reviewReport, setReviewReport] = useState<ModeratorReport | null>(null)
   const [showProfileModal, setShowProfileModal] = useState(false)
@@ -151,6 +154,35 @@ export const ModeratorDashboard = () => {
     [accessToken, loadReports]
   )
 
+  const handleUnassign = useCallback(
+    async (reportId: string) => {
+      if (!accessToken) return
+
+      await handleUnassignReport({
+        reportId,
+        accessToken,
+        setUnassigningReportId,
+        loadReports,
+      })
+    },
+    [accessToken, loadReports]
+  )
+
+  const handlePreviewUnassign = useCallback(
+    async (reportId: string) => {
+      if (!accessToken) return
+
+      await handlePreviewUnassignReport({
+        reportId,
+        accessToken,
+        setUnassigningReportId,
+        setPreviewReport,
+        loadReports,
+      })
+    },
+    [accessToken, loadReports]
+  )
+
   const handleReviewUpdate = useCallback(async () => {
     await loadReports()
   }, [loadReports])
@@ -171,7 +203,7 @@ export const ModeratorDashboard = () => {
       case "available":
         return availableReports
       case "assigned":
-        return assignedReports
+        return assignedReports.filter((report) => report.status === "assigned")
       case "completed":
         return completedReports
       default:
@@ -180,13 +212,16 @@ export const ModeratorDashboard = () => {
   }, [activeTab, availableReports, assignedReports, completedReports])
 
   const getStats = useCallback(() => {
+    const assignedOnlyCount = assignedReports.filter(
+      (report) => report.status === "assigned"
+    ).length
     return {
       available: availableReports.length,
-      assigned: assignedReports.length,
+      assigned: assignedOnlyCount,
       completed: completedReports.length,
-      total: availableReports.length + assignedReports.length + completedReports.length,
+      total: availableReports.length + assignedOnlyCount + completedReports.length,
     }
-  }, [availableReports.length, assignedReports.length, completedReports.length])
+  }, [availableReports.length, assignedReports, completedReports.length])
 
   const stats = getStats()
   const currentReports = getCurrentReports()
@@ -220,7 +255,7 @@ export const ModeratorDashboard = () => {
   return (
     <div className="mx-auto w-full max-w-7xl space-y-8 px-4 py-8 sm:px-6">
       <div className="grid gap-6 md:grid-cols-4">
-        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xs hover:shadow-primary/10">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
@@ -232,7 +267,7 @@ export const ModeratorDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-xl hover:shadow-blue-500/10">
+        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-blue-500/30 hover:shadow-xs hover:shadow-blue-500/10">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
@@ -246,7 +281,7 @@ export const ModeratorDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-yellow-500/30 hover:shadow-xl hover:shadow-yellow-500/10">
+        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-yellow-500/30 hover:shadow-xs hover:shadow-yellow-500/10">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-yellow-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
@@ -260,7 +295,7 @@ export const ModeratorDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-green-500/30 hover:shadow-xl hover:shadow-green-500/10">
+        <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-green-500/30 hover:shadow-xs hover:shadow-green-500/10">
           <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-green-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
@@ -295,7 +330,7 @@ export const ModeratorDashboard = () => {
                 className={twMerge(
                   "group relative flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-300",
                   isActive
-                    ? "bg-primary/10 text-primary shadow-md shadow-primary/10"
+                    ? "bg-primary/10 text-primary shadow-xs shadow-primary/10"
                     : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                 )}
                 aria-current={isActive ? "page" : undefined}
@@ -338,6 +373,8 @@ export const ModeratorDashboard = () => {
             reports={currentReports}
             onPreview={handlePreview}
             onReview={handleReview}
+            onUnassign={handleUnassign}
+            unassigningReportId={unassigningReportId}
             emptyMessage="No assigned reports"
           />
         )}
@@ -356,7 +393,9 @@ export const ModeratorDashboard = () => {
         report={previewReport}
         onClose={handleClosePreview}
         onAssign={handlePreviewAssign}
+        onUnassign={handlePreviewUnassign}
         isAssigning={assigningReportId !== null}
+        isUnassigning={unassigningReportId !== null}
       />
       <ReportReviewModal
         open={reviewReport !== null}

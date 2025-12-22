@@ -204,7 +204,7 @@ export const Navbar = () => {
           />
           <div
             className={cn(
-              "fixed right-0 top-0 z-50 h-full w-[280px] bg-background shadow-xl sm:hidden",
+              "fixed right-0 top-0 z-50 h-full w-[280px] bg-background shadow-xs sm:hidden",
               "animate-in slide-in-from-right duration-200"
             )}
           >

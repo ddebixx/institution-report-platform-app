@@ -39,7 +39,7 @@ export default function NotFound() {
             <div className="relative">
               <div className="absolute inset-0 rounded-3xl bg-primary/20 blur-3xl animate-glow" />
               
-              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-card/80 p-12 shadow-2xl backdrop-blur-sm sm:p-16">
+              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-card/80 p-12 shadow-md backdrop-blur-sm sm:p-16">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/10" />
                 
                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
@@ -83,7 +83,7 @@ export default function NotFound() {
             <Button
               size="lg"
               onClick={handleGoHome}
-              className="group relative overflow-hidden font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+              className="group relative overflow-hidden font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xs hover:shadow-primary/30"
             >
               <HomeIcon className="size-5 transition-transform duration-300 group-hover:scale-110" />
               Go Home
@@ -94,7 +94,7 @@ export default function NotFound() {
               size="lg"
               variant="outline"
               onClick={handleGoBack}
-              className="group font-semibold transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-lg"
+              className="group font-semibold transition-all duration-300 hover:scale-105 hover:border-primary/50 hover:shadow-xs"
             >
               <ArrowLeftIcon className="size-5 transition-transform duration-300 group-hover:-translate-x-1" />
               Go Back

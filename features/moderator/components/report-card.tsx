@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback } from "react"
-import { CalendarIcon, FileTextIcon, MailIcon, UserIcon, EyeIcon, FileCheckIcon } from "lucide-react"
+import { CalendarIcon, FileTextIcon, MailIcon, UserIcon, EyeIcon, FileCheckIcon, X } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 
 import { Button } from "@/components/ui/button"
@@ -10,18 +10,22 @@ import type { ModeratorReport } from "@/types/reports"
 type ReportCardProps = {
   report: ModeratorReport
   onAssign?: (reportId: string) => void
+  onUnassign?: (reportId: string) => void
   onPreview?: (report: ModeratorReport) => void
   onReview?: (report: ModeratorReport) => void
   isAssigning?: boolean
+  isUnassigning?: boolean
   showAssignButton?: boolean
 }
 
 export const ReportCard = ({
   report,
   onAssign,
+  onUnassign,
   onPreview,
   onReview,
   isAssigning = false,
+  isUnassigning = false,
   showAssignButton = false,
 }: ReportCardProps) => {
   const handleAssign = useCallback(() => {
@@ -29,6 +33,12 @@ export const ReportCard = ({
       onAssign(report.id)
     }
   }, [onAssign, report.id])
+
+  const handleUnassign = useCallback(() => {
+    if (onUnassign) {
+      onUnassign(report.id)
+    }
+  }, [onUnassign, report.id])
 
   const handlePreview = useCallback(() => {
     if (onPreview) {
@@ -65,7 +75,7 @@ export const ReportCard = ({
   }, [])
 
   return (
-    <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+    <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xs hover:shadow-primary/10">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-transparent to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:from-primary/3 group-hover:to-primary/3" />
       
       <div className="relative flex items-start justify-between gap-4">
@@ -145,6 +155,18 @@ export const ReportCard = ({
           >
             <EyeIcon className="size-4" />
             Preview
+          </Button>
+        )}
+        {report.status === "assigned" && onUnassign && (
+          <Button
+            variant="outline"
+            onClick={handleUnassign}
+            disabled={isUnassigning}
+            size="sm"
+            className="gap-2"
+          >
+            <X className="size-4" />
+            {isUnassigning ? "Unassigning..." : "Unassign"}
           </Button>
         )}
         {report.status === "assigned" && onReview && (
