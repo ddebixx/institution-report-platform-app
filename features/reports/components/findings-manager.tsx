@@ -66,7 +66,6 @@ export const FindingsManager = ({
   return (
     <div className="space-y-4 rounded-md border border-border/60 bg-background p-4">
       <h3 className="text-sm font-semibold text-foreground">{t("highlights.title")}</h3>
-      <p className="text-xs text-muted-foreground">{t("highlights.description")}</p>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <Input

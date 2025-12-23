@@ -49,12 +49,9 @@ export const PdfUploadField = ({
           )}
           htmlFor={uploadInputId}
         >
-          <div className="flex flex-col">
-            <span className="font-medium text-foreground">
-              {file?.name ?? t("upload.placeholder")}
-            </span>
-            <span className="text-xs text-muted-foreground">{t("upload.helper")}</span>
-          </div>
+          <span className="font-medium text-foreground">
+            {file?.name ?? t("upload.placeholder")}
+          </span>
         </label>
         <input
           id={uploadInputId}

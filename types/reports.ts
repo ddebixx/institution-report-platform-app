@@ -65,5 +65,9 @@ export type ModeratorReport = {
   createdAt: string
   updatedAt: string
   pdfPath?: string
+  reportContent?: {
+    findings: ReportFinding[]
+    comparisonNotes: string
+  }
 }
 

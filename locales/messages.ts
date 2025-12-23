@@ -177,7 +177,11 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { label: "Institution ID / Numer RSPO", placeholder: "123456" },
+        numerRspo: { 
+          label: "Institution ID / Numer RSPO", 
+          placeholder: "123456",
+          description: "This field is automatically filled when you select an institution from the search above."
+        },
         reportDescription: {
           label: "Report description",
           placeholder: "Provide a short summary of the issue.",
@@ -196,6 +200,7 @@ export const messagesByLocale: MessagesByLocale = {
       validation: {
         reporterName: "Reporter name is required",
         reporterEmail: "Valid email is required",
+        institutionName: "Institution name is required",
         findingDetail: "Highlight detail is required",
       },
       regulations: {
@@ -419,7 +424,11 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { label: "ID instytucji / Numer RSPO", placeholder: "123456" },
+        numerRspo: { 
+          label: "ID instytucji / Numer RSPO", 
+          placeholder: "123456",
+          description: "To pole jest automatycznie wypełniane po wybraniu instytucji z wyszukiwania powyżej."
+        },
         reportDescription: {
           label: "Opis zgłoszenia",
           placeholder: "Podaj krótkie podsumowanie problemu.",
@@ -438,6 +447,7 @@ export const messagesByLocale: MessagesByLocale = {
       validation: {
         reporterName: "Imię i nazwisko zgłaszającego jest wymagane",
         reporterEmail: "Wymagany jest prawidłowy email",
+        institutionName: "Nazwa instytucji jest wymagana",
         findingDetail: "Szczegół zaznaczenia jest wymagany",
       },
       regulations: {
@@ -660,7 +670,11 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { label: "ID закладу / Номер RSPO", placeholder: "123456" },
+        numerRspo: { 
+          label: "ID закладу / Номер RSPO", 
+          placeholder: "123456",
+          description: "Це поле автоматично заповнюється після вибору закладу з пошуку вище."
+        },
         reportDescription: {
           label: "Опис звіту",
           placeholder: "Надайте короткий опис проблеми.",
@@ -679,6 +693,7 @@ export const messagesByLocale: MessagesByLocale = {
       validation: {
         reporterName: "Ім'я та прізвище автора обов'язкові",
         reporterEmail: "Потрібна дійсна електронна пошта",
+        institutionName: "Назва закладу обов'язкова",
         findingDetail: "Деталь виділення обов'язкова",
       },
       regulations: {

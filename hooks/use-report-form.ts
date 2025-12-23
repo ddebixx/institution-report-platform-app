@@ -67,11 +67,13 @@ export function useReportForm({
         shouldDirty: true,
         shouldValidate: true,
       })
+      
       setValue("reportedInstitution", option.title, { shouldDirty: true })
       
       const rspoNumber = option.meta || option.id
       if (rspoNumber) {
         setValue("numerRspo", rspoNumber, { shouldDirty: true })
+        setValue("institutionId", rspoNumber, { shouldDirty: true })
       }
     },
     [setValue]
@@ -157,7 +159,7 @@ export function useReportForm({
           setValue("reporterEmail", emailInput.value, { shouldValidate: true })
         }
 
-        const isStepValid = await trigger(["reporterName", "reporterEmail"])
+        const isStepValid = await trigger(["reporterName", "reporterEmail", "institutionName"])
 
         if (!isStepValid) {
           return

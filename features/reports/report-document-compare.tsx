@@ -10,7 +10,6 @@ import type {
 import { useFilePreview } from "@/hooks/use-file-preview"
 import { PdfUploadField } from "./components/pdf-upload-field"
 import { PdfViewer } from "./components/pdf-viewer"
-import { RegulationsList } from "./components/regulations-list"
 import { FindingsManager } from "./components/findings-manager"
 import { ComparisonNotesField } from "./components/comparison-notes-field"
 
@@ -54,14 +53,11 @@ export const ReportDocumentCompare = ({
         />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        <RegulationsList regulations={regulations} />
-        <FindingsManager
-          regulations={regulations}
-          findings={findings}
-          onFindingsChange={onFindingsChange}
-        />
-      </div>
+      <FindingsManager
+        regulations={regulations}
+        findings={findings}
+        onFindingsChange={onFindingsChange}
+      />
 
       <ComparisonNotesField value={comparisonNotes} onChange={onComparisonNotesChange} />
     </div>

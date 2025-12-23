@@ -63,6 +63,7 @@ export function buildReportPayload(values: ReportFormValues): CreateReportPayloa
     reportDescription: values.reportDescription || undefined,
     reportContent: reportContentPayload,
     institutionName: values.institutionName || undefined,
+    institutionId: values.institutionId || undefined,
     numerRspo: values.numerRspo || undefined,
     reportReason: values.reportReason || undefined,
     pdf: values.pdf,

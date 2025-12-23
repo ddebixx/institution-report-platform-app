@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl"
 import {
   Field,
   FieldContent,
-  FieldDescription,
   FieldLabel,
 } from "@/components/ui/field"
 import { Textarea } from "@/components/ui/textarea"
@@ -40,7 +39,6 @@ export const ComparisonNotesField = ({
           rows={4}
         />
       </FieldContent>
-      <FieldDescription>{t("comparison.description")}</FieldDescription>
     </Field>
   )
 }

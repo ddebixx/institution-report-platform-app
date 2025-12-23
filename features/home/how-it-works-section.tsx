@@ -77,7 +77,7 @@ export const HowItWorksSection = () => {
       </div>
 
       <div className="relative z-10">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-8 lg:flex lg:flex-row lg:items-stretch lg:gap-4">
           {steps.map((step, index) => {
             const Icon = step.icon
             const isVisible = visibleSteps.has(index)
@@ -90,39 +90,41 @@ export const HowItWorksSection = () => {
               : { opacity: 0 }
 
             return (
-              <div key={step.key} className="relative" style={animationStyle}>
-                <div
-                  className={twMerge(
-                    "group relative flex flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-8 shadow-xs backdrop-blur-sm transition-all duration-700",
-                    isVisible && "opacity-100 scale-100"
-                  )}
-                >
-                  <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.3)]">
-                    {step.number}
+              <>
+                <div key={step.key} className="relative flex-1" style={animationStyle}>
+                  <div
+                    className={twMerge(
+                      "group relative flex h-full min-h-[320px] flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-8 pt-10 shadow-xs backdrop-blur-sm transition-all duration-700",
+                      isVisible && "opacity-100 scale-100"
+                    )}
+                  >
+                    <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
+                      {step.number}
+                    </div>
+
+                    <div className="mb-6 mt-4 flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30">
+                      <Icon className="size-10 transition-all duration-300 group-hover:scale-110" />
+                    </div>
+
+                    <h3 className="mb-3 text-center text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
+                      {t(`${step.key}.title`)}
+                    </h3>
+                    <p className="text-center text-sm leading-relaxed text-muted-foreground">
+                      {t(`${step.key}.desc`)}
+                    </p>
+
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
+                    
+                    <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
                   </div>
-
-                  <div className="mb-6 mt-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30">
-                    <Icon className="size-10 transition-all duration-300 group-hover:scale-110" />
-                  </div>
-
-                  <h3 className="mb-3 text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
-                    {t(`${step.key}.title`)}
-                  </h3>
-                  <p className="text-center text-sm leading-relaxed text-muted-foreground">
-                    {t(`${step.key}.desc`)}
-                  </p>
-
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
-                  
-                  <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.15)]" />
                 </div>
 
                 {!isLast && (
-                  <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block xl:-right-4">
-                    <ArrowRightIcon className="size-6 text-primary/40 transition-all duration-300 group-hover:text-primary/60 group-hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.3)]" />
+                  <div key={`arrow-${index}`} className="hidden items-center justify-center lg:flex lg:flex-shrink-0">
+                    <ArrowRightIcon className="size-6 text-primary/40 transition-all duration-300 hover:text-primary/60 hover:drop-shadow-[0_0_4px_rgba(0,0,0,0.1)]" />
                   </div>
                 )}
-              </div>
+              </>
             )
           })}
         </div>

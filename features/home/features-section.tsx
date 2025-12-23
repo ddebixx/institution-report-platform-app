@@ -105,7 +105,6 @@ export const FeaturesSection = () => {
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 transition-all duration-500 group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5" />
-              
               <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]" />
 
               <div className="relative z-10">

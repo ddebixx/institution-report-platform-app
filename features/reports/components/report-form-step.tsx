@@ -5,7 +5,6 @@ import {
   Controller,
   type Control,
   type FieldErrors,
-  type UseFormRegister,
 } from "react-hook-form"
 import { useTranslations } from "next-intl"
 
@@ -21,7 +20,6 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import type { ReportFormValues } from "@/types/reports"
 import type { InstitutionSearchResult } from "@/fetchers/institutions"
 import { mapInstitutionToOption } from "@/lib/reports"
@@ -29,7 +27,6 @@ import { MIN_INSTITUTION_SEARCH_CHARACTERS } from "@/consts/reports"
 
 type ReportFormStep1Props = {
   control: Control<ReportFormValues>
-  register: UseFormRegister<ReportFormValues>
   errors: FieldErrors<ReportFormValues>
   onInstitutionSearch: (query: string) => Promise<InstitutionSearchResult[]>
   onInstitutionSelect: (option: UniversalSearchOption) => void
@@ -37,7 +34,6 @@ type ReportFormStep1Props = {
 
 export const ReportFormStep1 = ({
   control,
-  register,
   errors,
   onInstitutionSearch,
   onInstitutionSelect,
@@ -116,7 +112,10 @@ export const ReportFormStep1 = ({
 
       <FieldGroup>
         <Field>
-          <FieldLabel>{t("fields.institutionName.label")}</FieldLabel>
+          <FieldLabel>
+            {t("fields.institutionName.label")}
+            <span className="text-destructive ml-1">*</span>
+          </FieldLabel>
           <FieldContent>
             <Controller
               control={control}
@@ -136,29 +135,32 @@ export const ReportFormStep1 = ({
               )}
             />
           </FieldContent>
+          {errors.institutionName?.message ? (
+            <FieldDescription className="text-destructive">
+              {errors.institutionName.message}
+            </FieldDescription>
+          ) : null}
         </Field>
 
         <Field>
           <FieldLabel>{t("fields.numerRspo.label")}</FieldLabel>
           <FieldContent>
-            <Input
-              {...register("numerRspo")}
-              placeholder={t("fields.numerRspo.placeholder")}
+            <Controller
+              control={control}
+              name="numerRspo"
+              render={({ field }) => (
+                <Input
+                  {...field}
+                  value={field.value || ""}
+                  placeholder={t("fields.numerRspo.placeholder")}
+                  disabled
+                  className="bg-muted cursor-not-allowed"
+                />
+              )}
             />
           </FieldContent>
         </Field>
       </FieldGroup>
-
-      <Field>
-        <FieldLabel>{t("fields.reportDescription.label")}</FieldLabel>
-        <FieldContent>
-          <Textarea
-            {...register("reportDescription")}
-            placeholder={t("fields.reportDescription.placeholder")}
-            rows={4}
-          />
-        </FieldContent>
-      </Field>
     </div>
   )
 }

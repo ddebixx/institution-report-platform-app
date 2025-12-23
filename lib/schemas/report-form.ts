@@ -9,7 +9,7 @@ export function createReportFormSchema(
     reporterEmail: z.string().trim().email(t("validation.reporterEmail")),
     reportedInstitution: z.string().trim().optional(),
     reportDescription: z.string().trim().optional(),
-    institutionName: z.string().trim().optional(),
+    institutionName: z.string().trim().min(1, t("validation.institutionName")),
     institutionId: z.string().trim().optional(),
     numerRspo: z.string().trim().optional(),
     reportReason: z.string().trim().optional(),

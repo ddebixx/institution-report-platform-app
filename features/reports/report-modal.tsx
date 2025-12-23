@@ -97,7 +97,6 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
         {activeStep === 1 ? (
           <ReportFormStep1
             control={control}
-            register={register}
             errors={errors}
             onInstitutionSearch={handleInstitutionSearch}
             onInstitutionSelect={handleInstitutionSelect}

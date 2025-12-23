@@ -59,6 +59,7 @@ export const UniversalSearchInput = ({
   const [statusMessage, setStatusMessage] = useState<string>(statusText.minChars)
   const requestCounterRef = useRef(0)
   const inputRef = useRef<HTMLInputElement | null>(null)
+  const justSelectedRef = useRef(false)
 
   const trimmedValue = useMemo(() => value.trim(), [value])
   const hasEnoughCharacters = useMemo(
@@ -75,6 +76,11 @@ export const UniversalSearchInput = ({
     }
 
     async function searchWhenEligible() {
+      if (justSelectedRef.current) {
+        justSelectedRef.current = false
+        return
+      }
+
       if (trimmedValue.length < minCharacters) {
         resetForShortQuery()
         return
@@ -131,21 +137,25 @@ export const UniversalSearchInput = ({
   const handleOptionMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>, option: UniversalSearchOption) => {
       event.preventDefault()
+      justSelectedRef.current = true
       onSelect(option)
       setIsOpen(false)
+      setOptions([])
     },
     [onSelect]
   )
 
+  const hasRenderableRows = useMemo(
+    () =>
+      isLoading ||
+      options.length > 0 ||
+      (Boolean(statusMessage) && hasEnoughCharacters),
+    [hasEnoughCharacters, isLoading, options.length, statusMessage]
+  )
+
   const shouldShowDropdown = useMemo(
-    () => {
-      const hasRenderableRows =
-        isLoading ||
-        options.length > 0 ||
-        (Boolean(statusMessage) && hasEnoughCharacters)
-      return isOpen && hasRenderableRows
-    },
-    [hasEnoughCharacters, isLoading, isOpen, options.length, statusMessage]
+    () => isOpen && hasRenderableRows,
+    [hasRenderableRows, isOpen]
   )
 
   useEffect(() => {
@@ -156,34 +166,27 @@ export const UniversalSearchInput = ({
 
   return (
     <div className="relative">
-      <div className="w-full">
-        <Input
-          id={inputId}
-          ref={inputRef}
-          value={value}
-          onChange={handleInputChange}
-          onBlur={(event) => {
-            setTimeout(() => setIsOpen(false), 50)
-            if (onBlur) {
-              onBlur()
-            }
-            event.persist?.()
-          }}
-          onFocus={() => {
-            const hasRenderableRows =
-              isLoading ||
-              options.length > 0 ||
-              (Boolean(statusMessage) && hasEnoughCharacters)
-
-            if (hasRenderableRows) {
-              setIsOpen(true)
-            }
-          }}
-          placeholder={placeholder}
-          className={className}
-          aria-expanded={shouldShowDropdown}
-        />
-      </div>
+      <Input
+        id={inputId}
+        ref={inputRef}
+        value={value}
+        onChange={handleInputChange}
+        onBlur={(event) => {
+          setTimeout(() => setIsOpen(false), 50)
+          if (onBlur) {
+            onBlur()
+          }
+          event.persist?.()
+        }}
+        onFocus={() => {
+          if (hasRenderableRows) {
+            setIsOpen(true)
+          }
+        }}
+        placeholder={placeholder}
+        className={className}
+        aria-expanded={shouldShowDropdown}
+      />
 
       {shouldShowDropdown ? (
         <div className="absolute z-50 mt-1 w-full min-w-88 max-w-xl overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-xs">
@@ -226,12 +229,6 @@ export const UniversalSearchInput = ({
             </div>
           ) : null}
         </div>
-      ) : null}
-
-      {statusMessage ? (
-        <p className={twMerge("mt-1 text-[11px] text-muted-foreground")}>
-          {statusMessage}
-        </p>
       ) : null}
     </div>
   )

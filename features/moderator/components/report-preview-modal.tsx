@@ -3,12 +3,10 @@
 import { useCallback, useMemo } from "react"
 import {
   CalendarIcon,
-  FileTextIcon,
   MailIcon,
   UserIcon,
   BuildingIcon,
   HashIcon,
-  XIcon,
 } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 
@@ -204,28 +202,85 @@ export const ReportPreviewModal = ({
           </div>
         </div>
 
-        {/* Description and Reason */}
+        {/* AI: User Description Section */}
         {(report.reportDescription || report.reportReason) && (
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            {report.reportDescription && (
+            <h4 className="text-sm font-semibold text-foreground">User Description</h4>
+            
+            {report.reportReason && (
               <div className="space-y-2">
-                <h4 className="text-sm font-semibold text-foreground">Description</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {report.reportDescription}
+                <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Report Reason
+                </h5>
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                  {report.reportReason}
                 </p>
               </div>
             )}
-            {report.reportReason && (
+
+            {report.reportDescription && (
               <>
-                {report.reportDescription && <Separator />}
-                <div className="flex items-start gap-3">
-                  <FileTextIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
-                  <div className="flex-1 space-y-1">
-                    <h4 className="text-sm font-semibold text-foreground">Report Reason</h4>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {report.reportReason}
-                    </p>
-                  </div>
+                {report.reportReason && <Separator />}
+                <div className="space-y-2">
+                  <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Description
+                  </h5>
+                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                    {report.reportDescription}
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* AI: User Submitted Content - show if there are findings or comparison notes */}
+        {report.reportContent && (report.reportContent.findings?.length > 0 || report.reportContent.comparisonNotes) && (
+          <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
+            <h4 className="text-sm font-semibold text-foreground">Submitted Report Content</h4>
+            
+            {report.reportContent.findings && report.reportContent.findings.length > 0 && (
+              <div className="space-y-3">
+                <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Findings ({report.reportContent.findings.length})
+                </h5>
+                <div className="space-y-2">
+                  {report.reportContent.findings.map((finding, index) => (
+                    <div
+                      key={finding.id}
+                      className="rounded-md border border-border/60 bg-muted/30 p-3"
+                    >
+                      <p className="text-sm text-foreground">{finding.detail}</p>
+                      {(finding.pageReference || finding.regulationId) && (
+                        <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                          {finding.pageReference && (
+                            <span className="rounded-full bg-background px-2 py-0.5">
+                              Page: {finding.pageReference}
+                            </span>
+                          )}
+                          {finding.regulationId && (
+                            <span className="rounded-full bg-background px-2 py-0.5">
+                              Regulation: {finding.regulationId}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {report.reportContent.comparisonNotes && report.reportContent.comparisonNotes.trim() && (
+              <>
+                {report.reportContent.findings && report.reportContent.findings.length > 0 && <Separator />}
+                <div className="space-y-2">
+                  <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Comparison Notes
+                  </h5>
+                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                    {report.reportContent.comparisonNotes}
+                  </p>
                 </div>
               </>
             )}
