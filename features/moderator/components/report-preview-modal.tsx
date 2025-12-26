@@ -202,40 +202,8 @@ export const ReportPreviewModal = ({
           </div>
         </div>
 
-        {/* AI: User Description Section */}
-        {(report.reportDescription || report.reportReason) && (
-          <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            <h4 className="text-sm font-semibold text-foreground">User Description</h4>
-            
-            {report.reportReason && (
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Report Reason
-                </h5>
-                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                  {report.reportReason}
-                </p>
-              </div>
-            )}
-
-            {report.reportDescription && (
-              <>
-                {report.reportReason && <Separator />}
-                <div className="space-y-2">
-                  <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Description
-                  </h5>
-                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                    {report.reportDescription}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* AI: User Submitted Content - show if there are findings or comparison notes */}
-        {report.reportContent && (report.reportContent.findings?.length > 0 || report.reportContent.comparisonNotes) && (
+        {/* User Submitted Content */}
+        {(report.reportContent?.comparisonNotes || report.reportContent?.findings && report.reportContent.findings.length > 0) && (
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
             <h4 className="text-sm font-semibold text-foreground">Submitted Report Content</h4>
             
@@ -271,7 +239,7 @@ export const ReportPreviewModal = ({
               </div>
             )}
 
-            {report.reportContent.comparisonNotes && report.reportContent.comparisonNotes.trim() && (
+            {report.reportContent.comparisonNotes && (
               <>
                 {report.reportContent.findings && report.reportContent.findings.length > 0 && <Separator />}
                 <div className="space-y-2">

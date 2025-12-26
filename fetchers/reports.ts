@@ -3,20 +3,6 @@ import { z } from "zod"
 import { clientEnv } from "@/lib/env"
 import type { ModeratorReport } from "@/types/reports"
 
-// AI: Zod schema for report findings
-const reportFindingSchema = z.object({
-  id: z.string(),
-  detail: z.string(),
-  regulationId: z.string().optional(),
-  pageReference: z.string().optional(),
-})
-
-// AI: Zod schema for report content
-const reportContentSchema = z.object({
-  findings: z.array(reportFindingSchema),
-  comparisonNotes: z.string(),
-})
-
 const moderatorReportSchema = z.object({
   id: z.coerce.string(),
   reporterName: z.string(),
@@ -34,7 +20,6 @@ const moderatorReportSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   pdfPath: z.string().optional(),
-  reportContent: reportContentSchema.optional(),
 })
 
 const moderatorReportsResponseSchema = z.array(moderatorReportSchema)

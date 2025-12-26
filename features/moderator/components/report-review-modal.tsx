@@ -18,6 +18,7 @@ import { PdfViewer } from "@/features/reports/components/pdf-viewer"
 import { Separator } from "@/components/ui/separator"
 import { FindingsManager } from "@/features/reports/components/findings-manager"
 import { ComparisonNotesField } from "@/features/reports/components/comparison-notes-field"
+import { RegulationsList } from "@/features/reports/components/regulations-list"
 import type { ModeratorReport, ReportFinding, RegulationReference } from "@/types/reports"
 import { getPdfUrl } from "@/lib/storage"
 import { REFERENCE_REGULATION_URL } from "@/consts/reports"
@@ -198,40 +199,8 @@ export const ReportReviewModal = ({
           </div>
         </div>
 
-        {/* AI: User Description Section */}
-        {(report.reportDescription || report.reportReason) && (
-          <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            <h4 className="text-sm font-semibold text-foreground">User Description</h4>
-            
-            {report.reportReason && (
-              <div className="space-y-2">
-                <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Report Reason
-                </h5>
-                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                  {report.reportReason}
-                </p>
-              </div>
-            )}
-
-            {report.reportDescription && (
-              <>
-                {report.reportReason && <Separator />}
-                <div className="space-y-2">
-                  <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Description
-                  </h5>
-                  <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                    {report.reportDescription}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* AI: User Submitted Content - show if there are findings or comparison notes */}
-        {report.reportContent && (report.reportContent.findings?.length > 0 || report.reportContent.comparisonNotes) && (
+        {/* User Submitted Content */}
+        {(report.reportContent?.comparisonNotes || report.reportContent?.findings && report.reportContent.findings.length > 0) && (
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
             <h4 className="text-sm font-semibold text-foreground">Submitted Report Content</h4>
             
@@ -267,7 +236,7 @@ export const ReportReviewModal = ({
               </div>
             )}
 
-            {report.reportContent.comparisonNotes && report.reportContent.comparisonNotes.trim() && (
+            {report.reportContent.comparisonNotes && (
               <>
                 {report.reportContent.findings && report.reportContent.findings.length > 0 && <Separator />}
                 <div className="space-y-2">
@@ -302,18 +271,21 @@ export const ReportReviewModal = ({
           />
         </div>
 
-        {/* AI: Review Section - removed RegulationsList as per user request */}
+        {/* Review Section */}
         <div className="space-y-6 rounded-lg border border-border bg-card p-6 shadow-sm">
           <div className="flex items-center gap-2">
             <CheckCircleIcon className="size-5 text-primary" />
             <h3 className="text-lg font-semibold text-foreground">Review & Findings</h3>
           </div>
 
-          <FindingsManager
-            regulations={regulationReferences}
-            findings={findings}
-            onFindingsChange={setFindings}
-          />
+          <div className="grid gap-4 lg:grid-cols-2">
+            <RegulationsList regulations={regulationReferences} />
+            <FindingsManager
+              regulations={regulationReferences}
+              findings={findings}
+              onFindingsChange={setFindings}
+            />
+          </div>
 
           <ComparisonNotesField value={comparisonNotes} onChange={setComparisonNotes} />
         </div>
