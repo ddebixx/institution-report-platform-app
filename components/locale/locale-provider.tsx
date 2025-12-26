@@ -12,10 +12,10 @@ import { NextIntlClientProvider } from "next-intl"
 
 import {
   defaultLocale,
-  isSupportedLocale,
   messagesByLocale,
   type SupportedLocale,
 } from "@/locales/messages"
+import { getInitialLocale } from "@/lib/locale-detection"
 
 type LocaleContextValue = {
   locale: SupportedLocale
@@ -32,14 +32,12 @@ export const LocaleProvider = ({ children }: LocaleProviderProps) => {
   const [locale, setLocaleState] = useState<SupportedLocale>(defaultLocale)
 
   useEffect(() => {
-    function initializeLocaleFromStorage() {
-      const stored = typeof window !== "undefined" ? localStorage.getItem("locale") : null
-      if (stored && isSupportedLocale(stored)) {
-        setLocaleState(stored)
-      }
+    function initializeLocaleWithAutoDetection() {
+      const initialLocale = getInitialLocale()
+      setLocaleState(initialLocale)
     }
 
-    initializeLocaleFromStorage()
+    initializeLocaleWithAutoDetection()
   }, [])
 
   const setLocale = useCallback((nextLocale: SupportedLocale) => {
