@@ -9,6 +9,7 @@ import {
   HashIcon,
 } from "lucide-react"
 import { twMerge } from "tailwind-merge"
+import { useTranslations } from "next-intl"
 
 import { Modal } from "@/components/ui/modal"
 import { Button } from "@/components/ui/button"
@@ -37,6 +38,7 @@ export const ReportPreviewModal = ({
   isAssigning = false,
   isUnassigning = false,
 }: ReportPreviewModalProps) => {
+  const t = useTranslations("reportPreviewModal")
   const pdfUrl = useMemo(() => {
     if (!report?.pdfPath) {
       return null
@@ -87,14 +89,14 @@ export const ReportPreviewModal = ({
   return (
     <Modal
       open={open}
-      title="Report Preview"
-      description="Review report details before assigning"
+      title={t("title")}
+      description={t("description")}
       onClose={onClose}
       panelClassName="max-w-7xl"
       footer={
         <div className="flex items-center justify-between">
           <Button variant="ghost" onClick={onClose}>
-            Close
+            {t("close")}
           </Button>
           <div className="flex items-center gap-2">
             {report?.status === "assigned" && onUnassign && (
@@ -103,12 +105,12 @@ export const ReportPreviewModal = ({
                 onClick={handleUnassign}
                 disabled={isUnassigning}
               >
-                {isUnassigning ? "Unassigning..." : "Unassign"}
+                {isUnassigning ? t("unassigning") : t("unassign")}
               </Button>
             )}
             {onAssign && (
               <Button onClick={handleAssign} disabled={isAssigning}>
-                {isAssigning ? "Assigning..." : "Assign to Me"}
+                {isAssigning ? t("assigning") : t("assignToMe")}
               </Button>
             )}
           </div>
@@ -123,13 +125,13 @@ export const ReportPreviewModal = ({
               <div className="flex items-center gap-3">
                 <BuildingIcon className="size-5 text-muted-foreground" />
                 <h3 className="text-2xl font-bold text-foreground">
-                  {report.institutionName || report.reportedInstitution || "Unnamed Institution"}
+                  {report.institutionName || report.reportedInstitution || t("unnamedInstitution")}
                 </h3>
               </div>
               {report.numerRspo && (
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <HashIcon className="size-4" />
-                  <span>RSPO Number: {report.numerRspo}</span>
+                  <span>{t("rspoNumber", { number: report.numerRspo })}</span>
                 </div>
               )}
             </div>
@@ -147,32 +149,32 @@ export const ReportPreviewModal = ({
         {/* Report Details Grid */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            <h4 className="text-sm font-semibold text-foreground">Reporter Information</h4>
+            <h4 className="text-sm font-semibold text-foreground">{t("reporterInformation")}</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <UserIcon className="size-4 shrink-0 text-muted-foreground" />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">{report.reporterName}</p>
-                  <p className="text-xs text-muted-foreground">Reporter Name</p>
+                  <p className="text-xs text-muted-foreground">{t("reporterName")}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <MailIcon className="size-4 shrink-0 text-muted-foreground" />
                 <div className="flex-1">
                   <p className="font-medium text-foreground">{report.reporterEmail}</p>
-                  <p className="text-xs text-muted-foreground">Email Address</p>
+                  <p className="text-xs text-muted-foreground">{t("emailAddress")}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            <h4 className="text-sm font-semibold text-foreground">Timeline</h4>
+            <h4 className="text-sm font-semibold text-foreground">{t("timeline")}</h4>
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
                 <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
                 <div className="flex-1">
-                  <p className="font-medium text-foreground">Created</p>
+                  <p className="font-medium text-foreground">{t("created")}</p>
                   <p className="text-xs text-muted-foreground">{formatDate(report.createdAt)}</p>
                 </div>
               </div>
@@ -180,7 +182,7 @@ export const ReportPreviewModal = ({
                 <div className="flex items-center gap-3 text-sm">
                   <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
                   <div className="flex-1">
-                    <p className="font-medium text-foreground">Assigned</p>
+                    <p className="font-medium text-foreground">{t("assigned")}</p>
                     <p className="text-xs text-muted-foreground">
                       {formatDate(report.assignedAt)}
                     </p>
@@ -191,7 +193,7 @@ export const ReportPreviewModal = ({
                 <div className="flex items-center gap-3 text-sm">
                   <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
                   <div className="flex-1">
-                    <p className="font-medium text-foreground">Completed</p>
+                    <p className="font-medium text-foreground">{t("completed")}</p>
                     <p className="text-xs text-muted-foreground">
                       {formatDate(report.completedAt)}
                     </p>
@@ -205,12 +207,12 @@ export const ReportPreviewModal = ({
         {/* User Submitted Content */}
         {(report.reportContent?.comparisonNotes || report.reportContent?.findings && report.reportContent.findings.length > 0) && (
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
-            <h4 className="text-sm font-semibold text-foreground">Submitted Report Content</h4>
+            <h4 className="text-sm font-semibold text-foreground">{t("submittedReportContent")}</h4>
             
             {report.reportContent.findings && report.reportContent.findings.length > 0 && (
               <div className="space-y-3">
                 <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                  Findings ({report.reportContent.findings.length})
+                  {t("findings", { count: report.reportContent.findings.length })}
                 </h5>
                 <div className="space-y-2">
                   {report.reportContent.findings.map((finding, index) => (
@@ -223,12 +225,12 @@ export const ReportPreviewModal = ({
                         <div className="mt-2 flex flex-wrap gap-2 text-xs text-muted-foreground">
                           {finding.pageReference && (
                             <span className="rounded-full bg-background px-2 py-0.5">
-                              Page: {finding.pageReference}
+                              {t("page", { page: finding.pageReference })}
                             </span>
                           )}
                           {finding.regulationId && (
                             <span className="rounded-full bg-background px-2 py-0.5">
-                              Regulation: {finding.regulationId}
+                              {t("regulation", { regulation: finding.regulationId })}
                             </span>
                           )}
                         </div>
@@ -244,7 +246,7 @@ export const ReportPreviewModal = ({
                 {report.reportContent.findings && report.reportContent.findings.length > 0 && <Separator />}
                 <div className="space-y-2">
                   <h5 className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    Comparison Notes
+                    {t("comparisonNotes")}
                   </h5>
                   <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-wrap">
                     {report.reportContent.comparisonNotes}
@@ -258,18 +260,18 @@ export const ReportPreviewModal = ({
         {/* PDF Viewers */}
         <div className="grid gap-4 lg:grid-cols-2">
           <PdfViewer
-            title="Submitted Document"
+            title={t("submittedDocument")}
             src={pdfUrl}
             fileName={report.pdfPath?.split("/").pop()}
-            emptyText="No PDF document available"
+            emptyText={t("noPdfAvailable")}
           />
           <PdfViewer
-            title="Reference Regulation"
+            title={t("referenceRegulation")}
             src={REFERENCE_REGULATION_URL}
             emptyText=""
             actionLink={{
               href: REFERENCE_REGULATION_URL,
-              label: "Open in new tab",
+              label: t("openInNewTab"),
             }}
           />
         </div>

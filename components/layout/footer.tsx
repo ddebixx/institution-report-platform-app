@@ -29,7 +29,7 @@ export const Footer = () => {
 
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground">
-              Quick Links
+              {t("quickLinks.title")}
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
@@ -38,7 +38,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Features</span>
+                  <span>{t("quickLinks.features")}</span>
                 </a>
               </li>
               <li>
@@ -47,7 +47,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>How It Works</span>
+                  <span>{t("quickLinks.howItWorks")}</span>
                 </a>
               </li>
               <li>
@@ -56,7 +56,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Benefits</span>
+                  <span>{t("quickLinks.benefits")}</span>
                 </a>
               </li>
               <li>
@@ -65,7 +65,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Regulations</span>
+                  <span>{t("quickLinks.regulations")}</span>
                 </a>
               </li>
             </ul>
@@ -73,7 +73,7 @@ export const Footer = () => {
 
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground">
-              Resources
+              {t("resources.title")}
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
@@ -82,7 +82,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Documentation</span>
+                  <span>{t("resources.documentation")}</span>
                 </a>
               </li>
               <li>
@@ -91,7 +91,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Guidelines</span>
+                  <span>{t("resources.guidelines")}</span>
                 </a>
               </li>
               <li>
@@ -100,7 +100,7 @@ export const Footer = () => {
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>Support</span>
+                  <span>{t("resources.support")}</span>
                 </a>
               </li>
             </ul>
@@ -108,16 +108,16 @@ export const Footer = () => {
 
           <div className="space-y-4">
             <h3 className="text-sm font-semibold uppercase tracking-wide text-foreground">
-              Contact
+              {t("contact.title")}
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="mailto:support@example.com"
+                  href={`mailto:${t("contact.email")}`}
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <MailIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <span>support@example.com</span>
+                  <span>{t("contact.email")}</span>
                 </a>
               </li>
             </ul>
@@ -127,20 +127,20 @@ export const Footer = () => {
         <div className="mt-16 border-t border-border/60 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
             <p className="transition-colors duration-300 hover:text-foreground">
-              © {new Date().getFullYear()} {t("title")}. All rights reserved.
+              © {new Date().getFullYear()} {t("title")}. {t("legal.copyright")}
             </p>
             <div className="flex items-center gap-6">
               <a
                 href="#"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
-                Privacy Policy
+                {t("legal.privacy")}
               </a>
               <a
                 href="#"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
-                Terms of Service
+                {t("legal.terms")}
               </a>
             </div>
           </div>

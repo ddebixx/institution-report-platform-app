@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
 import { ModeratorDashboard } from "@/features/moderator/moderator-dashboard"
@@ -9,6 +10,7 @@ import { ModeratorDashboard } from "@/features/moderator/moderator-dashboard"
 const AdminPage = () => {
   const router = useRouter()
   const { user, isInitializing } = useAuthContext()
+  const t = useTranslations("admin")
 
   useEffect(() => {
     function handleUnauthenticatedRedirect() {
@@ -23,7 +25,7 @@ const AdminPage = () => {
   if (isInitializing || !user) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-muted-foreground">Loading...</p>
+        <p className="text-muted-foreground">{t("loading")}</p>
       </div>
     )
   }
@@ -31,9 +33,9 @@ const AdminPage = () => {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">Moderator Dashboard</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t("title")}</h1>
         <p className="mt-2 text-muted-foreground">
-          Manage and review reports assigned to you
+          {t("subtitle")}
         </p>
       </div>
       <ModeratorDashboard />

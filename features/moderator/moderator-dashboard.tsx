@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { CheckCircleIcon, ClockIcon, FileCheckIcon, LoaderIcon } from "lucide-react"
 import { twMerge } from "tailwind-merge"
+import { useTranslations } from "next-intl"
 
 import { useAuthContext } from "@/components/auth/auth-provider"
 import type { ModeratorReport } from "@/types/reports"
@@ -23,18 +24,19 @@ type TabId = "available" | "assigned" | "completed"
 
 type Tab = {
   id: TabId
-  label: string
+  labelKey: string
   icon: typeof CheckCircleIcon
 }
 
 const tabs: Tab[] = [
-  { id: "available", label: "Available", icon: FileCheckIcon },
-  { id: "assigned", label: "Assigned", icon: ClockIcon },
-  { id: "completed", label: "Completed", icon: CheckCircleIcon },
+  { id: "available", labelKey: "moderatorDashboard.tabs.available", icon: FileCheckIcon },
+  { id: "assigned", labelKey: "moderatorDashboard.tabs.assigned", icon: ClockIcon },
+  { id: "completed", labelKey: "moderatorDashboard.tabs.completed", icon: CheckCircleIcon },
 ]
 
 export const ModeratorDashboard = () => {
   const { accessToken } = useAuthContext()
+  const t = useTranslations()
   const [activeTab, setActiveTab] = useState<TabId>("available")
   const [availableReports, setAvailableReports] = useState<ModeratorReport[]>([])
   const [assignedReports, setAssignedReports] = useState<ModeratorReport[]>([])
@@ -232,7 +234,7 @@ export const ModeratorDashboard = () => {
         <div className="flex min-h-[400px] items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <LoaderIcon className="size-8 animate-spin text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">Loading...</p>
+            <p className="text-sm text-muted-foreground">{t("admin.loading")}</p>
           </div>
         </div>
       </div>
@@ -245,7 +247,7 @@ export const ModeratorDashboard = () => {
         <div className="flex min-h-[400px] items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <LoaderIcon className="size-8 animate-spin text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">Loading reports...</p>
+            <p className="text-sm text-muted-foreground">{t("admin.loadingReports")}</p>
           </div>
         </div>
       </div>
@@ -259,7 +261,7 @@ export const ModeratorDashboard = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Total Reports</p>
+              <p className="text-sm font-medium text-muted-foreground">{t("moderatorDashboard.stats.total")}</p>
               <p className="mt-2 text-3xl font-bold text-foreground">{stats.total}</p>
             </div>
             <div className="rounded-lg bg-primary/10 p-3 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
@@ -271,7 +273,7 @@ export const ModeratorDashboard = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Available</p>
+              <p className="text-sm font-medium text-muted-foreground">{t("moderatorDashboard.tabs.available")}</p>
               <p className="mt-2 text-3xl font-bold text-foreground">
                 {stats.available}
               </p>
@@ -285,7 +287,7 @@ export const ModeratorDashboard = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-yellow-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Assigned</p>
+              <p className="text-sm font-medium text-muted-foreground">{t("moderatorDashboard.tabs.assigned")}</p>
               <p className="mt-2 text-3xl font-bold text-foreground">
                 {stats.assigned}
               </p>
@@ -299,7 +301,7 @@ export const ModeratorDashboard = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 via-transparent to-green-500/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-muted-foreground">Completed</p>
+              <p className="text-sm font-medium text-muted-foreground">{t("moderatorDashboard.tabs.completed")}</p>
               <p className="mt-2 text-3xl font-bold text-foreground">
                 {stats.completed}
               </p>
@@ -339,7 +341,7 @@ export const ModeratorDashboard = () => {
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5" />
                 )}
                 <Icon className={twMerge("size-4 transition-transform duration-300", isActive && "scale-110")} />
-                <span className="relative z-10">{tab.label}</span>
+                <span className="relative z-10">{t(tab.labelKey)}</span>
                 {count > 0 && (
                   <span
                     className={twMerge(

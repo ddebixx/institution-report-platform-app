@@ -91,7 +91,7 @@ export const Navbar = () => {
               <div className="flex flex-col">
                 <span className="text-sm font-semibold text-primary">IRP</span>
                 <span className="hidden text-xs text-muted-foreground sm:block">
-                  Institution Report Platform
+                  {t("navbar.title")}
                 </span>
               </div>
             </div>
