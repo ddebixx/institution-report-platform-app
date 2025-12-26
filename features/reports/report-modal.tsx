@@ -65,7 +65,7 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
     },
   })
 
-  const { control, register, watch, formState } = form
+  const { control, watch, formState } = form
   const { errors, isSubmitting } = formState
   const pdfFile = watch("pdf")
   const reportContent = watch("reportContent")
