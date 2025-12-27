@@ -92,7 +92,7 @@ export const FeaturesSection = () => {
             <div
               key={feature.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
+                "group relative overflow-hidden rounded-2xl border border-border/20 bg-background/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
                 isVisible
                   ? "translate-y-0 opacity-100 scale-100"
                   : "translate-y-12 opacity-0 scale-95"
@@ -105,7 +105,7 @@ export const FeaturesSection = () => {
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 transition-all duration-500 group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5" />
-              <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]" />
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]" />
 
               <div className="relative z-10">
                 <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-primary/10 p-3 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20 group-hover:shadow-xs group-hover:shadow-primary/20">

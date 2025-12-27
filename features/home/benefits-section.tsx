@@ -90,12 +90,14 @@ export const BenefitsSection = () => {
             <div
               key={benefit.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-8 shadow-xs backdrop-blur-sm transition-all duration-700",
+                "group relative overflow-hidden rounded-2xl border border-border/20 bg-background/90 p-8 shadow-xs backdrop-blur-sm transition-all duration-700",
                 isVisible && "opacity-100"
               )}
               style={animationStyle}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]" />
 
               <div className="relative z-10 flex gap-6">
                 <div className="shrink-0">

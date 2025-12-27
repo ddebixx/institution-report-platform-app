@@ -14,10 +14,10 @@ export const Footer = () => {
       <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 py-12 sm:px-6 sm:py-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 hover:scale-110 hover:bg-primary/20 hover:shadow-xs hover:shadow-primary/20">
+              <div className="flex h-12 w-16 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 hover:scale-110 hover:bg-primary/20 hover:shadow-xs hover:shadow-primary/20">
                 <ShieldIcon className="size-6" />
               </div>
               <span className="text-xl font-bold text-foreground">{t("title")}</span>
@@ -78,7 +78,7 @@ export const Footer = () => {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
                 <a
-                  href="#"
+                  href="/documentation"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -87,7 +87,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/guidelines"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -96,7 +96,7 @@ export const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/support"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -131,13 +131,13 @@ export const Footer = () => {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="#"
+                href="/privacy"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
                 {t("legal.privacy")}
               </a>
               <a
-                href="#"
+                href="/terms"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
                 {t("legal.terms")}

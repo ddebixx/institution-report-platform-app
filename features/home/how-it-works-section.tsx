@@ -94,7 +94,7 @@ export const HowItWorksSection = () => {
                 <div key={step.key} className="relative flex-1" style={animationStyle}>
                   <div
                     className={twMerge(
-                      "group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700",
+                      "group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700",
                       isVisible && "opacity-100 scale-100"
                     )}
                   >
@@ -115,7 +115,7 @@ export const HowItWorksSection = () => {
 
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
                     
-                    <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
+                    <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
                   </div>
                 </div>
 

@@ -88,7 +88,7 @@ export const RegulationsSection = () => {
             <article
               key={regulation.key}
               className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
+                "group relative overflow-hidden rounded-2xl border border-border/20 bg-background/90 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
                 isVisible && "opacity-100 scale-100"
               )}
               style={animationStyle}
@@ -111,7 +111,7 @@ export const RegulationsSection = () => {
 
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
               
-              <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/20 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.15)]" />
+              <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.15)]" />
             </article>
           )
         })}
