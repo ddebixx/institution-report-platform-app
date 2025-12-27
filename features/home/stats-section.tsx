@@ -75,7 +75,7 @@ export const StatsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full p-6 sm:p-12"
+      className="relative w-full p-6"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-primary/15 animate-ping" style={{ animationDelay: "0s" }} />
@@ -95,7 +95,6 @@ export const StatsSection = () => {
           const animatedValue = animatedValues[index]
           const numericValue = parseFloat(stat.value.replace(/[^0-9.]/g, ""))
           const delay = index * 100
-          const rotation = index % 2 === 0 ? "rotate-1" : "-rotate-1"
           
           let displayValue = stat.value
           if (!isNaN(numericValue) && numericValue > 0 && animatedValue !== undefined) {

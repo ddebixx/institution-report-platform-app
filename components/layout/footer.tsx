@@ -13,7 +13,7 @@ export const Footer = () => {
       <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
       <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 py-12 sm:px-6 sm:py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 lg:col-span-1">
             <div className="flex items-center gap-3">

@@ -63,7 +63,7 @@ export const FeaturesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full p-6 sm:p-12"
+      className="relative w-full p-6"
     >
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/2 via-transparent to-primary/2 opacity-30 animate-pulse" />
       <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse" />

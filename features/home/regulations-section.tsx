@@ -53,7 +53,7 @@ export const RegulationsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full p-6 sm:p-12"
+      className="relative w-full p-6"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />

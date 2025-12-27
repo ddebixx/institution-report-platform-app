@@ -33,7 +33,7 @@ export default function NotFound() {
         <div className="absolute bottom-20 right-1/3 h-3 w-3 rounded-full bg-primary/20 animate-float-delayed" style={{ animationDelay: "1.5s" }} />
       </div>
 
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-[1200px]">
         <div className="flex flex-col items-center justify-center text-center">
           <div className="relative mb-8">
             <div className="relative">

@@ -59,7 +59,7 @@ export const BenefitsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full p-6 sm:p-12"
+      className="relative w-full p-6"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 h-full w-full bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.03),transparent_50%)]" />

@@ -60,7 +60,7 @@ export const HowItWorksSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full p-6 sm:p-12"
+      className="relative w-full max-w-[1200px] mx-auto p-6"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
@@ -94,7 +94,7 @@ export const HowItWorksSection = () => {
                 <div key={step.key} className="relative flex-1" style={animationStyle}>
                   <div
                     className={twMerge(
-                      "group relative flex h-full min-h-[320px] flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-8 pt-10 shadow-xs backdrop-blur-sm transition-all duration-700",
+                      "group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/60 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700",
                       isVisible && "opacity-100 scale-100"
                     )}
                   >

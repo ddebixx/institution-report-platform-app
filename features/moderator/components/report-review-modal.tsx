@@ -114,7 +114,7 @@ export const ReportReviewModal = ({
       title={t("title")}
       description={t("description")}
       onClose={handleClose}
-      panelClassName="max-w-7xl"
+      panelClassName="max-w-[1200px]"
       footer={
         <div className="flex items-center justify-between">
           <Button variant="ghost" onClick={handleClose} disabled={isSubmitting}>

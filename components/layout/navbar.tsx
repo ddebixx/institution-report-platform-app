@@ -81,7 +81,7 @@ export const Navbar = () => {
   return (
     <>
       <header className="sticky top-0 z-30 w-full border-b border-border/60 bg-background/80 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+        <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
           {/* Logo section - hides subtitle on mobile */}
           <Link href="/">
             <div className="flex items-center gap-2">

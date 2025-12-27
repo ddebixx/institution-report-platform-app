@@ -92,7 +92,7 @@ export const ReportPreviewModal = ({
       title={t("title")}
       description={t("description")}
       onClose={onClose}
-      panelClassName="max-w-7xl"
+      panelClassName="max-w-[1200px]"
       footer={
         <div className="flex items-center justify-between">
           <Button variant="ghost" onClick={onClose}>

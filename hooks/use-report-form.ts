@@ -194,7 +194,7 @@ export function useReportForm({
   )
 
   const modalPanelClassName = useMemo(
-    () => (activeStep === 2 ? "max-w-6xl" : "max-w-xl"),
+    () => (activeStep === 2 ? "max-w-[1200px]" : "max-w-xl"),
     [activeStep]
   )
 
