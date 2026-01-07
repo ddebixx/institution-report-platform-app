@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input"
 import type { ReportFormValues } from "@/types/reports"
 import type { InstitutionSearchResult } from "@/fetchers/institutions"
 import { mapInstitutionToOption } from "@/lib/reports"
-import { MIN_INSTITUTION_SEARCH_CHARACTERS } from "@/consts/reports"
+import { MIN_SCHOOL_SEARCH_CHARACTERS } from "@/consts/reports"
 
 type ReportFormStep1Props = {
   control: Control<ReportFormValues>
@@ -43,7 +43,7 @@ export const ReportFormStep1 = ({
   const institutionSearchStatusText = useMemo(
     () => ({
       minChars: t("fields.institutionSearch.status.minChars", {
-        count: MIN_INSTITUTION_SEARCH_CHARACTERS,
+        count: MIN_SCHOOL_SEARCH_CHARACTERS,
       }),
       loading: t("fields.institutionSearch.status.loading"),
       empty: t("fields.institutionSearch.status.empty"),
@@ -127,7 +127,7 @@ export const ReportFormStep1 = ({
                   onValueChange={field.onChange}
                   onBlur={field.onBlur}
                   placeholder={t("fields.institutionSearch.placeholder")}
-                  minCharacters={MIN_INSTITUTION_SEARCH_CHARACTERS}
+                  minCharacters={MIN_SCHOOL_SEARCH_CHARACTERS}
                   fetchResults={handleInstitutionSearch}
                   onSelect={onInstitutionSelect}
                   statusText={institutionSearchStatusText}

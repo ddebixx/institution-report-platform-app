@@ -11,8 +11,8 @@ type MessagesByLocale = Record<SupportedLocale, Messages>
 export const messagesByLocale: MessagesByLocale = {
   en: {
     navbar: {
-      title: "Institution Report Platform",
-      subtitle: "Report institutional issues",
+      title: "School Statute Report Platform",
+      subtitle: "Report school statute compliance issues",
       login: "Login",
       register: "Register",
       dashboard: "Dashboard",
@@ -20,10 +20,10 @@ export const messagesByLocale: MessagesByLocale = {
       locale: "Language",
     },
     hero: {
-      badge: "Confidential institution incident reporting",
-      title: "Submit institution reports securely and reach the admin dashboard fast.",
+      badge: "Confidential school statute compliance reporting",
+      title: "Submit school statute reports securely and reach the admin dashboard fast.",
       subtitle:
-        "Share issues about institutions with supporting PDF evidence, track submissions, and let administrators review and respond to each report.",
+        "Share school statute compliance issues with supporting PDF evidence and let administrators review and respond to each report.",
       cta: {
         submit: "Submit a report",
         login: "Login to dashboard",
@@ -31,20 +31,20 @@ export const messagesByLocale: MessagesByLocale = {
       },
     },
     info: {
-      purpose: { title: "Purpose", desc: "Report institutional issues" },
+      purpose: { title: "Purpose", desc: "Report school statute compliance issues" },
       flow: { title: "Flow", desc: "Upload PDF and submit details" },
       auth: { title: "Authentication", desc: "Sign in to manage your submissions" },
       evidence: { title: "Evidence", desc: "Attach PDF proof with every report" },
-      details: { title: "Details", desc: "Capture reporter and institution context" },
+      details: { title: "Details", desc: "Capture reporter and school context" },
       dashboard: { title: "Dashboard", desc: "Review submissions in the admin area" },
     },
     regulations: {
       title: "Current regulations",
       description:
-        "Browse the latest regulatory guidelines and policy documents relevant to institutional reporting.",
+        "Browse the latest regulatory guidelines and policy documents relevant to school statute compliance reporting.",
       primary: {
         name: "Reporting guidelines",
-        desc: "How to prepare and submit compliant reports.",
+        desc: "How to prepare and submit compliant school statute reports.",
       },
       secondary: {
         name: "Data handling policy",
@@ -57,30 +57,30 @@ export const messagesByLocale: MessagesByLocale = {
     },
     features: {
       title: "Powerful Features",
-      subtitle: "Everything you need to report and manage institutional issues",
+      subtitle: "Everything you need to report and manage school statute compliance issues",
       secure: {
         title: "Secure & Confidential",
-        desc: "End-to-end encryption ensures your reports remain private and protected throughout the entire process.",
+        desc: "End-to-end encryption ensures your school statute reports remain private and protected throughout the entire process.",
       },
       pdf: {
         title: "PDF Document Analysis",
-        desc: "Upload PDF evidence, preview documents, and highlight specific findings with page-level precision.",
+        desc: "Upload school statute PDF documents, preview them, and highlight specific findings with page-level precision.",
       },
       regulations: {
-        title: "Regulation Compliance",
-        desc: "Compare documents against current regulations and link findings to specific compliance requirements.",
+        title: "Statute Compliance",
+        desc: "Compare school statutes against current regulations and link findings to specific compliance requirements.",
       },
       tracking: {
         title: "Real-time Tracking",
-        desc: "Monitor your report status from submission through review to resolution with live updates.",
+        desc: "Monitor your school statute report status from submission through review to resolution with live updates.",
       },
       moderation: {
         title: "Expert Moderation",
-        desc: "Experienced administrators review each report with detailed findings and comparison notes.",
+        desc: "Experienced administrators review each school statute report with detailed findings and comparison notes.",
       },
       dashboard: {
         title: "Admin Dashboard",
-        desc: "Comprehensive dashboard for moderators to manage, assign, and review reports efficiently.",
+        desc: "Comprehensive dashboard for moderators to manage, assign, and review school statute reports efficiently.",
       },
     },
     howItWorks: {
@@ -88,19 +88,19 @@ export const messagesByLocale: MessagesByLocale = {
       subtitle: "Simple, secure, and efficient reporting process",
       step1: {
         title: "Submit Your Report",
-        desc: "Fill in institution details, upload PDF evidence, and provide a clear description of the issue.",
+        desc: "Fill in school details, upload school statute PDF, and provide a clear description of compliance issues.",
       },
       step2: {
         title: "Document Review",
-        desc: "Preview your PDF, highlight specific findings, and compare against current regulations.",
+        desc: "Preview your school statute PDF, highlight specific findings, and compare against current regulations.",
       },
       step3: {
         title: "Moderator Review",
-        desc: "Expert moderators review your submission, analyze findings, and verify compliance.",
+        desc: "Expert moderators review your school statute submission, analyze findings, and verify compliance.",
       },
       step4: {
         title: "Resolution",
-        desc: "Receive updates on your report status and follow up on any actions taken.",
+        desc: "Receive updates on your school statute report status and follow up on any actions taken.",
       },
     },
     benefits: {
@@ -108,31 +108,31 @@ export const messagesByLocale: MessagesByLocale = {
       subtitle: "Built for transparency, security, and efficiency",
       transparency: {
         title: "Full Transparency",
-        desc: "Track every step of your report's journey from submission to resolution.",
+        desc: "Track every step of your school statute report's journey from submission to resolution.",
       },
       security: {
         title: "Enterprise Security",
-        desc: "Bank-level encryption and secure storage protect your sensitive information.",
+        desc: "Bank-level encryption and secure storage protect your sensitive school statute information.",
       },
       efficiency: {
         title: "Streamlined Process",
-        desc: "Intuitive interface and automated workflows reduce reporting time by 70%.",
+        desc: "Intuitive interface and automated workflows make school statute reporting simple and efficient.",
       },
       compliance: {
         title: "Regulatory Compliance",
-        desc: "Built-in compliance checks ensure all reports meet current regulatory standards.",
+        desc: "Built-in compliance checks ensure all school statute reports meet current regulatory standards.",
       },
     },
     stats: {
-      title: "Trusted by Institutions",
+      title: "Trusted by Schools",
       reportsSubmitted: "Reports Submitted",
       activeModerators: "Active Moderators",
       avgResponseTime: "Avg Response Time",
       complianceRate: "Compliance Rate",
     },
     footer: {
-      title: "Institution Report Platform",
-      subtitle: "Confidential channel for institution reports and follow-ups",
+      title: "School Statute Report Platform",
+      subtitle: "Confidential channel for school statute reports and follow-ups",
       quickLinks: {
         title: "Quick Links",
         features: "Features",
@@ -158,11 +158,11 @@ export const messagesByLocale: MessagesByLocale = {
     },
     documentation: {
       title: "Documentation",
-      subtitle: "Complete guide to using the Institution Report Platform",
+      subtitle: "Complete guide to using the School Statute Report Platform",
       overview: {
         title: "Overview",
         description:
-          "The Institution Report Platform provides a secure and confidential channel for reporting institutional issues. This documentation will help you understand how to use the platform effectively to submit reports, track their status, and ensure compliance with regulatory requirements.",
+          "The School Statute Report Platform provides a secure and confidential channel for reporting school statute compliance issues. This documentation will help you understand how to use the platform effectively to submit school statute reports, track their status, and ensure compliance with regulatory requirements.",
       },
       gettingStarted: {
         title: "Getting Started",
@@ -195,9 +195,9 @@ export const messagesByLocale: MessagesByLocale = {
             "Upload PDF documents and preview them directly in the platform. Highlight specific pages and sections for moderator review.",
         },
         search: {
-          title: "Institution Search",
+          title: "School Search",
           description:
-            "Search for institutions by name or RSPO number. The system will automatically fill in institution details when you select a match.",
+            "Search for schools by name or RSPO number. The system will automatically fill in school details when you select a match.",
         },
         tracking: {
           title: "Status Tracking",
@@ -207,10 +207,10 @@ export const messagesByLocale: MessagesByLocale = {
       },
       bestPractices: {
         title: "Best Practices",
-        item1: "Provide clear and detailed descriptions of the issues you're reporting",
-        item2: "Ensure all PDF documents are relevant and clearly show the problem",
-        item3: "Use the highlighting feature to point moderators to specific sections",
-        item4: "Include comparison notes explaining how documents relate to current regulations",
+        item1: "Provide clear and detailed descriptions of the school statute compliance issues you're reporting",
+        item2: "Ensure all school statute PDF documents are relevant and clearly show the problem",
+        item3: "Use the highlighting feature to point moderators to specific sections in school statutes",
+        item4: "Include comparison notes explaining how school statutes relate to current regulations",
       },
       faq: {
         title: "Frequently Asked Questions",
@@ -233,54 +233,54 @@ export const messagesByLocale: MessagesByLocale = {
     },
     guidelines: {
       title: "Reporting Guidelines",
-      subtitle: "Essential guidelines for preparing and submitting effective reports",
+      subtitle: "Essential guidelines for preparing and submitting effective school statute reports",
       preparation: {
         title: "Preparing Your Report",
         document: {
           title: "Document Preparation",
-          description: "Before submitting your report, ensure your documents meet these requirements:",
-          item1: "Documents must be in PDF format",
+          description: "Before submitting your school statute report, ensure your documents meet these requirements:",
+          item1: "School statute documents must be in PDF format",
           item2: "Files should be clear, legible, and properly scanned",
           item3: "Maximum file size of 5MB recommended for optimal performance",
         },
         content: {
           title: "Content Requirements",
-          description: "Your report should include:",
-          item1: "Complete institution information (name and RSPO number)",
-          item2: "Clear description of the issue or concern",
-          item3: "Specific findings with page references where applicable",
+          description: "Your school statute report should include:",
+          item1: "Complete school information (name and RSPO number)",
+          item2: "Clear description of the statute compliance issue or concern",
+          item3: "Specific findings with page references to school statutes where applicable",
         },
       },
       submission: {
         title: "Submission Process",
         step1: {
-          title: "Step 1: Institution Details",
+          title: "Step 1: School Details",
           description:
-            "Provide the institution name and RSPO number. You can search for institutions using the search feature, or enter the information manually.",
+            "Provide the school name and RSPO number. You can search for schools using the search feature, or enter the information manually.",
         },
         step2: {
           title: "Step 2: Document Review",
           description:
-            "Upload your PDF document and use the highlighting feature to mark specific sections, pages, or findings that are relevant to your report.",
+            "Upload your school statute PDF document and use the highlighting feature to mark specific sections, pages, or findings that are relevant to your report.",
         },
         step3: {
           title: "Step 3: Comparison Notes",
           description:
-            "Add comparison notes explaining how the document relates to current regulations and any compliance concerns you've identified.",
+            "Add comparison notes explaining how the school statute relates to current regulations and any compliance concerns you've identified.",
         },
       },
       requirements: {
         title: "Important Requirements",
         important: "Please ensure compliance with the following:",
         item1: "All information provided must be accurate and truthful",
-        item2: "Documents must be authentic and directly related to the reported issue",
+        item2: "School statute documents must be authentic and directly related to the reported compliance issue",
         item3: "Reports should be submitted in good faith and for legitimate purposes",
         item4: "Personal information of third parties should be handled in accordance with privacy regulations",
       },
       compliance: {
         title: "Regulatory Compliance",
         description:
-          "All reports are reviewed against current regulatory standards. Our moderators compare submitted documents with applicable regulations to ensure compliance and identify any discrepancies.",
+          "All school statute reports are reviewed against current regulatory standards. Our moderators compare submitted school statutes with applicable regulations to ensure compliance and identify any discrepancies.",
       },
     },
     support: {
@@ -340,13 +340,13 @@ export const messagesByLocale: MessagesByLocale = {
       introduction: {
         title: "Introduction",
         content:
-          "We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Institution Report Platform.",
+          "We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our School Statute Report Platform.",
       },
       dataCollection: {
         title: "Information We Collect",
         description: "We collect information that you provide directly to us, including:",
         item1: "Account information (name, email address, password)",
-        item2: "Report information (institution details, descriptions, uploaded documents)",
+        item2: "Report information (school details, descriptions, uploaded school statute documents)",
         item3: "Communication data (messages sent through the platform)",
         item4: "Usage data (how you interact with the platform)",
       },
@@ -383,12 +383,12 @@ export const messagesByLocale: MessagesByLocale = {
     },
     terms: {
       title: "Terms of Service",
-      subtitle: "Terms and conditions for using the Institution Report Platform",
+      subtitle: "Terms and conditions for using the School Statute Report Platform",
       lastUpdated: "Last updated: January 2024",
       acceptance: {
         title: "Acceptance of Terms",
         content:
-          "By accessing and using the Institution Report Platform, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, you should not use this platform.",
+          "By accessing and using the School Statute Report Platform, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, you should not use this platform.",
       },
       useOfService: {
         title: "Use of Service",
@@ -407,9 +407,9 @@ export const messagesByLocale: MessagesByLocale = {
       },
       reportSubmission: {
         title: "Report Submission",
-        description: "By submitting a report, you acknowledge that:",
+        description: "By submitting a school statute report, you acknowledge that:",
         item1: "All information provided is accurate to the best of your knowledge",
-        item2: "You have the right to submit the documents and information provided",
+        item2: "You have the right to submit the school statute documents and information provided",
         item3: "The submission is made in good faith and for legitimate purposes",
       },
       intellectualProperty: {
@@ -449,15 +449,72 @@ export const messagesByLocale: MessagesByLocale = {
         completed: "Completed",
       },
     },
+    reportCard: {
+      unnamedSchool: "Unnamed School",
+      rspoLabel: "RSPO: {number}",
+      status: {
+        pending: "Pending",
+        assigned: "Assigned",
+        completed: "Completed",
+      },
+      dates: {
+        created: "Created: {date}",
+        assigned: "Assigned: {date}",
+        completed: "Completed: {date}",
+        notAvailable: "N/A",
+      },
+      reason: "Reason:",
+      actions: {
+        preview: "Preview",
+        unassign: "Unassign",
+        unassigning: "Unassigning...",
+        review: "Review",
+        assignToMe: "Assign to Me",
+        assigning: "Assigning...",
+      },
+    },
+    moderatorProfileModal: {
+      title: "Complete Your Profile",
+      description: "Please provide your full name and email to continue. You can optionally upload a profile image.",
+      fullName: {
+        label: "Full Name",
+        placeholder: "Enter your full name",
+        description: "This name will be displayed on your moderator profile",
+      },
+      email: {
+        label: "Email",
+        placeholder: "Enter your email address",
+        description: "This email will be used for moderator communications",
+      },
+      image: {
+        label: "Profile Image (Optional)",
+        uploadPrompt: "Click to upload an image",
+        uploadHint: "PNG, JPG, GIF up to 5MB",
+        description: "Upload a profile picture to personalize your account (optional)",
+        altText: "Profile preview",
+      },
+      actions: {
+        save: "Save Profile",
+        saving: "Saving...",
+      },
+      errors: {
+        invalidImageType: "Please select an image file",
+        imageTooLarge: "Image size must be less than 5MB",
+        createFailed: "Failed to create profile",
+      },
+      success: {
+        profileCreated: "Profile created successfully",
+      },
+    },
     reportPreviewModal: {
       title: "Report Preview",
-      description: "Review report details before assigning",
+      description: "Review school statute report details before assigning",
       close: "Close",
       unassign: "Unassign",
       unassigning: "Unassigning...",
       assignToMe: "Assign to Me",
       assigning: "Assigning...",
-      unnamedInstitution: "Unnamed Institution",
+      unnamedInstitution: "Unnamed School",
       rspoNumber: "RSPO Number: {number}",
       reporterInformation: "Reporter Information",
       reporterName: "Reporter Name",
@@ -478,13 +535,13 @@ export const messagesByLocale: MessagesByLocale = {
     },
     reportReviewModal: {
       title: "Review Report",
-      description: "Add findings and comparison notes for this report",
+      description: "Add findings and comparison notes for this school statute report",
       cancel: "Cancel",
       saveReview: "Save Review",
       saving: "Saving...",
-      successMessage: "Report review saved successfully",
-      errorMessage: "Failed to save report review",
-      unnamedInstitution: "Unnamed Institution",
+      successMessage: "School statute report review saved successfully",
+      errorMessage: "Failed to save school statute report review",
+      unnamedInstitution: "Unnamed School",
       rspoNumber: "RSPO Number: {number}",
       reporterInformation: "Reporter Information",
       reporterName: "Reporter Name",
@@ -504,13 +561,13 @@ export const messagesByLocale: MessagesByLocale = {
       reviewAndFindings: "Review & Findings",
     },
     reportModal: {
-      title: "Submit a report",
+      title: "Submit a school statute report",
       description: {
-        step1: "Step 1 of 2: Provide institution and contact details.",
-        step2: "Step 2 of 2: Review the PDF, highlight issues, and compare regulations.",
+        step1: "Step 1 of 2: Provide school and contact details.",
+        step2: "Step 2 of 2: Review the school statute PDF, highlight issues, and compare regulations.",
       },
       steps: {
-        details: "Institution details",
+        details: "School details",
         review: "Document review",
       },
       progress: {
@@ -531,70 +588,70 @@ export const messagesByLocale: MessagesByLocale = {
         reporterName: { label: "Reporter name", placeholder: "Jane Doe" },
         reporterEmail: { label: "Reporter email", placeholder: "jane.doe@example.com" },
         institutionName: {
-          label: "Institution name",
-          placeholder: "Springfield University",
-          helper: "Optional: Add the institution display name.",
+          label: "School name",
+          placeholder: "Springfield High School",
+          helper: "Optional: Add the school display name.",
         },
         institutionSearch: {
-          placeholder: "Search for an institution by name or ID",
-          helper: "Provide at least 5 characters to see matching institutions.",
+          placeholder: "Search for a school by name or ID",
+          helper: "Provide at least 5 characters to see matching schools.",
           status: {
             minChars: "Type at least {count} characters to search.",
-            loading: "Searching institutions...",
-            empty: "No institutions match this search.",
-            error: "Unable to load institution suggestions.",
+            loading: "Searching schools...",
+            empty: "No schools match this search.",
+            error: "Unable to load school suggestions.",
             idle: "",
           },
         },
         numerRspo: { 
-          label: "Institution ID / Numer RSPO", 
+          label: "School ID / Numer RSPO", 
           placeholder: "123456",
-          description: "This field is automatically filled when you select an institution from the search above."
+          description: "This field is automatically filled when you select a school from the search above."
         },
         reportDescription: {
           label: "Report description",
-          placeholder: "Provide a short summary of the issue.",
+          placeholder: "Provide a short summary of the statute compliance issue.",
         },
       },
       success: {
-        title: "Report submitted",
+        title: "School statute report submitted",
         description: "Report ID: {id}",
       },
       errors: {
-        login: "Please login before submitting a report.",
-        pdfRequired: "A PDF file is required.",
-        submit: "Unable to submit report",
+        login: "Please login before submitting a school statute report.",
+        pdfRequired: "A school statute PDF file is required.",
+        submit: "Unable to submit school statute report",
         validation: "Please fix the form errors before continuing.",
       },
       validation: {
         reporterName: "Reporter name is required",
         reporterEmail: "Valid email is required",
-        institutionName: "Institution name is required",
+        institutionName: "School name is required",
         findingDetail: "Highlight detail is required",
       },
       regulations: {
         primary: {
           title: "Primary regulation",
-          description: "Check if the document follows the main accreditation standards.",
+          description: "Check if the school statute follows the main accreditation standards.",
         },
         secondary: {
           title: "Safety and compliance",
-          description: "Verify documented safeguards and compliance requirements.",
+          description: "Verify documented safeguards and compliance requirements in school statutes.",
         },
         tertiary: {
           title: "Quality and reporting",
-          description: "Confirm reporting formats, audit trails, and quality metrics.",
+          description: "Confirm reporting formats, audit trails, and quality metrics in school statutes.",
         },
       },
       compare: {
         upload: {
           title: "Upload and preview",
-          placeholder: "Choose a PDF file to review",
-          helper: "View the uploaded document directly and confirm it matches the reported issues.",
+          placeholder: "Choose a school statute PDF file to review",
+          helper: "View the uploaded school statute document directly and confirm it matches the reported issues.",
           replace: "Replace PDF",
           cta: "Upload PDF",
-          uploadedTitle: "Uploaded PDF",
-          empty: "Upload a PDF to preview it here and to start highlighting findings.",
+          uploadedTitle: "Uploaded School Statute PDF",
+          empty: "Upload a school statute PDF to preview it here and to start highlighting findings.",
         },
         reference: {
           title: "Reference regulation",
@@ -602,28 +659,28 @@ export const messagesByLocale: MessagesByLocale = {
         },
         highlights: {
           title: "Highlights for moderators",
-          description: "Capture specific sections, deviations, or errors to guide moderator review.",
+          description: "Capture specific sections, deviations, or errors in school statutes to guide moderator review.",
           pagePlaceholder: "Page or section",
           regulationPlaceholder: "Link to regulation (optional)",
-          detailPlaceholder: "Describe the issue, inconsistency, or highlight for moderators.",
+          detailPlaceholder: "Describe the statute compliance issue, inconsistency, or highlight for moderators.",
           add: "Add highlight",
-          empty: "No highlights added yet. Add notes to help moderators focus on the right areas.",
+          empty: "No highlights added yet. Add notes to help moderators focus on the right areas of school statutes.",
           pageLabel: "Page/section: {page}",
           regulationLabel: "Regulation: {regulation}",
           remove: "Remove",
         },
         comparison: {
           title: "Comparison notes",
-          placeholder: "Summarize how the document aligns with current regulations and list remaining concerns.",
-          description: "These notes are sent to moderators along with your highlights and the PDF.",
+          placeholder: "Summarize how the school statute aligns with current regulations and list remaining concerns.",
+          description: "These notes are sent to moderators along with your highlights and the school statute PDF.",
         },
       },
     },
   },
   pl: {
     navbar: {
-      title: "Platforma zgłaszania instytucji",
-      subtitle: "Zgłaszaj problemy w instytucjach",
+      title: "Platforma zgłaszania statutów szkolnych",
+      subtitle: "Zgłaszaj problemy zgodności statutów szkolnych",
       login: "Zaloguj",
       register: "Zarejestruj",
       dashboard: "Panel",
@@ -631,11 +688,11 @@ export const messagesByLocale: MessagesByLocale = {
       locale: "Język",
     },
     hero: {
-      badge: "Poufne zgłaszanie incydentów w instytucjach",
+      badge: "Poufne zgłaszanie zgodności statutów szkolnych",
       title:
-        "Zgłaszaj incydenty w instytucjach bezpiecznie i szybko przechodź do panelu.",
+        "Zgłaszaj statuty szkolne bezpiecznie i szybko przechodź do panelu.",
       subtitle:
-        "Przekazuj problemy dotyczące instytucji z dołączonym plikiem PDF, śledź zgłoszenia, a administratorzy przeanalizują i odpowiedzą na każde z nich.",
+        "Przekazuj problemy zgodności statutów szkolnych z dołączonym plikiem PDF, a administratorzy przeanalizują i odpowiedzą na każde z nich.",
       cta: {
         submit: "Złóż zgłoszenie",
         login: "Zaloguj do panelu",
@@ -643,20 +700,20 @@ export const messagesByLocale: MessagesByLocale = {
       },
     },
     info: {
-      purpose: { title: "Cel", desc: "Zgłaszanie problemów instytucjonalnych" },
-      flow: { title: "Proces", desc: "Dodaj PDF i wyślij szczegóły" },
+      purpose: { title: "Cel", desc: "Zgłaszanie problemów zgodności statutów szkolnych" },
+      flow: { title: "Proces", desc: "Dodaj PDF statutu szkolnego i wyślij szczegóły" },
       auth: { title: "Uwierzytelnienie", desc: "Zaloguj się, aby zarządzać zgłoszeniami" },
-      evidence: { title: "Dowody", desc: "Dołącz plik PDF do każdego zgłoszenia" },
-      details: { title: "Szczegóły", desc: "Zbierz dane zgłaszającego i instytucji" },
+      evidence: { title: "Dowody", desc: "Dołącz plik PDF statutu do każdego zgłoszenia" },
+      details: { title: "Szczegóły", desc: "Zbierz dane zgłaszającego i szkoły" },
       dashboard: { title: "Panel", desc: "Przeglądaj zgłoszenia w panelu admina" },
     },
     regulations: {
       title: "Aktualne regulacje",
       description:
-        "Przeglądaj najnowsze wytyczne i dokumenty dotyczące zgłaszania w instytucjach.",
+        "Przeglądaj najnowsze wytyczne i dokumenty dotyczące zgłaszania zgodności statutów szkolnych.",
       primary: {
         name: "Wytyczne zgłoszeń",
-        desc: "Jak przygotować i złożyć zgodne zgłoszenie.",
+        desc: "Jak przygotować i złożyć zgodne zgłoszenie statutu szkolnego.",
       },
       secondary: {
         name: "Polityka danych",
@@ -669,30 +726,30 @@ export const messagesByLocale: MessagesByLocale = {
     },
     features: {
       title: "Potężne funkcje",
-      subtitle: "Wszystko czego potrzebujesz do zgłaszania i zarządzania problemami instytucjonalnymi",
+      subtitle: "Wszystko czego potrzebujesz do zgłaszania i zarządzania problemami zgodności statutów szkolnych",
       secure: {
         title: "Bezpieczne i poufne",
-        desc: "Szyfrowanie end-to-end zapewnia, że Twoje zgłoszenia pozostają prywatne i chronione przez cały proces.",
+        desc: "Szyfrowanie end-to-end zapewnia, że Twoje zgłoszenia statutów szkolnych pozostają prywatne i chronione przez cały proces.",
       },
       pdf: {
         title: "Analiza dokumentów PDF",
-        desc: "Prześlij dowody PDF, podglądaj dokumenty i zaznaczaj konkretne ustalenia z precyzją na poziomie strony.",
+        desc: "Prześlij statuty szkolne PDF, podglądaj dokumenty i zaznaczaj konkretne ustalenia z precyzją na poziomie strony.",
       },
       regulations: {
-        title: "Zgodność z regulacjami",
-        desc: "Porównuj dokumenty z aktualnymi regulacjami i łącz ustalenia z konkretnymi wymaganiami zgodności.",
+        title: "Zgodność statutów",
+        desc: "Porównuj statuty szkolne z aktualnymi regulacjami i łącz ustalenia z konkretnymi wymaganiami zgodności.",
       },
       tracking: {
         title: "Śledzenie w czasie rzeczywistym",
-        desc: "Monitoruj status swojego zgłoszenia od przesłania przez przegląd do rozwiązania z aktualizacjami na żywo.",
+        desc: "Monitoruj status swojego zgłoszenia statutu szkolnego od przesłania przez przegląd do rozwiązania z aktualizacjami na żywo.",
       },
       moderation: {
         title: "Ekspercka moderacja",
-        desc: "Doświadczeni administratorzy przeglądają każde zgłoszenie z szczegółowymi ustaleniami i notatkami porównawczymi.",
+        desc: "Doświadczeni administratorzy przeglądają każde zgłoszenie statutu szkolnego z szczegółowymi ustaleniami i notatkami porównawczymi.",
       },
       dashboard: {
         title: "Panel administratora",
-        desc: "Kompleksowy panel dla moderatorów do zarządzania, przypisywania i przeglądania zgłoszeń efektywnie.",
+        desc: "Kompleksowy panel dla moderatorów do zarządzania, przypisywania i przeglądania zgłoszeń statutów szkolnych efektywnie.",
       },
     },
     howItWorks: {
@@ -700,7 +757,7 @@ export const messagesByLocale: MessagesByLocale = {
       subtitle: "Prosty, bezpieczny i efektywny proces zgłaszania",
       step1: {
         title: "Prześlij swoje zgłoszenie",
-        desc: "Wypełnij dane instytucji, prześlij dowody PDF i podaj jasny opis problemu.",
+        desc: "Wypełnij dane szkoły, prześlij statut szkolny PDF i podaj jasny opis problemu zgodności.",
       },
       step2: {
         title: "Przegląd dokumentu",
@@ -728,7 +785,7 @@ export const messagesByLocale: MessagesByLocale = {
       },
       efficiency: {
         title: "Usprawniony proces",
-        desc: "Intuicyjny interfejs i zautomatyzowane przepływy pracy skracają czas zgłaszania o 70%.",
+        desc: "Intuicyjny interfejs i zautomatyzowane przepływy pracy sprawiają, że zgłaszanie statutów szkolnych jest proste i wydajne.",
       },
       compliance: {
         title: "Zgodność regulacyjna",
@@ -736,15 +793,15 @@ export const messagesByLocale: MessagesByLocale = {
       },
     },
     stats: {
-      title: "Zaufane przez instytucje",
+      title: "Zaufane przez szkoły",
       reportsSubmitted: "Zgłoszeń przesłanych",
       activeModerators: "Aktywnych moderatorów",
       avgResponseTime: "Średni czas odpowiedzi",
       complianceRate: "Wskaźnik zgodności",
     },
     footer: {
-      title: "Platforma zgłaszania instytucji",
-      subtitle: "Poufny kanał zgłoszeń i dalszych działań",
+      title: "Platforma zgłaszania statutów szkolnych",
+      subtitle: "Poufny kanał zgłoszeń statutów szkolnych i dalszych działań",
       quickLinks: {
         title: "Szybkie linki",
         features: "Funkcje",
@@ -770,11 +827,11 @@ export const messagesByLocale: MessagesByLocale = {
     },
     documentation: {
       title: "Dokumentacja",
-      subtitle: "Kompletny przewodnik korzystania z Platformy zgłaszania instytucji",
+      subtitle: "Kompletny przewodnik korzystania z Platformy zgłaszania statutów szkolnych",
       overview: {
         title: "Przegląd",
         description:
-          "Platforma zgłaszania instytucji zapewnia bezpieczny i poufny kanał zgłaszania problemów instytucjonalnych. Ta dokumentacja pomoże Ci zrozumieć, jak skutecznie korzystać z platformy do przesyłania zgłoszeń, śledzenia ich statusu i zapewnienia zgodności z wymaganiami regulacyjnymi.",
+          "Platforma zgłaszania statutów szkolnych zapewnia bezpieczny i poufny kanał zgłaszania problemów zgodności statutów szkolnych. Ta dokumentacja pomoże Ci zrozumieć, jak skutecznie korzystać z platformy do przesyłania zgłoszeń, śledzenia ich statusu i zapewnienia zgodności z wymaganiami regulacyjnymi.",
       },
       gettingStarted: {
         title: "Rozpoczęcie pracy",
@@ -791,7 +848,7 @@ export const messagesByLocale: MessagesByLocale = {
         step3: {
           title: "Prześlij zgłoszenie",
           description:
-            "Użyj formularza zgłoszenia, aby podać szczegóły instytucji, przesłać dowody PDF i zaznaczyć konkretne ustalenia. Nasz system poprowadzi Cię przez każdy krok.",
+            "Użyj formularza zgłoszenia, aby podać szczegóły szkoły, przesłać dowody PDF statutu i zaznaczyć konkretne ustalenia. Nasz system poprowadzi Cię przez każdy krok.",
         },
       },
       features: {
@@ -807,9 +864,9 @@ export const messagesByLocale: MessagesByLocale = {
             "Prześlij dokumenty PDF i podglądaj je bezpośrednio w platformie. Zaznacz konkretne strony i sekcje do przeglądu przez moderatorów.",
         },
         search: {
-          title: "Wyszukiwanie instytucji",
+          title: "Wyszukiwanie szkół",
           description:
-            "Wyszukuj instytucje po nazwie lub numerze RSPO. System automatycznie wypełni szczegóły instytucji po wybraniu dopasowania.",
+            "Wyszukuj szkoły po nazwie lub numerze RSPO. System automatycznie wypełni szczegóły szkoły po wybraniu dopasowania.",
         },
         tracking: {
           title: "Śledzenie statusu",
@@ -857,18 +914,18 @@ export const messagesByLocale: MessagesByLocale = {
         },
         content: {
           title: "Wymagania dotyczące treści",
-          description: "Twoje zgłoszenie powinno zawierać:",
-          item1: "Pełne informacje o instytucji (nazwa i numer RSPO)",
-          item2: "Jasny opis problemu lub obawy",
-          item3: "Konkretne ustalenia z odniesieniami do stron, jeśli dotyczy",
+          description: "Twoje zgłoszenie statutu szkolnego powinno zawierać:",
+          item1: "Pełne informacje o szkole (nazwa i numer RSPO)",
+          item2: "Jasny opis problemu zgodności statutu lub obawy",
+          item3: "Konkretne ustalenia z odniesieniami do stron statutu, jeśli dotyczy",
         },
       },
       submission: {
         title: "Proces przesyłania",
         step1: {
-          title: "Krok 1: Szczegóły instytucji",
+          title: "Krok 1: Szczegóły szkoły",
           description:
-            "Podaj nazwę instytucji i numer RSPO. Możesz wyszukać instytucje za pomocą funkcji wyszukiwania lub wprowadzić informacje ręcznie.",
+            "Podaj nazwę szkoły i numer RSPO. Możesz wyszukać szkoły za pomocą funkcji wyszukiwania lub wprowadzić informacje ręcznie.",
         },
         step2: {
           title: "Krok 2: Przegląd dokumentu",
@@ -952,13 +1009,13 @@ export const messagesByLocale: MessagesByLocale = {
       introduction: {
         title: "Wprowadzenie",
         content:
-          "Jesteśmy zobowiązani do ochrony Twojej prywatności i zapewnienia bezpieczeństwa Twoich danych osobowych. Ta Polityka prywatności wyjaśnia, jak zbieramy, wykorzystujemy, ujawniamy i chronimy Twoje informacje podczas korzystania z naszej Platformy zgłaszania instytucji.",
+          "Jesteśmy zobowiązani do ochrony Twojej prywatności i zapewnienia bezpieczeństwa Twoich danych osobowych. Ta Polityka prywatności wyjaśnia, jak zbieramy, wykorzystujemy, ujawniamy i chronimy Twoje informacje podczas korzystania z naszej Platformy zgłaszania statutów szkolnych.",
       },
       dataCollection: {
         title: "Informacje, które zbieramy",
         description: "Zbieramy informacje, które podajesz nam bezpośrednio, w tym:",
         item1: "Informacje o koncie (imię, adres e-mail, hasło)",
-        item2: "Informacje o zgłoszeniu (szczegóły instytucji, opisy, przesłane dokumenty)",
+        item2: "Informacje o zgłoszeniu (szczegóły szkoły, opisy, przesłane dokumenty statutów)",
         item3: "Dane komunikacyjne (wiadomości wysyłane przez platformę)",
         item4: "Dane dotyczące korzystania (jak korzystasz z platformy)",
       },
@@ -995,12 +1052,12 @@ export const messagesByLocale: MessagesByLocale = {
     },
     terms: {
       title: "Warunki użytkowania",
-      subtitle: "Warunki i zasady korzystania z Platformy zgłaszania instytucji",
+      subtitle: "Warunki i zasady korzystania z Platformy zgłaszania statutów szkolnych",
       lastUpdated: "Ostatnia aktualizacja: styczeń 2024",
       acceptance: {
         title: "Akceptacja warunków",
         content:
-          "Korzystając z Platformy zgłaszania instytucji, akceptujesz i zgadzasz się być związany warunkami i postanowieniami niniejszej umowy. Jeśli nie zgadzasz się z tymi warunkami, nie powinieneś korzystać z tej platformy.",
+          "Korzystając z Platformy zgłaszania statutów szkolnych, akceptujesz i zgadzasz się być związany warunkami i postanowieniami niniejszej umowy. Jeśli nie zgadzasz się z tymi warunkami, nie powinieneś korzystać z tej platformy.",
       },
       useOfService: {
         title: "Korzystanie z usługi",
@@ -1061,15 +1118,72 @@ export const messagesByLocale: MessagesByLocale = {
         completed: "Ukończone",
       },
     },
+    reportCard: {
+      unnamedSchool: "Szkoła bez nazwy",
+      rspoLabel: "RSPO: {number}",
+      status: {
+        pending: "Oczekujące",
+        assigned: "Przypisane",
+        completed: "Ukończone",
+      },
+      dates: {
+        created: "Utworzono: {date}",
+        assigned: "Przypisano: {date}",
+        completed: "Ukończono: {date}",
+        notAvailable: "Brak",
+      },
+      reason: "Powód:",
+      actions: {
+        preview: "Podgląd",
+        unassign: "Cofnij przypisanie",
+        unassigning: "Cofanie przypisania...",
+        review: "Przejrzyj",
+        assignToMe: "Przypisz do mnie",
+        assigning: "Przypisywanie...",
+      },
+    },
+    moderatorProfileModal: {
+      title: "Uzupełnij swój profil",
+      description: "Podaj swoje imię i nazwisko oraz adres email, aby kontynuować. Możesz opcjonalnie przesłać zdjęcie profilowe.",
+      fullName: {
+        label: "Imię i nazwisko",
+        placeholder: "Wprowadź swoje imię i nazwisko",
+        description: "To imię będzie wyświetlane w Twoim profilu moderatora",
+      },
+      email: {
+        label: "Email",
+        placeholder: "Wprowadź swój adres email",
+        description: "Ten email będzie używany do komunikacji z moderatorami",
+      },
+      image: {
+        label: "Zdjęcie profilowe (Opcjonalne)",
+        uploadPrompt: "Kliknij, aby przesłać zdjęcie",
+        uploadHint: "PNG, JPG, GIF do 5MB",
+        description: "Prześlij zdjęcie profilowe, aby spersonalizować swoje konto (opcjonalne)",
+        altText: "Podgląd profilu",
+      },
+      actions: {
+        save: "Zapisz profil",
+        saving: "Zapisywanie...",
+      },
+      errors: {
+        invalidImageType: "Proszę wybrać plik obrazu",
+        imageTooLarge: "Rozmiar obrazu musi być mniejszy niż 5MB",
+        createFailed: "Nie udało się utworzyć profilu",
+      },
+      success: {
+        profileCreated: "Profil utworzony pomyślnie",
+      },
+    },
     reportPreviewModal: {
       title: "Podgląd zgłoszenia",
-      description: "Przejrzyj szczegóły zgłoszenia przed przypisaniem",
+      description: "Przejrzyj szczegóły zgłoszenia statutu szkolnego przed przypisaniem",
       close: "Zamknij",
       unassign: "Cofnij przypisanie",
       unassigning: "Cofanie przypisania...",
       assignToMe: "Przypisz do mnie",
       assigning: "Przypisywanie...",
-      unnamedInstitution: "Instytucja bez nazwy",
+      unnamedInstitution: "Szkoła bez nazwy",
       rspoNumber: "Numer RSPO: {number}",
       reporterInformation: "Informacje o zgłaszającym",
       reporterName: "Imię i nazwisko zgłaszającego",
@@ -1090,13 +1204,13 @@ export const messagesByLocale: MessagesByLocale = {
     },
     reportReviewModal: {
       title: "Przegląd zgłoszenia",
-      description: "Dodaj ustalenia i notatki porównawcze dla tego zgłoszenia",
+      description: "Dodaj ustalenia i notatki porównawcze dla tego zgłoszenia statutu szkolnego",
       cancel: "Anuluj",
       saveReview: "Zapisz przegląd",
       saving: "Zapisywanie...",
-      successMessage: "Przegląd zgłoszenia zapisany pomyślnie",
-      errorMessage: "Nie udało się zapisać przeglądu zgłoszenia",
-      unnamedInstitution: "Instytucja bez nazwy",
+      successMessage: "Przegląd zgłoszenia statutu szkolnego zapisany pomyślnie",
+      errorMessage: "Nie udało się zapisać przeglądu zgłoszenia statutu szkolnego",
+      unnamedInstitution: "Szkoła bez nazwy",
       rspoNumber: "Numer RSPO: {number}",
       reporterInformation: "Informacje o zgłaszającym",
       reporterName: "Imię i nazwisko zgłaszającego",
@@ -1105,7 +1219,7 @@ export const messagesByLocale: MessagesByLocale = {
       created: "Utworzono",
       assigned: "Przypisano",
       submittedReportContent: "Przesłana treść zgłoszenia",
-      findings: "Ustalenia ({count})",
+      findings: "Ustalenia ({count})",  
       page: "Strona: {page}",
       regulation: "Regulacja: {regulation}",
       comparisonNotes: "Notatki porównawcze",
@@ -1116,13 +1230,13 @@ export const messagesByLocale: MessagesByLocale = {
       reviewAndFindings: "Przegląd i ustalenia",
     },
     reportModal: {
-      title: "Złóż zgłoszenie",
+      title: "Złóż zgłoszenie statutu szkolnego",
       description: {
-        step1: "Krok 1 z 2: Podaj dane instytucji i kontaktowe.",
-        step2: "Krok 2 z 2: Przejrzyj PDF, zaznacz problemy i porównaj z regulacjami.",
+        step1: "Krok 1 z 2: Podaj dane szkoły i kontaktowe.",
+        step2: "Krok 2 z 2: Przejrzyj PDF statutu szkolnego, zaznacz problemy i porównaj z regulacjami.",
       },
       steps: {
-        details: "Szczegóły instytucji",
+        details: "Szczegóły szkoły",
         review: "Przegląd dokumentu",
       },
       progress: {
@@ -1143,29 +1257,29 @@ export const messagesByLocale: MessagesByLocale = {
         reporterName: { label: "Imię i nazwisko zgłaszającego", placeholder: "Jan Kowalski" },
         reporterEmail: { label: "Email zgłaszającego", placeholder: "jan.kowalski@example.com" },
         institutionName: {
-          label: "Nazwa instytucji",
-          placeholder: "Uniwersytet Warszawski",
-          helper: "Opcjonalnie: Dodaj wyświetlaną nazwę instytucji.",
+          label: "Nazwa szkoły",
+          placeholder: "Liceum Ogólnokształcące",
+          helper: "Opcjonalnie: Dodaj wyświetlaną nazwę szkoły.",
         },
         institutionSearch: {
-          placeholder: "Wyszukaj instytucję po nazwie lub ID",
-          helper: "Wprowadź co najmniej 5 znaków, aby zobaczyć pasujące instytucje.",
+          placeholder: "Wyszukaj szkołę po nazwie lub ID",
+          helper: "Wprowadź co najmniej 5 znaków, aby zobaczyć pasujące szkoły.",
           status: {
             minChars: "Wpisz co najmniej {count} znaków, aby wyszukać.",
-            loading: "Wyszukiwanie instytucji...",
-            empty: "Brak instytucji pasujących do wyszukiwania.",
-            error: "Nie można załadować sugestii instytucji.",
+            loading: "Wyszukiwanie szkół...",
+            empty: "Brak szkół pasujących do wyszukiwania.",
+            error: "Nie można załadować sugestii szkół.",
             idle: "",
           },
         },
         numerRspo: { 
-          label: "ID instytucji / Numer RSPO", 
+          label: "ID szkoły / Numer RSPO", 
           placeholder: "123456",
-          description: "To pole jest automatycznie wypełniane po wybraniu instytucji z wyszukiwania powyżej."
+          description: "To pole jest automatycznie wypełniane po wybraniu szkoły z wyszukiwania powyżej."
         },
         reportDescription: {
           label: "Opis zgłoszenia",
-          placeholder: "Podaj krótkie podsumowanie problemu.",
+          placeholder: "Podaj krótkie podsumowanie problemu zgodności statutu.",
         },
       },
       success: {
@@ -1181,7 +1295,7 @@ export const messagesByLocale: MessagesByLocale = {
       validation: {
         reporterName: "Imię i nazwisko zgłaszającego jest wymagane",
         reporterEmail: "Wymagany jest prawidłowy email",
-        institutionName: "Nazwa instytucji jest wymagana",
+        institutionName: "Nazwa szkoły jest wymagana",
         findingDetail: "Szczegół zaznaczenia jest wymagany",
       },
       regulations: {
@@ -1234,8 +1348,8 @@ export const messagesByLocale: MessagesByLocale = {
   },
   uk: {
     navbar: {
-      title: "Платформа звітів про заклади",
-      subtitle: "Повідомляйте про проблеми в установах",
+      title: "Платформа звітів про статути шкіл",
+      subtitle: "Повідомляйте про проблеми відповідності статутів шкіл",
       login: "Увійти",
       register: "Зареєструватися",
       dashboard: "Панель",
@@ -1243,10 +1357,10 @@ export const messagesByLocale: MessagesByLocale = {
       locale: "Мова",
     },
     hero: {
-      badge: "Конфіденційні повідомлення про інциденти в установах",
-      title: "Подайте звіт безпечно та швидко перейдіть до адмін-панелі.",
+      badge: "Конфіденційні повідомлення про відповідність статутів шкіл",
+      title: "Подайте звіт про статут школи безпечно та швидко перейдіть до адмін-панелі.",
       subtitle:
-        "Діліться проблемами щодо установ з PDF-доказами, відстежуйте подані звіти, а адміністратори опрацюють і нададуть відповідь на кожен.",
+        "Діліться проблемами відповідності статутів шкіл з PDF-доказами, а адміністратори опрацюють і нададуть відповідь на кожен.",
       cta: {
         submit: "Надіслати звіт",
         login: "Увійти до панелі",
@@ -1254,11 +1368,11 @@ export const messagesByLocale: MessagesByLocale = {
       },
     },
     info: {
-      purpose: { title: "Мета", desc: "Повідомлення про проблеми в установах" },
-      flow: { title: "Процес", desc: "Додайте PDF і надішліть деталі" },
+      purpose: { title: "Мета", desc: "Повідомлення про проблеми відповідності статутів шкіл" },
+      flow: { title: "Процес", desc: "Додайте PDF статуту школи і надішліть деталі" },
       auth: { title: "Автентифікація", desc: "Увійдіть, щоб керувати звітами" },
-      evidence: { title: "Докази", desc: "Додавайте PDF-доказ до кожного звіту" },
-      details: { title: "Деталі", desc: "Зберіть дані автора і закладу" },
+      evidence: { title: "Докази", desc: "Додавайте PDF-доказ статуту до кожного звіту" },
+      details: { title: "Деталі", desc: "Зберіть дані автора і школи" },
       dashboard: { title: "Панель", desc: "Переглядайте звіти в адмін-панелі" },
     },
     regulations: {
@@ -1280,30 +1394,30 @@ export const messagesByLocale: MessagesByLocale = {
     },
     features: {
       title: "Потужні функції",
-      subtitle: "Все, що потрібно для звітування та управління проблемами закладів",
+      subtitle: "Все, що потрібно для звітування та управління проблемами відповідності статутів шкіл",
       secure: {
         title: "Безпечно та конфіденційно",
-        desc: "Шифрування end-to-end забезпечує, що ваші звіти залишаються приватними та захищеними протягом усього процесу.",
+        desc: "Шифрування end-to-end забезпечує, що ваші звіти про статути шкіл залишаються приватними та захищеними протягом усього процесу.",
       },
       pdf: {
         title: "Аналіз документів PDF",
-        desc: "Завантажте PDF-докази, переглядайте документи та виділяйте конкретні знахідки з точністю на рівні сторінки.",
+        desc: "Завантажте PDF статутів шкіл, переглядайте документи та виділяйте конкретні знахідки з точністю на рівні сторінки.",
       },
       regulations: {
-        title: "Відповідність регуляціям",
-        desc: "Порівнюйте документи з поточними регуляціями та пов'язуйте знахідки з конкретними вимогами відповідності.",
+        title: "Відповідність статутів",
+        desc: "Порівнюйте статути шкіл з поточними регуляціями та пов'язуйте знахідки з конкретними вимогами відповідності.",
       },
       tracking: {
         title: "Відстеження в реальному часі",
-        desc: "Відстежуйте статус вашого звіту від подання через перегляд до вирішення з оновленнями в реальному часі.",
+        desc: "Відстежуйте статус вашого звіту про статут школи від подання через перегляд до вирішення з оновленнями в реальному часі.",
       },
       moderation: {
         title: "Експертна модерація",
-        desc: "Досвідчені адміністратори переглядають кожен звіт з детальними знахідками та порівняльними нотатками.",
+        desc: "Досвідчені адміністратори переглядають кожен звіт про статут школи з детальними знахідками та порівняльними нотатками.",
       },
       dashboard: {
         title: "Адмін-панель",
-        desc: "Комплексна панель для модераторів для ефективного управління, призначення та перегляду звітів.",
+        desc: "Комплексна панель для модераторів для ефективного управління, призначення та перегляду звітів про статути шкіл.",
       },
     },
     howItWorks: {
@@ -1339,7 +1453,7 @@ export const messagesByLocale: MessagesByLocale = {
       },
       efficiency: {
         title: "Оптимізований процес",
-        desc: "Інтуїтивний інтерфейс та автоматизовані робочі процеси зменшують час звітування на 70%.",
+        desc: "Інтуїтивний інтерфейс та автоматизовані робочі процеси роблять звітування про статути шкіл простим та ефективним.",
       },
       compliance: {
         title: "Регуляторна відповідність",
@@ -1347,15 +1461,15 @@ export const messagesByLocale: MessagesByLocale = {
       },
     },
     stats: {
-      title: "Довіряють заклади",
+      title: "Довіряють школи",
       reportsSubmitted: "Звітів надіслано",
       activeModerators: "Активних модераторів",
       avgResponseTime: "Середній час відповіді",
       complianceRate: "Показник відповідності",
     },
     footer: {
-      title: "Платформа звітів про заклади",
-      subtitle: "Конфіденційний канал для звітів та подальших дій",
+      title: "Платформа звітів про статути шкіл",
+      subtitle: "Конфіденційний канал для звітів про статути шкіл та подальших дій",
       quickLinks: {
         title: "Швидкі посилання",
         features: "Функції",
@@ -1672,15 +1786,72 @@ export const messagesByLocale: MessagesByLocale = {
         completed: "Завершені",
       },
     },
+    reportCard: {
+      unnamedSchool: "Школа без назви",
+      rspoLabel: "RSPO: {number}",
+      status: {
+        pending: "Очікує",
+        assigned: "Призначено",
+        completed: "Завершено",
+      },
+      dates: {
+        created: "Створено: {date}",
+        assigned: "Призначено: {date}",
+        completed: "Завершено: {date}",
+        notAvailable: "Н/Д",
+      },
+      reason: "Причина:",
+      actions: {
+        preview: "Попередній перегляд",
+        unassign: "Скасувати призначення",
+        unassigning: "Скасування призначення...",
+        review: "Переглянути",
+        assignToMe: "Призначити мені",
+        assigning: "Призначення...",
+      },
+    },
+    moderatorProfileModal: {
+      title: "Завершіть свій профіль",
+      description: "Будь ласка, надайте своє повне ім'я та електронну адресу, щоб продовжити. Ви також можете завантажити зображення профілю.",
+      fullName: {
+        label: "Повне ім'я",
+        placeholder: "Введіть своє повне ім'я",
+        description: "Це ім'я буде відображатися у вашому профілі модератора",
+      },
+      email: {
+        label: "Email",
+        placeholder: "Введіть свою адресу електронної пошти",
+        description: "Ця електронна адреса буде використовуватися для спілкування з модераторами",
+      },
+      image: {
+        label: "Зображення профілю (Необов'язково)",
+        uploadPrompt: "Клацніть, щоб завантажити зображення",
+        uploadHint: "PNG, JPG, GIF до 5MB",
+        description: "Завантажте зображення профілю, щоб персоналізувати свій обліковий запис (необов'язково)",
+        altText: "Попередній перегляд профілю",
+      },
+      actions: {
+        save: "Зберегти профіль",
+        saving: "Збереження...",
+      },
+      errors: {
+        invalidImageType: "Будь ласка, виберіть файл зображення",
+        imageTooLarge: "Розмір зображення повинен бути менше 5MB",
+        createFailed: "Не вдалося створити профіль",
+      },
+      success: {
+        profileCreated: "Профіль успішно створено",
+      },
+    },
     reportPreviewModal: {
       title: "Перегляд звіту",
-      description: "Перегляньте деталі звіту перед призначенням",
+      description: "Перегляньте деталі звіту про статут школи перед призначенням",
       close: "Закрити",
       unassign: "Скасувати призначення",
       unassigning: "Скасування призначення...",
       assignToMe: "Призначити мені",
       assigning: "Призначення...",
-      unnamedInstitution: "Заклад без назви",
+      unnamedInstitution: "Школа без назви",
       rspoNumber: "Номер RSPO: {number}",
       reporterInformation: "Інформація про автора",
       reporterName: "Ім'я та прізвище автора",
@@ -1701,13 +1872,13 @@ export const messagesByLocale: MessagesByLocale = {
     },
     reportReviewModal: {
       title: "Перегляд звіту",
-      description: "Додайте знахідки та порівняльні нотатки для цього звіту",
+      description: "Додайте знахідки та порівняльні нотатки для цього звіту про статут школи",
       cancel: "Скасувати",
       saveReview: "Зберегти перегляд",
       saving: "Збереження...",
-      successMessage: "Перегляд звіту успішно збережено",
-      errorMessage: "Не вдалося зберегти перегляд звіту",
-      unnamedInstitution: "Заклад без назви",
+      successMessage: "Перегляд звіту про статут школи успішно збережено",
+      errorMessage: "Не вдалося зберегти перегляд звіту про статут школи",
+      unnamedInstitution: "Школа без назви",
       rspoNumber: "Номер RSPO: {number}",
       reporterInformation: "Інформація про автора",
       reporterName: "Ім'я та прізвище автора",
@@ -1727,13 +1898,13 @@ export const messagesByLocale: MessagesByLocale = {
       reviewAndFindings: "Перегляд та знахідки",
     },
     reportModal: {
-      title: "Надіслати звіт",
+      title: "Надіслати звіт про статут школи",
       description: {
-        step1: "Крок 1 з 2: Надайте дані про заклад та контактну інформацію.",
-        step2: "Крок 2 з 2: Перегляньте PDF, виділіть проблеми та порівняйте з регуляціями.",
+        step1: "Крок 1 з 2: Надайте дані про школу та контактну інформацію.",
+        step2: "Крок 2 з 2: Перегляньте PDF статуту школи, виділіть проблеми та порівняйте з регуляціями.",
       },
       steps: {
-        details: "Деталі закладу",
+        details: "Деталі школи",
         review: "Перегляд документа",
       },
       progress: {
@@ -1754,29 +1925,29 @@ export const messagesByLocale: MessagesByLocale = {
         reporterName: { label: "Ім'я та прізвище автора", placeholder: "Іван Петренко" },
         reporterEmail: { label: "Email автора", placeholder: "ivan.petrenko@example.com" },
         institutionName: {
-          label: "Назва закладу",
-          placeholder: "Київський університет",
-          helper: "За бажанням: Додайте відображувану назву закладу.",
+          label: "Назва школи",
+          placeholder: "Київська гімназія",
+          helper: "За бажанням: Додайте відображувану назву школи.",
         },
         institutionSearch: {
-          placeholder: "Пошук закладу за назвою або ID",
-          helper: "Введіть принаймні 5 символів, щоб побачити відповідні заклади.",
+          placeholder: "Пошук школи за назвою або ID",
+          helper: "Введіть принаймні 5 символів, щоб побачити відповідні школи.",
           status: {
             minChars: "Введіть принаймні {count} символів для пошуку.",
-            loading: "Пошук закладів...",
-            empty: "Жоден заклад не відповідає цьому пошуку.",
-            error: "Неможливо завантажити пропозиції закладів.",
+            loading: "Пошук шкіл...",
+            empty: "Жодна школа не відповідає цьому пошуку.",
+            error: "Неможливо завантажити пропозиції шкіл.",
             idle: "",
           },
         },
         numerRspo: { 
-          label: "ID закладу / Номер RSPO", 
+          label: "ID школи / Номер RSPO", 
           placeholder: "123456",
-          description: "Це поле автоматично заповнюється після вибору закладу з пошуку вище."
+          description: "Це поле автоматично заповнюється після вибору школи з пошуку вище."
         },
         reportDescription: {
           label: "Опис звіту",
-          placeholder: "Надайте короткий опис проблеми.",
+          placeholder: "Надайте короткий опис проблеми відповідності статуту.",
         },
       },
       success: {
@@ -1792,7 +1963,7 @@ export const messagesByLocale: MessagesByLocale = {
       validation: {
         reporterName: "Ім'я та прізвище автора обов'язкові",
         reporterEmail: "Потрібна дійсна електронна пошта",
-        institutionName: "Назва закладу обов'язкова",
+        institutionName: "Назва школи обов'язкова",
         findingDetail: "Деталь виділення обов'язкова",
       },
       regulations: {

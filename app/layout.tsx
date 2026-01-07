@@ -17,8 +17,8 @@ const robotoMono = Roboto_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Institution Report Platform",
-  description: "Submit institution reports securely and access the admin area.",
+  title: "School Statute Report Platform",
+  description: "Submit school statute reports securely and access the admin area.",
 }
 
 export default function RootLayout({

@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form"
 import { LoaderIcon, UploadIcon, XIcon } from "lucide-react"
 import { twMerge } from "tailwind-merge"
 import { toast } from "sonner"
+import { useTranslations } from "next-intl"
 
 import { Modal } from "@/components/ui/modal"
 import { Button } from "@/components/ui/button"
@@ -37,6 +38,8 @@ export const ModeratorProfileModal = ({
   onSuccess,
   accessToken,
 }: ModeratorProfileModalProps) => {
+  const t = useTranslations("moderatorProfileModal")
+  
   const form = useForm<ModeratorProfileFormValues>({
     resolver: zodResolver(moderatorProfileFormSchema),
     defaultValues: {
@@ -79,17 +82,17 @@ export const ModeratorProfileModal = ({
       const file = event.target.files?.[0] ?? null
       if (file) {
         if (!file.type.startsWith("image/")) {
-          toast.error("Please select an image file")
+          toast.error(t("errors.invalidImageType"))
           return
         }
         if (file.size > 5 * 1024 * 1024) {
-          toast.error("Image size must be less than 5MB")
+          toast.error(t("errors.imageTooLarge"))
           return
         }
         setValue("image", file, { shouldDirty: true, shouldValidate: false })
       }
     },
-    [setValue]
+    [setValue, t]
   )
 
   const handleRemoveImage = useCallback(() => {
@@ -113,16 +116,16 @@ export const ModeratorProfileModal = ({
           accessToken
         )
 
-        toast.success("Profile created successfully")
+        toast.success(t("success.profileCreated"))
         onSuccess()
         onClose()
       } catch (error) {
         const errorMessage =
-          error instanceof Error ? error.message : "Failed to create profile"
+          error instanceof Error ? error.message : t("errors.createFailed")
         toast.error(errorMessage)
       }
     },
-    [accessToken, onSuccess, onClose]
+    [accessToken, onSuccess, onClose, t]
   )
 
   const handleClose = useCallback(() => {
@@ -138,8 +141,8 @@ export const ModeratorProfileModal = ({
   return (
     <Modal
       open={open}
-      title="Complete Your Profile"
-      description="Please provide your full name and email to continue. You can optionally upload a profile image."
+      title={t("title")}
+      description={t("description")}
       onClose={undefined}
       panelClassName="max-w-2xl"
       footer={
@@ -151,10 +154,10 @@ export const ModeratorProfileModal = ({
             {isSubmitting ? (
               <>
                 <LoaderIcon className="size-4 animate-spin" />
-                Saving...
+                {t("actions.saving")}
               </>
             ) : (
-              "Save Profile"
+              t("actions.save")
             )}
           </Button>
         </div>
@@ -163,7 +166,7 @@ export const ModeratorProfileModal = ({
       <div className="space-y-6">
         <Field>
           <FieldLabel>
-            Full Name <span className="text-destructive">*</span>
+            {t("fullName.label")} <span className="text-destructive">*</span>
           </FieldLabel>
           <FieldContent>
             <Controller
@@ -173,7 +176,7 @@ export const ModeratorProfileModal = ({
                 <Input
                   {...field}
                   type="text"
-                  placeholder="Enter your full name"
+                  placeholder={t("fullName.placeholder")}
                   disabled={isSubmitting}
                   aria-invalid={Boolean(errors.fullName)}
                 />
@@ -185,7 +188,7 @@ export const ModeratorProfileModal = ({
               </FieldDescription>
             ) : (
               <FieldDescription>
-                This name will be displayed on your moderator profile
+                {t("fullName.description")}
               </FieldDescription>
             )}
           </FieldContent>
@@ -193,7 +196,7 @@ export const ModeratorProfileModal = ({
 
         <Field>
           <FieldLabel>
-            Email <span className="text-destructive">*</span>
+            {t("email.label")} <span className="text-destructive">*</span>
           </FieldLabel>
           <FieldContent>
             <Controller
@@ -203,7 +206,7 @@ export const ModeratorProfileModal = ({
                 <Input
                   {...field}
                   type="email"
-                  placeholder="Enter your email address"
+                  placeholder={t("email.placeholder")}
                   disabled={isSubmitting}
                   aria-invalid={Boolean(errors.email)}
                 />
@@ -215,21 +218,21 @@ export const ModeratorProfileModal = ({
               </FieldDescription>
             ) : (
               <FieldDescription>
-                This email will be used for moderator communications
+                {t("email.description")}
               </FieldDescription>
             )}
           </FieldContent>
         </Field>
             
         <Field>
-          <FieldLabel>Profile Image (Optional)</FieldLabel>
+          <FieldLabel>{t("image.label")}</FieldLabel>
           <FieldContent>
             {imagePreview ? (
               <div className="relative inline-block">
                 <div className="relative size-32 overflow-hidden rounded-lg border border-border">
                   <img
                     src={imagePreview}
-                    alt="Profile preview"
+                    alt={t("image.altText")}
                     className="size-full object-cover"
                   />
                 </div>
@@ -256,10 +259,10 @@ export const ModeratorProfileModal = ({
                 <UploadIcon className="size-5 text-muted-foreground" />
                 <div className="flex flex-col">
                   <span className="font-medium text-foreground">
-                    Click to upload an image
+                    {t("image.uploadPrompt")}
                   </span>
                   <span className="text-xs text-muted-foreground">
-                    PNG, JPG, GIF up to 5MB
+                    {t("image.uploadHint")}
                   </span>
                 </div>
               </label>
@@ -273,7 +276,7 @@ export const ModeratorProfileModal = ({
               disabled={isSubmitting}
             />
             <FieldDescription>
-              Upload a profile picture to personalize your account (optional)
+              {t("image.description")}
             </FieldDescription>
           </FieldContent>
         </Field>

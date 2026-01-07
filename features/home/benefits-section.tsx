@@ -12,12 +12,10 @@ import { twMerge } from "tailwind-merge"
 
 type Benefit = {
   icon: typeof EyeIcon
-  key: "transparency" | "security" | "efficiency" | "compliance"
+  key: "efficiency" | "compliance"
 }
 
 const benefits: Benefit[] = [
-  { icon: EyeIcon, key: "transparency" },
-  { icon: ShieldIcon, key: "security" },
   { icon: ZapIcon, key: "efficiency" },
   { icon: FileCheckIcon, key: "compliance" },
 ]

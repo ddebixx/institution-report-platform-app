@@ -5,7 +5,6 @@ import {
   FileTextIcon,
   ShieldCheckIcon,
   SearchIcon,
-  EyeIcon,
   CheckCircleIcon,
   LayoutDashboardIcon,
 } from "lucide-react"
@@ -14,14 +13,12 @@ import { twMerge } from "tailwind-merge"
 
 type Feature = {
   icon: typeof FileTextIcon
-  key: "secure" | "pdf" | "regulations" | "tracking" | "moderation" | "dashboard"
+  key: "pdf" | "regulations" | "moderation" | "dashboard"
 }
 
 const features: Feature[] = [
-  { icon: ShieldCheckIcon, key: "secure" },
   { icon: FileTextIcon, key: "pdf" },
   { icon: SearchIcon, key: "regulations" },
-  { icon: EyeIcon, key: "tracking" },
   { icon: CheckCircleIcon, key: "moderation" },
   { icon: LayoutDashboardIcon, key: "dashboard" },
 ]
@@ -82,7 +79,7 @@ export const FeaturesSection = () => {
         </p>
       </div>
 
-      <div className="relative z-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="relative z-10 grid gap-6 md:grid-cols-2">
         {features.map((feature, index) => {
           const Icon = feature.icon
           const isVisible = visibleFeatures.has(index)
