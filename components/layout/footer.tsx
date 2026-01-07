@@ -2,13 +2,14 @@
 
 import { ShieldIcon, MailIcon, FileTextIcon, ArrowRightIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 export const Footer = () => {
   const t = useTranslations("footer")
 
   return (
     <footer className="relative border-t border-border/60 bg-background/90 backdrop-blur-sm">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/2 via-transparent to-primary/2 opacity-30" />
+      <div className="absolute inset-0 -z-10 bg-linear-to-br from-primary/2 via-transparent to-primary/2 opacity-30" />
       
       <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
       <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
@@ -33,40 +34,40 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a
+                <Link
                   href="#features"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("quickLinks.features")}</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#how-it-works"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("quickLinks.howItWorks")}</span>
-                </a>
+                  </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#benefits"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("quickLinks.benefits")}</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="#regulations"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("quickLinks.regulations")}</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -77,31 +78,31 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/documentation"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("resources.documentation")}</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#"
+                <Link
+                  href="/guidelines"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("resources.guidelines")}</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/support"
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <FileTextIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("resources.support")}</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -112,13 +113,13 @@ export const Footer = () => {
             </h3>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li>
-                <a
+                <Link
                   href={`mailto:${t("contact.email")}`}
                   className="group flex items-center gap-2 transition-all duration-300 hover:translate-x-1 hover:text-primary"
                 >
                   <MailIcon className="size-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("contact.email")}</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -130,18 +131,18 @@ export const Footer = () => {
               © {new Date().getFullYear()} {t("title")}. {t("legal.copyright")}
             </p>
             <div className="flex items-center gap-6">
-              <a
-                href="#"
+              <Link
+                href="/privacy"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
                 {t("legal.privacy")}
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                  href="/terms"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
                 {t("legal.terms")}
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,64 +1,48 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { 
-  FileTextIcon, 
-  CheckCircleIcon, 
-  UserIcon, 
-  KeyIcon, 
-  FileUpIcon, 
-  CopyrightIcon, 
-  ShieldAlertIcon, 
-  RefreshCwIcon,
-  MailIcon 
-} from "lucide-react"
+import { ShieldIcon, DatabaseIcon, LockIcon, ClockIcon, UserCheckIcon, MailIcon } from "lucide-react"
 import { Accordion } from "@/components/ui/accordion"
 
-const TermsPage = () => {
-  const t = useTranslations("terms")
+const PrivacyPage = () => {
+  const t = useTranslations("privacy")
 
   const accordionItems = [
     {
-      id: "acceptance",
-      title: t("acceptance.title"),
-      content: t("acceptance.content"),
-      icon: CheckCircleIcon,
+      id: "introduction",
+      title: t("introduction.title"),
+      content: t("introduction.content"),
+      icon: ShieldIcon,
     },
     {
-      id: "useOfService",
-      title: t("useOfService.title"),
-      content: `${t("useOfService.description")}\n\n• ${t("useOfService.item1")}\n• ${t("useOfService.item2")}\n• ${t("useOfService.item3")}\n• ${t("useOfService.item4")}`,
-      icon: UserIcon,
+      id: "dataCollection",
+      title: t("dataCollection.title"),
+      content: `${t("dataCollection.description")}\n\n• ${t("dataCollection.item1")}\n• ${t("dataCollection.item2")}\n• ${t("dataCollection.item3")}\n• ${t("dataCollection.item4")}`,
+      icon: DatabaseIcon,
     },
     {
-      id: "userAccounts",
-      title: t("userAccounts.title"),
-      content: `${t("userAccounts.description")}\n\n• ${t("userAccounts.item1")}\n• ${t("userAccounts.item2")}\n• ${t("userAccounts.item3")}`,
-      icon: KeyIcon,
+      id: "dataUsage",
+      title: t("dataUsage.title"),
+      content: `${t("dataUsage.description")}\n\n• ${t("dataUsage.item1")}\n• ${t("dataUsage.item2")}\n• ${t("dataUsage.item3")}`,
+      icon: DatabaseIcon,
     },
     {
-      id: "reportSubmission",
-      title: t("reportSubmission.title"),
-      content: `${t("reportSubmission.description")}\n\n• ${t("reportSubmission.item1")}\n• ${t("reportSubmission.item2")}\n• ${t("reportSubmission.item3")}`,
-      icon: FileUpIcon,
+      id: "dataSecurity",
+      title: t("dataSecurity.title"),
+      content: t("dataSecurity.description"),
+      icon: LockIcon,
     },
     {
-      id: "intellectualProperty",
-      title: t("intellectualProperty.title"),
-      content: t("intellectualProperty.content"),
-      icon: CopyrightIcon,
+      id: "dataRetention",
+      title: t("dataRetention.title"),
+      content: t("dataRetention.description"),
+      icon: ClockIcon,
     },
     {
-      id: "limitationOfLiability",
-      title: t("limitationOfLiability.title"),
-      content: t("limitationOfLiability.content"),
-      icon: ShieldAlertIcon,
-    },
-    {
-      id: "modifications",
-      title: t("modifications.title"),
-      content: t("modifications.content"),
-      icon: RefreshCwIcon,
+      id: "yourRights",
+      title: t("yourRights.title"),
+      content: `${t("yourRights.description")}\n\n• ${t("yourRights.item1")}\n• ${t("yourRights.item2")}\n• ${t("yourRights.item3")}\n• ${t("yourRights.item4")}`,
+      icon: UserCheckIcon,
     },
   ]
 
@@ -66,7 +50,7 @@ const TermsPage = () => {
     <div className="mx-auto w-full max-w-[900px] px-4 py-12 sm:px-6">
       <div className="mb-8 text-center">
         <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5">
-          <FileTextIcon className="size-8 text-primary" />
+          <ShieldIcon className="size-8 text-primary" />
         </div>
         <h1 className="mb-2 text-3xl font-bold text-foreground sm:text-4xl">{t("title")}</h1>
         <p className="text-base text-muted-foreground">{t("subtitle")}</p>
@@ -98,5 +82,4 @@ const TermsPage = () => {
   )
 }
 
-export default TermsPage
-
+export default PrivacyPage
