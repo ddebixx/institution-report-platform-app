@@ -1,36 +1,31 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import {
-  FileTextIcon,
-  EyeIcon,
-  CheckCircleIcon,
-  ArrowRightIcon,
-} from "lucide-react"
-import { useTranslations } from "next-intl"
-import { twMerge } from "tailwind-merge"
+import { useEffect, useRef, useState } from "react";
+import { FileTextIcon, EyeIcon, CheckCircleIcon, ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 type Step = {
-  icon: typeof FileTextIcon
-  number: number
-  key: "step1" | "step2" | "step3" | "step4"
-}
+  icon: typeof FileTextIcon;
+  number: number;
+  key: "step1" | "step2" | "step3" | "step4";
+};
 
 const steps: Step[] = [
   { icon: FileTextIcon, number: 1, key: "step1" },
   { icon: EyeIcon, number: 2, key: "step2" },
   { icon: CheckCircleIcon, number: 3, key: "step3" },
   { icon: ArrowRightIcon, number: 4, key: "step4" },
-]
+];
 
 export const HowItWorksSection = () => {
-  const t = useTranslations("howItWorks")
-  const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set())
-  const sectionRef = useRef<HTMLElement>(null)
+  const t = useTranslations("howItWorks");
+  const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function handleIntersection() {
-      if (!sectionRef.current) return
+      if (!sectionRef.current) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -38,56 +33,52 @@ export const HowItWorksSection = () => {
             if (entry.isIntersecting) {
               steps.forEach((_, index) => {
                 setTimeout(() => {
-                  setVisibleSteps((prev) => new Set([...prev, index]))
-                }, index * 150)
-              })
+                  setVisibleSteps((prev) => new Set([...prev, index]));
+                }, index * 150);
+              });
             }
-          })
+          });
         },
         { threshold: 0.1 }
-      )
+      );
 
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
 
-    handleIntersection()
-  }, [])
+    handleIntersection();
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full max-w-[1200px] mx-auto p-6"
-    >
+    <section ref={sectionRef} className="relative w-full max-w-[1200px] mx-auto p-6">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div
+          className="absolute bottom-0 right-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
       </div>
 
       <div className="relative z-10 mb-16 text-center">
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
-          {t("title")}
-        </h2>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          {t("subtitle")}
-        </p>
+        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       <div className="relative z-10">
         <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-8 lg:flex lg:flex-row lg:items-stretch lg:gap-4">
           {steps.map((step, index) => {
-            const Icon = step.icon
-            const isVisible = visibleSteps.has(index)
-            const isLast = index === steps.length - 1
-            const delay = index * 150
+            const Icon = step.icon;
+            const isVisible = visibleSteps.has(index);
+            const isLast = index === steps.length - 1;
+            const delay = index * 150;
             const animationStyle = isVisible
               ? {
                   animation: `scale-in 0.8s ease-out ${delay}ms both`,
                 }
-              : { opacity: 0 }
+              : { opacity: 0 };
 
             return (
               <>
@@ -114,22 +105,24 @@ export const HowItWorksSection = () => {
                     </p>
 
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
-                    
+
                     <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
                   </div>
                 </div>
 
                 {!isLast && (
-                  <div key={`arrow-${index}`} className="hidden items-center justify-center lg:flex lg:flex-shrink-0">
+                  <div
+                    key={`arrow-${step.key}`}
+                    className="hidden items-center justify-center lg:flex lg:flex-shrink-0"
+                  >
                     <ArrowRightIcon className="size-6 text-primary/40 transition-all duration-300 hover:text-primary/60 hover:drop-shadow-[0_0_4px_rgba(0,0,0,0.1)]" />
                   </div>
                 )}
               </>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
-}
-
+  );
+};

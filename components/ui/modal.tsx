@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import type { MouseEvent } from "react"
-import { useCallback, useEffect } from "react"
+import type { MouseEvent } from "react";
+import { useCallback, useEffect } from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 type ModalProps = {
-  open: boolean
-  title: string
-  description?: string
-  onClose?: () => void
-  children: React.ReactNode
-  footer?: React.ReactNode
-  panelClassName?: string
-}
+  open: boolean;
+  title: string;
+  description?: string;
+  onClose?: () => void;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+  panelClassName?: string;
+};
 
 export const Modal = ({
   open,
@@ -27,34 +27,44 @@ export const Modal = ({
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Escape" && onClose) {
-        onClose()
+        onClose();
       }
     },
     [onClose]
-  )
+  );
 
   const handleBackdropClick = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
       if (event.target === event.currentTarget && onClose) {
-        onClose()
+        onClose();
       }
     },
     [onClose]
-  )
+  );
+
+  const handleBackdropKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if ((event.key === "Enter" || event.key === " ") && onClose) {
+        event.preventDefault();
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
     if (!open || !onClose) {
-      return
+      return;
     }
 
-    document.addEventListener("keydown", handleKeyDown)
+    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyDown)
-    }
-  }, [handleKeyDown, open, onClose])
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown, open, onClose]);
 
   if (!open) {
-    return null
+    return null;
   }
 
   return (
@@ -63,6 +73,8 @@ export const Modal = ({
       aria-modal="true"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       onClick={onClose ? handleBackdropClick : undefined}
+      onKeyDown={onClose ? handleBackdropKeyDown : undefined}
+      tabIndex={onClose ? 0 : undefined}
     >
       <div
         className={cn(
@@ -75,17 +87,12 @@ export const Modal = ({
         <div className="flex h-full flex-col gap-0">
           <div className="space-y-2 pb-4">
             <h2 className="text-xl font-semibold text-foreground">{title}</h2>
-            {description ? (
-              <p className="text-sm text-muted-foreground">{description}</p>
-            ) : null}
+            {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
           </div>
-          <div className="flex-1 min-h-0 space-y-4 overflow-y-auto pr-1">
-            {children}
-          </div>
+          <div className="flex-1 min-h-0 space-y-4 overflow-y-auto pr-1">{children}</div>
           {footer ? <div className="pt-6">{footer}</div> : null}
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};

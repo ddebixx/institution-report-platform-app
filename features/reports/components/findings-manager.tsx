@@ -1,40 +1,32 @@
-"use client"
+"use client";
 
-import { useCallback, useMemo, useState } from "react"
-import { useTranslations } from "next-intl"
+import { useCallback, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import type { ReportFinding, RegulationReference } from "@/types/reports"
-import { generateFindingId, createRegulationLookup } from "@/lib/reports"
-
-type FindingsManagerProps = {
-  regulations: RegulationReference[]
-  findings: ReportFinding[]
-  onFindingsChange: (findings: ReportFinding[]) => void
-}
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import type { ReportFinding } from "@/types/reports";
+import type { FindingsManagerProps } from "@/types/reports";
+import { generateFindingId, createRegulationLookup } from "@/lib/reports";
 
 export const FindingsManager = ({
   regulations,
   findings,
   onFindingsChange,
 }: FindingsManagerProps) => {
-  const t = useTranslations("reportModal.compare")
-  const [pendingDetail, setPendingDetail] = useState<string>("")
-  const [pendingPageReference, setPendingPageReference] = useState<string>("")
-  const [pendingRegulationId, setPendingRegulationId] = useState<string>("")
+  const t = useTranslations("reportModal.compare");
+  const [pendingDetail, setPendingDetail] = useState<string>("");
+  const [pendingPageReference, setPendingPageReference] = useState<string>("");
+  const [pendingRegulationId, setPendingRegulationId] = useState<string>("");
 
-  const regulationLookup = useMemo(
-    () => createRegulationLookup(regulations),
-    [regulations]
-  )
+  const regulationLookup = useMemo(() => createRegulationLookup(regulations), [regulations]);
 
   const handleAddFinding = useCallback(() => {
-    const trimmedDetail = pendingDetail.trim()
+    const trimmedDetail = pendingDetail.trim();
 
     if (!trimmedDetail) {
-      return
+      return;
     }
 
     const nextFinding: ReportFinding = {
@@ -42,26 +34,20 @@ export const FindingsManager = ({
       detail: trimmedDetail,
       pageReference: pendingPageReference.trim() || undefined,
       regulationId: pendingRegulationId || undefined,
-    }
+    };
 
-    onFindingsChange([...findings, nextFinding])
-    setPendingDetail("")
-    setPendingPageReference("")
-    setPendingRegulationId("")
-  }, [
-    findings,
-    onFindingsChange,
-    pendingDetail,
-    pendingPageReference,
-    pendingRegulationId,
-  ])
+    onFindingsChange([...findings, nextFinding]);
+    setPendingDetail("");
+    setPendingPageReference("");
+    setPendingRegulationId("");
+  }, [findings, onFindingsChange, pendingDetail, pendingPageReference, pendingRegulationId]);
 
   const handleRemoveFinding = useCallback(
     (findingId: string) => {
-      onFindingsChange(findings.filter((finding) => finding.id !== findingId))
+      onFindingsChange(findings.filter((finding) => finding.id !== findingId));
     },
     [findings, onFindingsChange]
-  )
+  );
 
   return (
     <div className="space-y-4 rounded-md border border-border/60 bg-background p-4">
@@ -139,6 +125,5 @@ export const FindingsManager = ({
         )}
       </div>
     </div>
-  )
-}
-
+  );
+};

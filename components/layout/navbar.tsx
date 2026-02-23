@@ -1,82 +1,73 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
-import {
-  LogInIcon,
-  LogOutIcon,
-  ShieldCheckIcon,
-  MenuIcon,
-  XIcon,
-} from "lucide-react"
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { LogInIcon, LogOutIcon, ShieldCheckIcon, MenuIcon, XIcon } from "lucide-react";
 
-import { LocaleSwitcher } from "@/components/locale/locale-switcher"
-import { useAuthModal } from "@/components/auth/auth-modal-provider"
-import { Button } from "@/components/ui/button"
-import { useAuthContext } from "@/components/auth/auth-provider"
-import { cn } from "@/lib/utils"
-import { useTranslations } from "next-intl"
-import Link from "next/link"
+import { LocaleSwitcher } from "@/components/locale/locale-switcher";
+import { useAuthModal } from "@/components/auth/auth-modal-provider";
+import { Button } from "@/components/ui/button";
+import { useAuthContext } from "@/components/auth/auth-provider";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import {
   handleDashboardNavigate as handleDashboardNavigateHandler,
   handleLogout as handleLogoutHandler,
   handleLogin as handleLoginHandler,
   handleRegister as handleRegisterHandler,
-} from "@/handlers/navbar"
+} from "@/handlers/navbar";
 
 export const Navbar = () => {
-  const router = useRouter()
-  const { user, signOut, isAuthenticating } = useAuthContext()
-  const { openLogin, openRegister } = useAuthModal()
-  const t = useTranslations()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const router = useRouter();
+  const { user, signOut, isAuthenticating } = useAuthContext();
+  const { openLogin, openRegister } = useAuthModal();
+  const t = useTranslations();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const userLabel = useMemo(
-    () => user?.email ?? t("navbar.subtitle"),
-    [t, user?.email]
-  )
+  const userLabel = useMemo(() => user?.email ?? t("navbar.subtitle"), [t, user?.email]);
 
   const handleDashboardNavigate = useCallback(() => {
-    handleDashboardNavigateHandler({ router, setIsMobileMenuOpen })
-  }, [router])
+    handleDashboardNavigateHandler({ router, setIsMobileMenuOpen });
+  }, [router]);
 
   const handleLogout = useCallback(async () => {
-    await handleLogoutHandler({ signOut, setIsMobileMenuOpen })
-  }, [signOut])
+    await handleLogoutHandler({ signOut, setIsMobileMenuOpen });
+  }, [signOut]);
 
   const handleLogin = useCallback(() => {
-    handleLoginHandler({ openLogin, setIsMobileMenuOpen })
-  }, [openLogin])
+    handleLoginHandler({ openLogin, setIsMobileMenuOpen });
+  }, [openLogin]);
 
   const handleRegister = useCallback(() => {
-    handleRegisterHandler({ openRegister, setIsMobileMenuOpen })
-  }, [openRegister])
+    handleRegisterHandler({ openRegister, setIsMobileMenuOpen });
+  }, [openRegister]);
 
   const toggleMobileMenu = useCallback(() => {
-    setIsMobileMenuOpen((prev) => !prev)
-  }, [])
+    setIsMobileMenuOpen((prev) => !prev);
+  }, []);
 
   const closeMobileMenu = useCallback(() => {
-    setIsMobileMenuOpen(false)
-  }, [])
+    setIsMobileMenuOpen(false);
+  }, []);
 
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
       if (event.key === "Escape" && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false)
+        setIsMobileMenuOpen(false);
       }
     }
 
     if (isMobileMenuOpen) {
-      document.addEventListener("keydown", handleEscapeKey)
-      document.body.style.overflow = "hidden"
+      document.addEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener("keydown", handleEscapeKey)
-      document.body.style.overflow = ""
-    }
-  }, [isMobileMenuOpen])
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -103,9 +94,7 @@ export const Navbar = () => {
               <div className="hidden items-center gap-2 sm:flex sm:gap-3">
                 <div className="flex items-center gap-2 rounded-full bg-secondary px-2 py-1 text-sm sm:px-3">
                   <span className="size-2 rounded-full bg-green-500" />
-                  <span className="hidden text-muted-foreground md:inline">
-                    {userLabel}
-                  </span>
+                  <span className="hidden text-muted-foreground md:inline">{userLabel}</span>
                 </div>
                 <Button
                   size="sm"
@@ -151,12 +140,7 @@ export const Navbar = () => {
           ) : (
             <>
               <div className="hidden items-center gap-2 sm:flex">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleLogin}
-                  className="font-semibold"
-                >
+                <Button size="sm" variant="ghost" onClick={handleLogin} className="font-semibold">
                   <LogInIcon className="size-4" />
                   <span className="hidden md:inline">{t("navbar.login")}</span>
                 </Button>
@@ -273,6 +257,5 @@ export const Navbar = () => {
         </>
       )}
     </>
-  )
-}
-
+  );
+};

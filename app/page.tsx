@@ -1,7 +1,7 @@
-import { HomeLanding } from "@/features/home/home-landing"
+import { HomeLanding } from "@/features/home/home-landing";
 
 const HomePage = () => {
-  return <HomeLanding />
-}
+  return <HomeLanding />;
+};
 
-export default HomePage
+export default HomePage;

@@ -1,32 +1,21 @@
-"use client"
+"use client";
 
-import { type ChangeEvent, useCallback } from "react"
-import { useTranslations } from "next-intl"
+import { type ChangeEvent, useCallback } from "react";
+import { useTranslations } from "next-intl";
 
-import {
-  Field,
-  FieldContent,
-  FieldLabel,
-} from "@/components/ui/field"
-import { Textarea } from "@/components/ui/textarea"
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
+import { Textarea } from "@/components/ui/textarea";
+import type { ComparisonNotesFieldProps } from "@/types/reports";
 
-type ComparisonNotesFieldProps = {
-  value: string
-  onChange: (value: string) => void
-}
-
-export const ComparisonNotesField = ({
-  value,
-  onChange,
-}: ComparisonNotesFieldProps) => {
-  const t = useTranslations("reportModal.compare")
+export const ComparisonNotesField = ({ value, onChange }: ComparisonNotesFieldProps) => {
+  const t = useTranslations("reportModal.compare");
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
-      onChange(event.target.value)
+      onChange(event.target.value);
     },
     [onChange]
-  )
+  );
 
   return (
     <Field>
@@ -40,6 +29,5 @@ export const ComparisonNotesField = ({
         />
       </FieldContent>
     </Field>
-  )
-}
-
+  );
+};

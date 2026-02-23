@@ -1,41 +1,23 @@
-"use client"
+"use client";
 
-import { type ChangeEvent, useCallback, useMemo } from "react"
-import { twMerge } from "tailwind-merge"
-import { useTranslations } from "next-intl"
+import { type ChangeEvent, useCallback, useMemo } from "react";
+import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button"
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-} from "@/components/ui/field"
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field";
+import type { PdfUploadFieldProps } from "@/types/reports";
 
-type PdfUploadFieldProps = {
-  file: File | null
-  fileError?: string
-  onFileChange: (file: File | null) => void
-}
-
-export const PdfUploadField = ({
-  file,
-  fileError,
-  onFileChange,
-}: PdfUploadFieldProps) => {
-  const t = useTranslations("reportModal.compare")
-  const uploadInputId = useMemo(
-    () => `pdf-upload-${Math.random().toString(36).slice(2, 9)}`,
-    []
-  )
+export const PdfUploadField = ({ file, fileError, onFileChange }: PdfUploadFieldProps) => {
+  const t = useTranslations("reportModal.compare");
+  const uploadInputId = useMemo(() => `pdf-upload-${Math.random().toString(36).slice(2, 9)}`, []);
 
   const handleFileInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const nextFile = event.target.files?.[0] ?? null
-      onFileChange(nextFile)
+      const nextFile = event.target.files?.[0] ?? null;
+      onFileChange(nextFile);
     },
     [onFileChange]
-  )
+  );
 
   return (
     <Field>
@@ -65,6 +47,5 @@ export const PdfUploadField = ({
         <FieldDescription className="text-destructive">{fileError}</FieldDescription>
       ) : null}
     </Field>
-  )
-}
-
+  );
+};

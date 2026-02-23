@@ -1,33 +1,34 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { twMerge } from "tailwind-merge"
+import { useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 type Tab = {
-  id: string
-  label: string
-  content: React.ReactNode
-}
+  id: string;
+  label: string;
+  content: React.ReactNode;
+};
 
 type TabsProps = {
-  tabs: Tab[]
-  className?: string
-  defaultTab?: string
-}
+  tabs: Tab[];
+  className?: string;
+  defaultTab?: string;
+};
 
 export const Tabs = ({ tabs, className, defaultTab }: TabsProps) => {
-  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id || "")
+  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id || "");
 
-  const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content
+  const activeTabContent = tabs.find((tab) => tab.id === activeTab)?.content;
 
   return (
     <div className={twMerge("space-y-4", className)}>
       <div className="flex flex-wrap gap-2 rounded-lg border border-border bg-muted/30 p-1">
         {tabs.map((tab) => {
-          const isActive = activeTab === tab.id
+          const isActive = activeTab === tab.id;
 
           return (
             <button
+              type="button"
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={twMerge(
@@ -39,7 +40,7 @@ export const Tabs = ({ tabs, className, defaultTab }: TabsProps) => {
             >
               {tab.label}
             </button>
-          )
+          );
         })}
       </div>
 
@@ -52,6 +53,5 @@ export const Tabs = ({ tabs, className, defaultTab }: TabsProps) => {
         {activeTabContent}
       </div>
     </div>
-  )
-}
-
+  );
+};

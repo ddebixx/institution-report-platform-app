@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 import {
   FileTextIcon,
   ShieldCheckIcon,
   SearchIcon,
   CheckCircleIcon,
   LayoutDashboardIcon,
-} from "lucide-react"
-import { useTranslations } from "next-intl"
-import { twMerge } from "tailwind-merge"
+} from "lucide-react";
+import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 type Feature = {
-  icon: typeof FileTextIcon
-  key: "pdf" | "regulations" | "moderation" | "dashboard"
-}
+  icon: typeof FileTextIcon;
+  key: "pdf" | "regulations" | "moderation" | "dashboard";
+};
 
 const features: Feature[] = [
   { icon: FileTextIcon, key: "pdf" },
   { icon: SearchIcon, key: "regulations" },
   { icon: CheckCircleIcon, key: "moderation" },
   { icon: LayoutDashboardIcon, key: "dashboard" },
-]
+];
 
 export const FeaturesSection = () => {
-  const t = useTranslations("features")
-  const [visibleFeatures, setVisibleFeatures] = useState<Set<number>>(new Set())
-  const sectionRef = useRef<HTMLElement>(null)
+  const t = useTranslations("features");
+  const [visibleFeatures, setVisibleFeatures] = useState<Set<number>>(new Set());
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function handleIntersection() {
-      if (!sectionRef.current) return
+      if (!sectionRef.current) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -38,30 +38,27 @@ export const FeaturesSection = () => {
             if (entry.isIntersecting) {
               features.forEach((_, index) => {
                 setTimeout(() => {
-                  setVisibleFeatures((prev) => new Set([...prev, index]))
-                }, index * 100)
-              })
+                  setVisibleFeatures((prev) => new Set([...prev, index]));
+                }, index * 100);
+              });
             }
-          })
+          });
         },
         { threshold: 0.1 }
-      )
+      );
 
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
 
-    handleIntersection()
-  }, [])
+    handleIntersection();
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full p-6"
-    >
+    <section ref={sectionRef} className="relative w-full p-6">
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/2 via-transparent to-primary/2 opacity-30 animate-pulse" />
       <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse" />
       <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse" />
@@ -71,19 +68,15 @@ export const FeaturesSection = () => {
           <ShieldCheckIcon className="size-4" />
           {t("title")}
         </div>
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
-          {t("title")}
-        </h2>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          {t("subtitle")}
-        </p>
+        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
+        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       <div className="relative z-10 grid gap-6 md:grid-cols-2">
         {features.map((feature, index) => {
-          const Icon = feature.icon
-          const isVisible = visibleFeatures.has(index)
-          const delay = index * 100
+          const Icon = feature.icon;
+          const isVisible = visibleFeatures.has(index);
+          const delay = index * 100;
 
           return (
             <div
@@ -118,10 +111,9 @@ export const FeaturesSection = () => {
 
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
             </div>
-          )
+          );
         })}
       </div>
     </section>
-  )
-}
-
+  );
+};

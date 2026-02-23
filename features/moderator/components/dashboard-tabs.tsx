@@ -1,36 +1,26 @@
-import { twMerge } from "tailwind-merge"
-import { useTranslations } from "next-intl"
-import type { TabId, Tab } from "@/consts/moderator-dashboard"
-
-type DashboardTabsProps = {
-  tabs: Tab[]
-  activeTab: TabId
-  stats: {
-    available: number
-    assigned: number
-    completed: number
-  }
-  onTabChange: (tabId: TabId) => void
-}
+import { twMerge } from "tailwind-merge";
+import { useTranslations } from "next-intl";
+import type { DashboardTabsProps } from "@/types/moderator-dashboard";
 
 export const DashboardTabs = ({ tabs, activeTab, stats, onTabChange }: DashboardTabsProps) => {
-  const t = useTranslations()
+  const t = useTranslations();
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-border/50 bg-card/50 p-1 backdrop-blur-sm">
       <nav className="flex space-x-1" aria-label="Tabs">
         {tabs.map((tab) => {
-          const Icon = tab.icon
-          const isActive = activeTab === tab.id
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
           const count =
             tab.id === "available"
               ? stats.available
               : tab.id === "assigned"
                 ? stats.assigned
-                : stats.completed
+                : stats.completed;
 
           return (
             <button
+              type="button"
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={twMerge(
@@ -64,10 +54,9 @@ export const DashboardTabs = ({ tabs, activeTab, stats, onTabChange }: Dashboard
                 </span>
               )}
             </button>
-          )
+          );
         })}
       </nav>
     </div>
-  )
-}
-
+  );
+};

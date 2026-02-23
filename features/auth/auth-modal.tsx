@@ -1,51 +1,43 @@
-"use client"
+"use client";
 
-import { FormEvent, useCallback, useMemo, useState } from "react"
-import { useRouter } from "next/navigation"
+import { type FormEvent, useCallback, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { useAuthContext } from "@/components/auth/auth-provider"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Modal } from "@/components/ui/modal"
-import { Field, FieldContent, FieldLabel } from "@/components/ui/field"
-import { handleAuthSubmit } from "@/handlers/auth-modal"
+import { useAuthContext } from "@/components/auth/auth-provider";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Modal } from "@/components/ui/modal";
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
+import { handleAuthSubmit } from "@/handlers/auth-modal";
 
-type AuthModalMode = "login" | "register"
+type AuthModalMode = "login" | "register";
 
 type AuthModalProps = {
-  open: boolean
-  mode: AuthModalMode
-  onClose: () => void
-  onModeChange: (mode: AuthModalMode) => void
-}
+  open: boolean;
+  mode: AuthModalMode;
+  onClose: () => void;
+  onModeChange: (mode: AuthModalMode) => void;
+};
 
-export const AuthModal = ({
-  open,
-  mode,
-  onClose,
-  onModeChange,
-}: AuthModalProps) => {
-  const router = useRouter()
-  const { signIn, signUp, isAuthenticating, setAuthMode } = useAuthContext()
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
+export const AuthModal = ({ open, mode, onClose, onModeChange }: AuthModalProps) => {
+  const router = useRouter();
+  const { signIn, signUp, isAuthenticating, setAuthMode } = useAuthContext();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const ctaLabel = useMemo(
-    () => (mode === "login" ? "Login" : "Create account"),
-    [mode]
-  )
+  const ctaLabel = useMemo(() => (mode === "login" ? "Login" : "Create account"), [mode]);
 
   const toggleMode = useCallback(() => {
-    const nextMode: AuthModalMode = mode === "login" ? "register" : "login"
-    onModeChange(nextMode)
-    setAuthMode(nextMode)
-  }, [mode, onModeChange, setAuthMode])
+    const nextMode: AuthModalMode = mode === "login" ? "register" : "login";
+    onModeChange(nextMode);
+    setAuthMode(nextMode);
+  }, [mode, onModeChange, setAuthMode]);
 
   const handleClose = useCallback(() => {
-    setEmail("")
-    setPassword("")
-    onClose()
-  }, [onClose])
+    setEmail("");
+    setPassword("");
+    onClose();
+  }, [onClose]);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -58,10 +50,10 @@ export const AuthModal = ({
         signUp,
         handleClose,
         router,
-      })
+      });
     },
     [email, password, mode, signIn, signUp, handleClose, router]
-  )
+  );
 
   return (
     <Modal
@@ -72,11 +64,7 @@ export const AuthModal = ({
       onClose={handleClose}
       footer={
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
-            {mode === "login"
-              ? "Need an account?"
-              : "Already have an account?"}
-          </span>
+          <span>{mode === "login" ? "Need an account?" : "Already have an account?"}</span>
           <Button
             type="button"
             variant="ghost"
@@ -121,15 +109,10 @@ export const AuthModal = ({
           </FieldContent>
         </Field>
 
-        <Button
-          type="submit"
-          className="w-full font-semibold"
-          disabled={isAuthenticating}
-        >
+        <Button type="submit" className="w-full font-semibold" disabled={isAuthenticating}>
           {ctaLabel}
         </Button>
       </form>
     </Modal>
-  )
-}
-
+  );
+};

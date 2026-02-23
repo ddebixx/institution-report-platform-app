@@ -1,44 +1,44 @@
-import { isSupportedLocale, type SupportedLocale, defaultLocale } from "@/locales/messages"
+import { isSupportedLocale, type SupportedLocale, defaultLocale } from "@/locales/messages";
 
-export const detectBrowserLocale = (): SupportedLocale => {
+const detectBrowserLocale = (): SupportedLocale => {
   if (typeof window === "undefined") {
-    return defaultLocale
+    return defaultLocale;
   }
 
-  const browserLanguage = navigator.language || (navigator as any).userLanguage
+  const browserLanguage =
+    navigator.language || (navigator as { userLanguage?: string }).userLanguage;
 
   if (!browserLanguage) {
-    return defaultLocale
+    return defaultLocale;
   }
 
-  const primaryLanguageCode = browserLanguage.split("-")[0].toLowerCase()
+  const primaryLanguageCode = browserLanguage.split("-")[0].toLowerCase();
 
   if (isSupportedLocale(primaryLanguageCode)) {
-    return primaryLanguageCode
+    return primaryLanguageCode;
   }
 
   if (isSupportedLocale(browserLanguage.toLowerCase())) {
-    return browserLanguage.toLowerCase() as SupportedLocale
+    return browserLanguage.toLowerCase() as SupportedLocale;
   }
 
-  return defaultLocale
-}
+  return defaultLocale;
+};
 
 export const getInitialLocale = (): SupportedLocale => {
   if (typeof window === "undefined") {
-    return defaultLocale
+    return defaultLocale;
   }
 
-  const storedLocale = localStorage.getItem("locale")
-  
+  const storedLocale = localStorage.getItem("locale");
+
   if (storedLocale && isSupportedLocale(storedLocale)) {
-    return storedLocale
+    return storedLocale;
   }
 
-  const detectedLocale = detectBrowserLocale()
-  
-  localStorage.setItem("locale", detectedLocale)
-  
-  return detectedLocale
-}
+  const detectedLocale = detectBrowserLocale();
 
+  localStorage.setItem("locale", detectedLocale);
+
+  return detectedLocale;
+};

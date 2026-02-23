@@ -1,12 +1,12 @@
-export const supportedLocales = ["en", "pl", "uk"] as const
+export const supportedLocales = ["en", "pl", "uk"] as const;
 
-export type SupportedLocale = (typeof supportedLocales)[number]
+export type SupportedLocale = (typeof supportedLocales)[number];
 
-export const defaultLocale: SupportedLocale = "pl"
+export const defaultLocale: SupportedLocale = "pl";
 
-type Messages = Record<string, {}>
+type Messages = Record<string, object>;
 
-type MessagesByLocale = Record<SupportedLocale, Messages>
+type MessagesByLocale = Record<SupportedLocale, Messages>;
 
 export const messagesByLocale: MessagesByLocale = {
   en: {
@@ -207,10 +207,13 @@ export const messagesByLocale: MessagesByLocale = {
       },
       bestPractices: {
         title: "Best Practices",
-        item1: "Provide clear and detailed descriptions of the school statute compliance issues you're reporting",
+        item1:
+          "Provide clear and detailed descriptions of the school statute compliance issues you're reporting",
         item2: "Ensure all school statute PDF documents are relevant and clearly show the problem",
-        item3: "Use the highlighting feature to point moderators to specific sections in school statutes",
-        item4: "Include comparison notes explaining how school statutes relate to current regulations",
+        item3:
+          "Use the highlighting feature to point moderators to specific sections in school statutes",
+        item4:
+          "Include comparison notes explaining how school statutes relate to current regulations",
       },
       faq: {
         title: "Frequently Asked Questions",
@@ -233,12 +236,14 @@ export const messagesByLocale: MessagesByLocale = {
     },
     guidelines: {
       title: "Reporting Guidelines",
-      subtitle: "Essential guidelines for preparing and submitting effective school statute reports",
+      subtitle:
+        "Essential guidelines for preparing and submitting effective school statute reports",
       preparation: {
         title: "Preparing Your Report",
         document: {
           title: "Document Preparation",
-          description: "Before submitting your school statute report, ensure your documents meet these requirements:",
+          description:
+            "Before submitting your school statute report, ensure your documents meet these requirements:",
           item1: "School statute documents must be in PDF format",
           item2: "Files should be clear, legible, and properly scanned",
           item3: "Maximum file size of 5MB recommended for optimal performance",
@@ -273,9 +278,11 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Important Requirements",
         important: "Please ensure compliance with the following:",
         item1: "All information provided must be accurate and truthful",
-        item2: "School statute documents must be authentic and directly related to the reported compliance issue",
+        item2:
+          "School statute documents must be authentic and directly related to the reported compliance issue",
         item3: "Reports should be submitted in good faith and for legitimate purposes",
-        item4: "Personal information of third parties should be handled in accordance with privacy regulations",
+        item4:
+          "Personal information of third parties should be handled in accordance with privacy regulations",
       },
       compliance: {
         title: "Regulatory Compliance",
@@ -290,12 +297,14 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Contact Us",
         email: {
           title: "Email Support",
-          description: "For questions, technical issues, or general inquiries, please contact us at:",
+          description:
+            "For questions, technical issues, or general inquiries, please contact us at:",
           address: "support@example.com",
         },
         hours: {
           title: "Support Hours",
-          description: "Our support team is available Monday through Friday, 9:00 AM to 5:00 PM (CET).",
+          description:
+            "Our support team is available Monday through Friday, 9:00 AM to 5:00 PM (CET).",
         },
       },
       commonIssues: {
@@ -346,7 +355,8 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Information We Collect",
         description: "We collect information that you provide directly to us, including:",
         item1: "Account information (name, email address, password)",
-        item2: "Report information (school details, descriptions, uploaded school statute documents)",
+        item2:
+          "Report information (school details, descriptions, uploaded school statute documents)",
         item3: "Communication data (messages sent through the platform)",
         item4: "Usage data (how you interact with the platform)",
       },
@@ -392,7 +402,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       useOfService: {
         title: "Use of Service",
-        description: "You agree to use the platform only for lawful purposes and in accordance with these Terms. You agree not to:",
+        description:
+          "You agree to use the platform only for lawful purposes and in accordance with these Terms. You agree not to:",
         item1: "Submit false, misleading, or fraudulent information",
         item2: "Violate any applicable laws or regulations",
         item3: "Infringe upon the rights of others",
@@ -475,7 +486,8 @@ export const messagesByLocale: MessagesByLocale = {
     },
     moderatorProfileModal: {
       title: "Complete Your Profile",
-      description: "Please provide your full name and email to continue. You can optionally upload a profile image.",
+      description:
+        "Please provide your full name and email to continue. You can optionally upload a profile image.",
       fullName: {
         label: "Full Name",
         placeholder: "Enter your full name",
@@ -564,7 +576,8 @@ export const messagesByLocale: MessagesByLocale = {
       title: "Submit a school statute report",
       description: {
         step1: "Step 1 of 2: Provide school and contact details.",
-        step2: "Step 2 of 2: Review the school statute PDF, highlight issues, and compare regulations.",
+        step2:
+          "Step 2 of 2: Review the school statute PDF, highlight issues, and compare regulations.",
       },
       steps: {
         details: "School details",
@@ -603,10 +616,11 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { 
-          label: "School ID / Numer RSPO", 
+        numerRspo: {
+          label: "School ID / Numer RSPO",
           placeholder: "123456",
-          description: "This field is automatically filled when you select a school from the search above."
+          description:
+            "This field is automatically filled when you select a school from the search above.",
         },
         reportDescription: {
           label: "Report description",
@@ -636,22 +650,26 @@ export const messagesByLocale: MessagesByLocale = {
         },
         secondary: {
           title: "Safety and compliance",
-          description: "Verify documented safeguards and compliance requirements in school statutes.",
+          description:
+            "Verify documented safeguards and compliance requirements in school statutes.",
         },
         tertiary: {
           title: "Quality and reporting",
-          description: "Confirm reporting formats, audit trails, and quality metrics in school statutes.",
+          description:
+            "Confirm reporting formats, audit trails, and quality metrics in school statutes.",
         },
       },
       compare: {
         upload: {
           title: "Upload and preview",
           placeholder: "Choose a school statute PDF file to review",
-          helper: "View the uploaded school statute document directly and confirm it matches the reported issues.",
+          helper:
+            "View the uploaded school statute document directly and confirm it matches the reported issues.",
           replace: "Replace PDF",
           cta: "Upload PDF",
           uploadedTitle: "Uploaded School Statute PDF",
-          empty: "Upload a school statute PDF to preview it here and to start highlighting findings.",
+          empty:
+            "Upload a school statute PDF to preview it here and to start highlighting findings.",
         },
         reference: {
           title: "Reference regulation",
@@ -659,20 +677,25 @@ export const messagesByLocale: MessagesByLocale = {
         },
         highlights: {
           title: "Highlights for moderators",
-          description: "Capture specific sections, deviations, or errors in school statutes to guide moderator review.",
+          description:
+            "Capture specific sections, deviations, or errors in school statutes to guide moderator review.",
           pagePlaceholder: "Page or section",
           regulationPlaceholder: "Link to regulation (optional)",
-          detailPlaceholder: "Describe the statute compliance issue, inconsistency, or highlight for moderators.",
+          detailPlaceholder:
+            "Describe the statute compliance issue, inconsistency, or highlight for moderators.",
           add: "Add highlight",
-          empty: "No highlights added yet. Add notes to help moderators focus on the right areas of school statutes.",
+          empty:
+            "No highlights added yet. Add notes to help moderators focus on the right areas of school statutes.",
           pageLabel: "Page/section: {page}",
           regulationLabel: "Regulation: {regulation}",
           remove: "Remove",
         },
         comparison: {
           title: "Comparison notes",
-          placeholder: "Summarize how the school statute aligns with current regulations and list remaining concerns.",
-          description: "These notes are sent to moderators along with your highlights and the school statute PDF.",
+          placeholder:
+            "Summarize how the school statute aligns with current regulations and list remaining concerns.",
+          description:
+            "These notes are sent to moderators along with your highlights and the school statute PDF.",
         },
       },
     },
@@ -689,8 +712,7 @@ export const messagesByLocale: MessagesByLocale = {
     },
     hero: {
       badge: "Poufne zgłaszanie zgodności statutów szkolnych",
-      title:
-        "Zgłaszaj statuty szkolne bezpiecznie i szybko przechodź do panelu.",
+      title: "Zgłaszaj statuty szkolne bezpiecznie i szybko przechodź do panelu.",
       subtitle:
         "Przekazuj problemy zgodności statutów szkolnych z dołączonym plikiem PDF, a administratorzy przeanalizują i odpowiedzą na każde z nich.",
       cta: {
@@ -726,7 +748,8 @@ export const messagesByLocale: MessagesByLocale = {
     },
     features: {
       title: "Potężne funkcje",
-      subtitle: "Wszystko czego potrzebujesz do zgłaszania i zarządzania problemami zgodności statutów szkolnych",
+      subtitle:
+        "Wszystko czego potrzebujesz do zgłaszania i zarządzania problemami zgodności statutów szkolnych",
       secure: {
         title: "Bezpieczne i poufne",
         desc: "Szyfrowanie end-to-end zapewnia, że Twoje zgłoszenia statutów szkolnych pozostają prywatne i chronione przez cały proces.",
@@ -879,7 +902,8 @@ export const messagesByLocale: MessagesByLocale = {
         item1: "Podaj jasne i szczegółowe opisy problemów, które zgłaszasz",
         item2: "Upewnij się, że wszystkie dokumenty PDF są istotne i wyraźnie pokazują problem",
         item3: "Użyj funkcji zaznaczania, aby wskazać moderatorom konkretne sekcje",
-        item4: "Dołącz notatki porównawcze wyjaśniające, jak dokumenty odnoszą się do aktualnych regulacji",
+        item4:
+          "Dołącz notatki porównawcze wyjaśniające, jak dokumenty odnoszą się do aktualnych regulacji",
       },
       faq: {
         title: "Często zadawane pytania",
@@ -907,7 +931,8 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Przygotowanie zgłoszenia",
         document: {
           title: "Przygotowanie dokumentów",
-          description: "Przed przesłaniem zgłoszenia upewnij się, że Twoje dokumenty spełniają te wymagania:",
+          description:
+            "Przed przesłaniem zgłoszenia upewnij się, że Twoje dokumenty spełniają te wymagania:",
           item1: "Dokumenty muszą być w formacie PDF",
           item2: "Pliki powinny być czytelne i prawidłowo zeskanowane",
           item3: "Zalecany maksymalny rozmiar pliku 5MB dla optymalnej wydajności",
@@ -944,7 +969,8 @@ export const messagesByLocale: MessagesByLocale = {
         item1: "Wszystkie podane informacje muszą być dokładne i prawdziwe",
         item2: "Dokumenty muszą być autentyczne i bezpośrednio związane z zgłoszonym problemem",
         item3: "Zgłoszenia powinny być przesyłane w dobrej wierze i w uzasadnionych celach",
-        item4: "Informacje osobowe osób trzecich powinny być przetwarzane zgodnie z przepisami o ochronie prywatności",
+        item4:
+          "Informacje osobowe osób trzecich powinny być przetwarzane zgodnie z przepisami o ochronie prywatności",
       },
       compliance: {
         title: "Zgodność regulacyjna",
@@ -959,12 +985,14 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Skontaktuj się z nami",
         email: {
           title: "Wsparcie e-mail",
-          description: "W przypadku pytań, problemów technicznych lub ogólnych zapytań, prosimy o kontakt:",
+          description:
+            "W przypadku pytań, problemów technicznych lub ogólnych zapytań, prosimy o kontakt:",
           address: "support@example.com",
         },
         hours: {
           title: "Godziny wsparcia",
-          description: "Nasz zespół wsparcia jest dostępny od poniedziałku do piątku, od 9:00 do 17:00 (CET).",
+          description:
+            "Nasz zespół wsparcia jest dostępny od poniedziałku do piątku, od 9:00 do 17:00 (CET).",
         },
       },
       commonIssues: {
@@ -1046,7 +1074,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       contact: {
         title: "Skontaktuj się z nami",
-        description: "Jeśli masz pytania dotyczące tej Polityki prywatności, skontaktuj się z nami:",
+        description:
+          "Jeśli masz pytania dotyczące tej Polityki prywatności, skontaktuj się z nami:",
         email: "privacy@example.com",
       },
     },
@@ -1061,7 +1090,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       useOfService: {
         title: "Korzystanie z usługi",
-        description: "Zgadzasz się korzystać z platformy wyłącznie w celach zgodnych z prawem i zgodnie z niniejszymi Warunkami. Zgadzasz się nie:",
+        description:
+          "Zgadzasz się korzystać z platformy wyłącznie w celach zgodnych z prawem i zgodnie z niniejszymi Warunkami. Zgadzasz się nie:",
         item1: "Przesyłać fałszywych, wprowadzających w błąd lub oszukańczych informacji",
         item2: "Naruszać jakichkolwiek obowiązujących przepisów prawa lub regulacji",
         item3: "Naruszać praw innych",
@@ -1098,7 +1128,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       contact: {
         title: "Skontaktuj się z nami",
-        description: "Jeśli masz pytania dotyczące tych Warunków użytkowania, skontaktuj się z nami:",
+        description:
+          "Jeśli masz pytania dotyczące tych Warunków użytkowania, skontaktuj się z nami:",
         email: "legal@example.com",
       },
     },
@@ -1144,7 +1175,8 @@ export const messagesByLocale: MessagesByLocale = {
     },
     moderatorProfileModal: {
       title: "Uzupełnij swój profil",
-      description: "Podaj swoje imię i nazwisko oraz adres email, aby kontynuować. Możesz opcjonalnie przesłać zdjęcie profilowe.",
+      description:
+        "Podaj swoje imię i nazwisko oraz adres email, aby kontynuować. Możesz opcjonalnie przesłać zdjęcie profilowe.",
       fullName: {
         label: "Imię i nazwisko",
         placeholder: "Wprowadź swoje imię i nazwisko",
@@ -1219,7 +1251,7 @@ export const messagesByLocale: MessagesByLocale = {
       created: "Utworzono",
       assigned: "Przypisano",
       submittedReportContent: "Przesłana treść zgłoszenia",
-      findings: "Ustalenia ({count})",  
+      findings: "Ustalenia ({count})",
       page: "Strona: {page}",
       regulation: "Regulacja: {regulation}",
       comparisonNotes: "Notatki porównawcze",
@@ -1233,7 +1265,8 @@ export const messagesByLocale: MessagesByLocale = {
       title: "Złóż zgłoszenie statutu szkolnego",
       description: {
         step1: "Krok 1 z 2: Podaj dane szkoły i kontaktowe.",
-        step2: "Krok 2 z 2: Przejrzyj PDF statutu szkolnego, zaznacz problemy i porównaj z regulacjami.",
+        step2:
+          "Krok 2 z 2: Przejrzyj PDF statutu szkolnego, zaznacz problemy i porównaj z regulacjami.",
       },
       steps: {
         details: "Szczegóły szkoły",
@@ -1272,10 +1305,11 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { 
-          label: "ID szkoły / Numer RSPO", 
+        numerRspo: {
+          label: "ID szkoły / Numer RSPO",
           placeholder: "123456",
-          description: "To pole jest automatycznie wypełniane po wybraniu szkoły z wyszukiwania powyżej."
+          description:
+            "To pole jest automatycznie wypełniane po wybraniu szkoły z wyszukiwania powyżej.",
         },
         reportDescription: {
           label: "Opis zgłoszenia",
@@ -1316,7 +1350,8 @@ export const messagesByLocale: MessagesByLocale = {
         upload: {
           title: "Prześlij i podgląd",
           placeholder: "Wybierz plik PDF do przeglądu",
-          helper: "Wyświetl przesłany dokument bezpośrednio i potwierdź, że pasuje do zgłoszonych problemów.",
+          helper:
+            "Wyświetl przesłany dokument bezpośrednio i potwierdź, że pasuje do zgłoszonych problemów.",
           replace: "Zastąp PDF",
           cta: "Prześlij PDF",
           uploadedTitle: "Przesłany PDF",
@@ -1328,19 +1363,22 @@ export const messagesByLocale: MessagesByLocale = {
         },
         highlights: {
           title: "Zaznaczenia dla moderatorów",
-          description: "Zapisz konkretne sekcje, odchylenia lub błędy, aby pomóc w przeglądzie moderatora.",
+          description:
+            "Zapisz konkretne sekcje, odchylenia lub błędy, aby pomóc w przeglądzie moderatora.",
           pagePlaceholder: "Strona lub sekcja",
           regulationPlaceholder: "Link do regulacji (opcjonalnie)",
           detailPlaceholder: "Opisz problem, niespójność lub zaznaczenie dla moderatorów.",
           add: "Dodaj zaznaczenie",
-          empty: "Brak dodanych zaznaczeń. Dodaj notatki, aby pomóc moderatorom skupić się na właściwych obszarach.",
+          empty:
+            "Brak dodanych zaznaczeń. Dodaj notatki, aby pomóc moderatorom skupić się na właściwych obszarach.",
           pageLabel: "Strona/sekcja: {page}",
           regulationLabel: "Regulacja: {regulation}",
           remove: "Usuń",
         },
         comparison: {
           title: "Notatki porównawcze",
-          placeholder: "Podsumuj, jak dokument jest zgodny z aktualnymi regulacjami i wymień pozostałe obawy.",
+          placeholder:
+            "Podsumuj, jak dokument jest zgodny z aktualnymi regulacjami i wymień pozostałe obawy.",
           description: "Te notatki są wysyłane do moderatorów wraz z Twoimi zaznaczeniami i PDF.",
         },
       },
@@ -1394,7 +1432,8 @@ export const messagesByLocale: MessagesByLocale = {
     },
     features: {
       title: "Потужні функції",
-      subtitle: "Все, що потрібно для звітування та управління проблемами відповідності статутів шкіл",
+      subtitle:
+        "Все, що потрібно для звітування та управління проблемами відповідності статутів шкіл",
       secure: {
         title: "Безпечно та конфіденційно",
         desc: "Шифрування end-to-end забезпечує, що ваші звіти про статути шкіл залишаються приватними та захищеними протягом усього процесу.",
@@ -1547,7 +1586,8 @@ export const messagesByLocale: MessagesByLocale = {
         item1: "Надайте чіткі та детальні описи проблем, про які ви повідомляєте",
         item2: "Переконайтеся, що всі PDF-документи є релевантними та чітко показують проблему",
         item3: "Використовуйте функцію виділення, щоб вказати модераторам на конкретні розділи",
-        item4: "Додайте порівняльні нотатки, що пояснюють, як документи стосуються поточних регуляцій",
+        item4:
+          "Додайте порівняльні нотатки, що пояснюють, як документи стосуються поточних регуляцій",
       },
       faq: {
         title: "Часті запитання",
@@ -1575,7 +1615,8 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Підготовка звіту",
         document: {
           title: "Підготовка документів",
-          description: "Перед поданням звіту переконайтеся, що ваші документи відповідають цим вимогам:",
+          description:
+            "Перед поданням звіту переконайтеся, що ваші документи відповідають цим вимогам:",
           item1: "Документи повинні бути у форматі PDF",
           item2: "Файли повинні бути чіткими, читабельними та правильно відсканованими",
           item3: "Рекомендований максимальний розмір файлу 5MB для оптимальної продуктивності",
@@ -1610,7 +1651,8 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Важливі вимоги",
         important: "Будь ласка, забезпечте відповідність наступному:",
         item1: "Вся надана інформація повинна бути точною та правдивою",
-        item2: "Документи повинні бути автентичними та безпосередньо пов'язаними з повідомленою проблемою",
+        item2:
+          "Документи повинні бути автентичними та безпосередньо пов'язаними з повідомленою проблемою",
         item3: "Звіти повинні подаватися в добрій вірі та з законних цілей",
         item4: "Особові дані третіх осіб повинні оброблятися відповідно до правил конфіденційності",
       },
@@ -1627,12 +1669,14 @@ export const messagesByLocale: MessagesByLocale = {
         title: "Зв'яжіться з нами",
         email: {
           title: "Підтримка електронною поштою",
-          description: "З питань, технічних проблем або загальних запитів, будь ласка, зв'яжіться з нами:",
+          description:
+            "З питань, технічних проблем або загальних запитів, будь ласка, зв'яжіться з нами:",
           address: "support@example.com",
         },
         hours: {
           title: "Години підтримки",
-          description: "Наша команда підтримки доступна з понеділка по п'ятницю, з 9:00 до 17:00 (CET).",
+          description:
+            "Наша команда підтримки доступна з понеділка по п'ятницю, з 9:00 до 17:00 (CET).",
         },
       },
       commonIssues: {
@@ -1714,7 +1758,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       contact: {
         title: "Зв'яжіться з нами",
-        description: "Якщо у вас є запитання щодо цієї Політики конфіденційності, будь ласка, зв'яжіться з нами:",
+        description:
+          "Якщо у вас є запитання щодо цієї Політики конфіденційності, будь ласка, зв'яжіться з нами:",
         email: "privacy@example.com",
       },
     },
@@ -1729,7 +1774,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       useOfService: {
         title: "Використання послуги",
-        description: "Ви погоджуєтеся використовувати платформу лише для законних цілей та відповідно до цих Умов. Ви погоджуєтеся не:",
+        description:
+          "Ви погоджуєтеся використовувати платформу лише для законних цілей та відповідно до цих Умов. Ви погоджуєтеся не:",
         item1: "Надсилати неправдиву, оманливу або шахрайську інформацію",
         item2: "Порушувати будь-які застосовні закони або регуляції",
         item3: "Порушувати права інших",
@@ -1740,7 +1786,8 @@ export const messagesByLocale: MessagesByLocale = {
         description: "Створюючи обліковий запис, ви погоджуєтеся:",
         item1: "Надавати точну та повну інформацію",
         item2: "Зберігати безпеку ваших облікових даних",
-        item3: "Негайно повідомляти нас про будь-яке несанкціоноване використання вашого облікового запису",
+        item3:
+          "Негайно повідомляти нас про будь-яке несанкціоноване використання вашого облікового запису",
       },
       reportSubmission: {
         title: "Подання звіту",
@@ -1766,7 +1813,8 @@ export const messagesByLocale: MessagesByLocale = {
       },
       contact: {
         title: "Зв'яжіться з нами",
-        description: "Якщо у вас є запитання щодо цих Умов використання, будь ласка, зв'яжіться з нами:",
+        description:
+          "Якщо у вас є запитання щодо цих Умов використання, будь ласка, зв'яжіться з нами:",
         email: "legal@example.com",
       },
     },
@@ -1812,7 +1860,8 @@ export const messagesByLocale: MessagesByLocale = {
     },
     moderatorProfileModal: {
       title: "Завершіть свій профіль",
-      description: "Будь ласка, надайте своє повне ім'я та електронну адресу, щоб продовжити. Ви також можете завантажити зображення профілю.",
+      description:
+        "Будь ласка, надайте своє повне ім'я та електронну адресу, щоб продовжити. Ви також можете завантажити зображення профілю.",
       fullName: {
         label: "Повне ім'я",
         placeholder: "Введіть своє повне ім'я",
@@ -1827,7 +1876,8 @@ export const messagesByLocale: MessagesByLocale = {
         label: "Зображення профілю (Необов'язково)",
         uploadPrompt: "Клацніть, щоб завантажити зображення",
         uploadHint: "PNG, JPG, GIF до 5MB",
-        description: "Завантажте зображення профілю, щоб персоналізувати свій обліковий запис (необов'язково)",
+        description:
+          "Завантажте зображення профілю, щоб персоналізувати свій обліковий запис (необов'язково)",
         altText: "Попередній перегляд профілю",
       },
       actions: {
@@ -1901,7 +1951,8 @@ export const messagesByLocale: MessagesByLocale = {
       title: "Надіслати звіт про статут школи",
       description: {
         step1: "Крок 1 з 2: Надайте дані про школу та контактну інформацію.",
-        step2: "Крок 2 з 2: Перегляньте PDF статуту школи, виділіть проблеми та порівняйте з регуляціями.",
+        step2:
+          "Крок 2 з 2: Перегляньте PDF статуту школи, виділіть проблеми та порівняйте з регуляціями.",
       },
       steps: {
         details: "Деталі школи",
@@ -1940,10 +1991,10 @@ export const messagesByLocale: MessagesByLocale = {
             idle: "",
           },
         },
-        numerRspo: { 
-          label: "ID школи / Номер RSPO", 
+        numerRspo: {
+          label: "ID школи / Номер RSPO",
           placeholder: "123456",
-          description: "Це поле автоматично заповнюється після вибору школи з пошуку вище."
+          description: "Це поле автоматично заповнюється після вибору школи з пошуку вище.",
         },
         reportDescription: {
           label: "Опис звіту",
@@ -1984,7 +2035,8 @@ export const messagesByLocale: MessagesByLocale = {
         upload: {
           title: "Завантажити та перегляд",
           placeholder: "Виберіть файл PDF для перегляду",
-          helper: "Перегляньте завантажений документ безпосередньо та підтвердіть, що він відповідає повідомленим проблемам.",
+          helper:
+            "Перегляньте завантажений документ безпосередньо та підтвердіть, що він відповідає повідомленим проблемам.",
           replace: "Замінити PDF",
           cta: "Завантажити PDF",
           uploadedTitle: "Завантажений PDF",
@@ -1996,26 +2048,28 @@ export const messagesByLocale: MessagesByLocale = {
         },
         highlights: {
           title: "Виділення для модераторів",
-          description: "Зафіксуйте конкретні розділи, відхилення або помилки для керівництва переглядом модератора.",
+          description:
+            "Зафіксуйте конкретні розділи, відхилення або помилки для керівництва переглядом модератора.",
           pagePlaceholder: "Сторінка або розділ",
           regulationPlaceholder: "Посилання на регуляцію (за бажанням)",
           detailPlaceholder: "Опишіть проблему, неузгодженість або виділення для модераторів.",
           add: "Додати виділення",
-          empty: "Поки що немає доданих виділень. Додайте нотатки, щоб допомогти модераторам зосередитися на правильних областях.",
+          empty:
+            "Поки що немає доданих виділень. Додайте нотатки, щоб допомогти модераторам зосередитися на правильних областях.",
           pageLabel: "Сторінка/розділ: {page}",
           regulationLabel: "Регуляція: {regulation}",
           remove: "Видалити",
         },
         comparison: {
           title: "Порівняльні нотатки",
-          placeholder: "Підсумуйте, як документ відповідає поточним регуляціям, та перелічіть залишкові проблеми.",
+          placeholder:
+            "Підсумуйте, як документ відповідає поточним регуляціям, та перелічіть залишкові проблеми.",
           description: "Ці нотатки надсилаються модераторам разом з вашими виділеннями та PDF.",
         },
       },
     },
   },
-}
+};
 
 export const isSupportedLocale = (value: string): value is SupportedLocale =>
-  supportedLocales.includes(value as SupportedLocale)
-
+  supportedLocales.includes(value as SupportedLocale);

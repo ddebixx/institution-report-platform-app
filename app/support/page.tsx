@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
+import { useTranslations } from "next-intl";
 import {
   HelpCircleIcon,
   MailIcon,
@@ -8,30 +8,13 @@ import {
   FileTextIcon,
   BookOpenIcon,
   ArrowRightIcon,
-} from "lucide-react"
-import Link from "next/link"
-import { Accordion } from "@/components/ui/accordion"
+} from "lucide-react";
+import Link from "next/link";
+import { Accordion } from "@/components/ui/accordion";
+import { commonIssuesItems } from "@/consts/shared";
 
-const SupportPage = () => {
-  const t = useTranslations("support")
-
-  const commonIssuesItems = [
-    {
-      id: "issue-1",
-      title: t("commonIssues.issue1.question"),
-      content: t("commonIssues.issue1.answer"),
-    },
-    {
-      id: "issue-2",
-      title: t("commonIssues.issue2.question"),
-      content: t("commonIssues.issue2.answer"),
-    },
-    {
-      id: "issue-3",
-      title: t("commonIssues.issue3.question"),
-      content: t("commonIssues.issue3.answer"),
-    },
-  ]
+export default function SupportPage() {
+  const t = useTranslations("support");
 
   return (
     <div className="mx-auto w-full max-w-[800px] px-4 py-12 sm:px-6">
@@ -55,7 +38,9 @@ const SupportPage = () => {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
                     <MailIcon className="size-5" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">{t("contact.email.title")}</h3>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {t("contact.email.title")}
+                  </h3>
                 </div>
                 <p className="text-sm text-muted-foreground">{t("contact.email.description")}</p>
                 <a
@@ -66,7 +51,7 @@ const SupportPage = () => {
                   <ArrowRightIcon className="size-4 transition-transform duration-200" />
                 </a>
               </div>
-              
+
               <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </div>
 
@@ -76,7 +61,9 @@ const SupportPage = () => {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
                     <ClockIcon className="size-5" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground">{t("contact.hours.title")}</h3>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {t("contact.hours.title")}
+                  </h3>
                 </div>
                 <p className="text-sm text-muted-foreground">{t("contact.hours.description")}</p>
               </div>
@@ -87,7 +74,7 @@ const SupportPage = () => {
 
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">{t("commonIssues.title")}</h2>
-          <Accordion items={commonIssuesItems} />
+          <Accordion items={commonIssuesItems(t)} />
         </section>
 
         <section className="space-y-6">
@@ -101,8 +88,12 @@ const SupportPage = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
                   <FileTextIcon className="size-6" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{t("resources.documentation.title")}</h3>
-                <p className="text-sm text-muted-foreground">{t("resources.documentation.description")}</p>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {t("resources.documentation.title")}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {t("resources.documentation.description")}
+                </p>
                 <div className="flex items-center gap-2 text-primary transition-all duration-200 group-hover:gap-3">
                   <span className="text-sm font-medium">Learn more</span>
                   <ArrowRightIcon className="size-4" />
@@ -120,14 +111,18 @@ const SupportPage = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground">
                   <BookOpenIcon className="size-6" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{t("resources.guidelines.title")}</h3>
-                <p className="text-sm text-muted-foreground">{t("resources.guidelines.description")}</p>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {t("resources.guidelines.title")}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {t("resources.guidelines.description")}
+                </p>
                 <div className="flex items-center gap-2 text-primary transition-all duration-200 group-hover:gap-3">
                   <span className="text-sm font-medium">Learn more</span>
                   <ArrowRightIcon className="size-4" />
                 </div>
               </div>
-                <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/5 to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="absolute -right-8 -top-8 h-16 w-16 rounded-full bg-primary/5 transition-all duration-500 group-hover:scale-150" />
             </Link>
           </div>
@@ -144,8 +139,5 @@ const SupportPage = () => {
         </section>
       </div>
     </div>
-  )
+  );
 }
-
-export default SupportPage
-

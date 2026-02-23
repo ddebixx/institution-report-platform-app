@@ -1,53 +1,42 @@
-"use client"
+"use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react"
-import { NextIntlClientProvider } from "next-intl"
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { NextIntlClientProvider } from "next-intl";
 
-import {
-  defaultLocale,
-  messagesByLocale,
-  type SupportedLocale,
-} from "@/locales/messages"
-import { getInitialLocale } from "@/lib/locale-detection"
+import { defaultLocale, messagesByLocale, type SupportedLocale } from "@/locales/messages";
+import { getInitialLocale } from "@/lib/locale-detection";
 
 type LocaleContextValue = {
-  locale: SupportedLocale
-  setLocale: (locale: SupportedLocale) => void
-}
+  locale: SupportedLocale;
+  setLocale: (locale: SupportedLocale) => void;
+};
 
-const LocaleContext = createContext<LocaleContextValue | null>(null)
+const LocaleContext = createContext<LocaleContextValue | null>(null);
 
 type LocaleProviderProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export const LocaleProvider = ({ children }: LocaleProviderProps) => {
-  const [locale, setLocaleState] = useState<SupportedLocale>(defaultLocale)
+  const [locale, setLocaleState] = useState<SupportedLocale>(defaultLocale);
 
   useEffect(() => {
     function initializeLocaleWithAutoDetection() {
-      const initialLocale = getInitialLocale()
-      setLocaleState(initialLocale)
+      const initialLocale = getInitialLocale();
+      setLocaleState(initialLocale);
     }
 
-    initializeLocaleWithAutoDetection()
-  }, [])
+    initializeLocaleWithAutoDetection();
+  }, []);
 
   const setLocale = useCallback((nextLocale: SupportedLocale) => {
-    setLocaleState(nextLocale)
+    setLocaleState(nextLocale);
     if (typeof window !== "undefined") {
-      localStorage.setItem("locale", nextLocale)
+      localStorage.setItem("locale", nextLocale);
     }
-  }, [])
+  }, []);
 
-  const messages = useMemo(() => messagesByLocale[locale], [locale])
+  const messages = useMemo(() => messagesByLocale[locale], [locale]);
 
   const contextValue = useMemo(
     () => ({
@@ -55,7 +44,7 @@ export const LocaleProvider = ({ children }: LocaleProviderProps) => {
       setLocale,
     }),
     [locale, setLocale]
-  )
+  );
 
   return (
     <LocaleContext.Provider value={contextValue}>
@@ -63,16 +52,15 @@ export const LocaleProvider = ({ children }: LocaleProviderProps) => {
         {children}
       </NextIntlClientProvider>
     </LocaleContext.Provider>
-  )
-}
+  );
+};
 
 export const useLocaleContext = (): LocaleContextValue => {
-  const context = useContext(LocaleContext)
+  const context = useContext(LocaleContext);
 
   if (!context) {
-    throw new Error("useLocaleContext must be used within LocaleProvider")
+    throw new Error("useLocaleContext must be used within LocaleProvider");
   }
 
-  return context
-}
-
+  return context;
+};

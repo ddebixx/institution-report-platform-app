@@ -1,6 +1,4 @@
-import { z } from "zod"
-
-import { clientEnv } from "@/lib/env"
+import { z } from "zod";
 
 const institutionSearchItemSchema = z.object({
   id: z.string(),
@@ -8,66 +6,51 @@ const institutionSearchItemSchema = z.object({
   numerRspo: z.string().optional(),
   city: z.string().optional(),
   country: z.string().optional(),
-})
+});
 
 const institutionSearchResponseSchema = z.union([
   z.object({ items: z.array(institutionSearchItemSchema) }),
   z.array(institutionSearchItemSchema),
-])
+]);
 
-export type InstitutionSearchResult = z.infer<typeof institutionSearchItemSchema>
-
-export class InstitutionSearchError extends Error {
-  status: number
-
-  constructor(message: string, status: number) {
-    super(message)
-    this.status = status
-  }
-}
+export type InstitutionSearchResult = z.infer<typeof institutionSearchItemSchema>;
 
 export const searchInstitutions = async (
   query: string,
-  accessToken?: string
+  _accessToken?: string
 ): Promise<InstitutionSearchResult[]> => {
-  const trimmedQuery = query.trim()
+  const trimmedQuery = query.trim();
 
   if (trimmedQuery.length < 5) {
-    return []
+    return [];
   }
 
-  const response = await fetch(
-    `/api/institutions/search?q=${encodeURIComponent(trimmedQuery)}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
+  const response = await fetch(`/api/institutions/search?q=${encodeURIComponent(trimmedQuery)}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!response.ok) {
-    const errorBody = await response.json().catch(() => null)
+    const errorBody = await response.json().catch(() => null);
     const errorMessage =
-      typeof errorBody?.message === "string"
-        ? errorBody.message
-        : "Failed to search institutions"
+      typeof errorBody?.message === "string" ? errorBody.message : "Failed to search institutions";
 
-    throw new InstitutionSearchError(errorMessage, response.status)
+    throw new InstitutionSearchError(errorMessage, response.status);
   }
 
-  const parsed = institutionSearchResponseSchema.safeParse(await response.json())
+  const parsed = institutionSearchResponseSchema.safeParse(await response.json());
 
   if (!parsed.success) {
     throw new InstitutionSearchError(
       "Unexpected response from institution search endpoint",
       response.status
-    )
+    );
   }
 
   if (Array.isArray(parsed.data)) {
-    return parsed.data
+    return parsed.data;
   }
 
-  return parsed.data.items
-}
-
+  return parsed.data.items;
+};

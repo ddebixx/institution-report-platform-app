@@ -1,48 +1,39 @@
-"use client"
+"use client";
 
-import { useCallback, useMemo } from "react"
-import { useTranslations } from "next-intl"
+import { useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 
-import { useAuthContext } from "@/components/auth/auth-provider"
-import { Modal } from "@/components/ui/modal"
-import type { ReportModalProps } from "@/types/reports"
-import { handleInstitutionSearch as handleInstitutionSearchHandler } from "@/handlers/report-modal"
-import { REFERENCE_REGULATION_URL } from "@/consts/reports"
-import {
-  createRegulationReferences,
-  createStepDefinitions,
-} from "@/lib/reports"
-import { useReportForm } from "@/hooks/use-report-form"
-import { ReportDocumentCompare } from "@/features/reports/report-document-compare"
-import { ReportFormStep1 } from "./components/report-form-step"
-import { ReportFormProgress } from "./components/report-form-progress"
-import { ReportModalFooter } from "./components/report-modal-footer"
-import { ReportFormActions } from "./components/report-form-actions"
+import { useAuthContext } from "@/components/auth/auth-provider";
+import { Modal } from "@/components/ui/modal";
+import type { ReportModalProps } from "@/types/reports";
+import { handleInstitutionSearch as handleInstitutionSearchHandler } from "@/handlers/report-modal";
+import { REFERENCE_REGULATION_URL } from "@/consts/reports";
+import { createRegulationReferences, createStepDefinitions } from "@/lib/reports";
+import { useReportForm } from "@/hooks/use-report-form";
+import { ReportDocumentCompare } from "@/features/reports/report-document-compare";
+import { ReportFormStep1 } from "./components/report-form-step";
+import { ReportFormProgress } from "./components/report-form-progress";
+import { ReportModalFooter } from "./components/report-modal-footer";
+import { ReportFormActions } from "./components/report-form-actions";
 
 export const ReportModal = ({ open, onClose }: ReportModalProps) => {
-  const t = useTranslations("reportModal")
-  const { accessToken } = useAuthContext()
+  const t = useTranslations("reportModal");
+  const { accessToken } = useAuthContext();
 
-  const stepDefinitions = useMemo(
-    () => createStepDefinitions(t),
-    [t]
-  )
+  const stepDefinitions = useMemo(() => createStepDefinitions(t), [t]);
 
-  const regulationReferences = useMemo(
-    () => createRegulationReferences(t),
-    [t]
-  )
+  const regulationReferences = useMemo(() => createRegulationReferences(t), [t]);
 
   const handleInstitutionSearch = useCallback(
     async (query: string) => {
-      return await handleInstitutionSearchHandler({ query, accessToken })
+      return await handleInstitutionSearchHandler({ query, accessToken });
     },
     [accessToken]
-  )
+  );
 
   const handleClose = useCallback(() => {
-    onClose()
-  }, [onClose])
+    onClose();
+  }, [onClose]);
 
   const {
     form,
@@ -60,36 +51,27 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
   } = useReportForm({
     accessToken,
     onSuccess: () => {
-      handleFormClose()
-      handleClose()
+      handleFormClose();
+      handleClose();
     },
-  })
+  });
 
-  const { control, watch, formState } = form
-  const { errors, isSubmitting } = formState
-  const pdfFile = watch("pdf")
-  const reportContent = watch("reportContent")
+  const { control, watch, formState } = form;
+  const { errors, isSubmitting } = formState;
+  const pdfFile = watch("pdf");
+  const reportContent = watch("reportContent");
 
   return (
     <Modal
       open={open}
       title={t("title")}
-      description={
-        activeStep === 1
-          ? t("description.step1")
-          : t("description.step2")
-      }
+      description={activeStep === 1 ? t("description.step1") : t("description.step2")}
       onClose={() => {
-        handleFormClose()
-        handleClose()
+        handleFormClose();
+        handleClose();
       }}
       panelClassName={modalPanelClassName}
-      footer={
-        <ReportModalFooter
-          activeStep={activeStep}
-          totalSteps={stepDefinitions.length}
-        />
-      }
+      footer={<ReportModalFooter activeStep={activeStep} totalSteps={stepDefinitions.length} />}
     >
       <form className="space-y-5" onSubmit={handleFormSubmit} noValidate>
         <ReportFormProgress activeStep={activeStep} steps={stepDefinitions} />
@@ -124,5 +106,5 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
         />
       </form>
     </Modal>
-  )
-}
+  );
+};

@@ -1,45 +1,37 @@
-"use client"
+"use client";
 
-import {
-  type ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
-import { Loader2, Search } from "lucide-react"
-import { twMerge } from "tailwind-merge"
+import { type ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Loader2, Search } from "lucide-react";
 
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
 
 export type UniversalSearchOption = {
-  id: string
-  title: string
-  subtitle?: string
-  meta?: string
-}
+  id: string;
+  title: string;
+  subtitle?: string;
+  meta?: string;
+};
 
 type StatusText = {
-  idle: string
-  loading: string
-  empty: string
-  minChars: string
-  error: string
-}
+  idle: string;
+  loading: string;
+  empty: string;
+  minChars: string;
+  error: string;
+};
 
 type UniversalSearchInputProps = {
-  value: string
-  onValueChange: (value: string) => void
-  onSelect: (option: UniversalSearchOption) => void
-  fetchResults: (query: string) => Promise<UniversalSearchOption[]>
-  placeholder?: string
-  minCharacters?: number
-  inputId?: string
-  onBlur?: () => void
-  className?: string
-  statusText: StatusText
-}
+  value: string;
+  onValueChange: (value: string) => void;
+  onSelect: (option: UniversalSearchOption) => void;
+  fetchResults: (query: string) => Promise<UniversalSearchOption[]>;
+  placeholder?: string;
+  minCharacters?: number;
+  inputId?: string;
+  onBlur?: () => void;
+  className?: string;
+  statusText: StatusText;
+};
 
 export const UniversalSearchInput = ({
   value,
@@ -53,72 +45,71 @@ export const UniversalSearchInput = ({
   className,
   statusText,
 }: UniversalSearchInputProps) => {
-  const [options, setOptions] = useState<UniversalSearchOption[]>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const [statusMessage, setStatusMessage] = useState<string>(statusText.minChars)
-  const requestCounterRef = useRef(0)
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const justSelectedRef = useRef(false)
+  const [options, setOptions] = useState<UniversalSearchOption[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string>(statusText.minChars);
+  const requestCounterRef = useRef(0);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const justSelectedRef = useRef(false);
 
-  const trimmedValue = useMemo(() => value.trim(), [value])
+  const trimmedValue = useMemo(() => value.trim(), [value]);
   const hasEnoughCharacters = useMemo(
     () => trimmedValue.length >= minCharacters,
     [minCharacters, trimmedValue.length]
-  )
+  );
 
   useEffect(() => {
     function resetForShortQuery() {
-      setIsOpen(false)
-      setOptions([])
-      setIsLoading(false)
-      setStatusMessage(statusText.minChars)
+      setIsOpen(false);
+      setOptions([]);
+      setIsLoading(false);
+      setStatusMessage(statusText.minChars);
     }
 
     async function searchWhenEligible() {
       if (justSelectedRef.current) {
-        justSelectedRef.current = false
-        return
+        justSelectedRef.current = false;
+        return;
       }
 
       if (trimmedValue.length < minCharacters) {
-        resetForShortQuery()
-        return
+        resetForShortQuery();
+        return;
       }
 
-      setIsLoading(true)
-      setStatusMessage(statusText.loading)
-      const nextRequestId = requestCounterRef.current + 1
-      requestCounterRef.current = nextRequestId
+      setIsLoading(true);
+      setStatusMessage(statusText.loading);
+      const nextRequestId = requestCounterRef.current + 1;
+      requestCounterRef.current = nextRequestId;
 
       try {
-        const result = await fetchResults(trimmedValue)
+        const result = await fetchResults(trimmedValue);
 
         if (requestCounterRef.current !== nextRequestId) {
-          return
+          return;
         }
 
-        setOptions(result)
-        setStatusMessage(result.length ? statusText.idle : statusText.empty)
-        setIsOpen(true)
+        setOptions(result);
+        setStatusMessage(result.length ? statusText.idle : statusText.empty);
+        setIsOpen(true);
       } catch (error) {
         if (requestCounterRef.current !== nextRequestId) {
-          return
+          return;
         }
 
-        const errorMessage =
-          error instanceof Error ? error.message : statusText.error
-        setOptions([])
-        setStatusMessage(errorMessage)
-        setIsOpen(true)
+        const errorMessage = error instanceof Error ? error.message : statusText.error;
+        setOptions([]);
+        setStatusMessage(errorMessage);
+        setIsOpen(true);
       } finally {
         if (requestCounterRef.current === nextRequestId) {
-          setIsLoading(false)
+          setIsLoading(false);
         }
       }
     }
 
-    searchWhenEligible()
+    searchWhenEligible();
   }, [
     fetchResults,
     minCharacters,
@@ -128,41 +119,41 @@ export const UniversalSearchInput = ({
     statusText.loading,
     statusText.minChars,
     trimmedValue,
-  ])
+  ]);
 
-  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    onValueChange(event.target.value)
-  }, [onValueChange])
+  const handleInputChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      onValueChange(event.target.value);
+    },
+    [onValueChange]
+  );
 
   const handleOptionMouseDown = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>, option: UniversalSearchOption) => {
-      event.preventDefault()
-      justSelectedRef.current = true
-      onSelect(option)
-      setIsOpen(false)
-      setOptions([])
+      event.preventDefault();
+      justSelectedRef.current = true;
+      onSelect(option);
+      setIsOpen(false);
+      setOptions([]);
     },
     [onSelect]
-  )
+  );
 
   const hasRenderableRows = useMemo(
-    () =>
-      isLoading ||
-      options.length > 0 ||
-      (Boolean(statusMessage) && hasEnoughCharacters),
+    () => isLoading || options.length > 0 || (Boolean(statusMessage) && hasEnoughCharacters),
     [hasEnoughCharacters, isLoading, options.length, statusMessage]
-  )
+  );
 
   const shouldShowDropdown = useMemo(
     () => isOpen && hasRenderableRows,
     [hasRenderableRows, isOpen]
-  )
+  );
 
   useEffect(() => {
     if (shouldShowDropdown) {
-      inputRef.current?.focus({ preventScroll: true })
+      inputRef.current?.focus({ preventScroll: true });
     }
-  }, [shouldShowDropdown])
+  }, [shouldShowDropdown]);
 
   return (
     <div className="relative">
@@ -172,15 +163,15 @@ export const UniversalSearchInput = ({
         value={value}
         onChange={handleInputChange}
         onBlur={(event) => {
-          setTimeout(() => setIsOpen(false), 50)
+          setTimeout(() => setIsOpen(false), 50);
           if (onBlur) {
-            onBlur()
+            onBlur();
           }
-          event.persist?.()
+          event.persist?.();
         }}
         onFocus={() => {
           if (hasRenderableRows) {
-            setIsOpen(true)
+            setIsOpen(true);
           }
         }}
         placeholder={placeholder}
@@ -197,40 +188,34 @@ export const UniversalSearchInput = ({
             </div>
           ) : null}
 
-          {!isLoading && options.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              onMouseDown={(event) => handleOptionMouseDown(event, option)}
-              className="flex w-full items-start gap-2 px-3 py-2 text-left text-sm transition hover:bg-accent hover:text-accent-foreground"
-            >
-              <div className="flex size-8 items-center justify-center rounded-md bg-muted">
-                <Search className="size-4" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-medium">{option.title}</span>
-                {option.subtitle ? (
-                  <span className="text-xs text-muted-foreground">
-                    {option.subtitle}
-                  </span>
-                ) : null}
-                {option.meta ? (
-                  <span className="text-[11px] text-muted-foreground">
-                    {option.meta}
-                  </span>
-                ) : null}
-              </div>
-            </button>
-          ))}
+          {!isLoading &&
+            options.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                onMouseDown={(event) => handleOptionMouseDown(event, option)}
+                className="flex w-full items-start gap-2 px-3 py-2 text-left text-sm transition hover:bg-accent hover:text-accent-foreground"
+              >
+                <div className="flex size-8 items-center justify-center rounded-md bg-muted">
+                  <Search className="size-4" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-medium">{option.title}</span>
+                  {option.subtitle ? (
+                    <span className="text-xs text-muted-foreground">{option.subtitle}</span>
+                  ) : null}
+                  {option.meta ? (
+                    <span className="text-[11px] text-muted-foreground">{option.meta}</span>
+                  ) : null}
+                </div>
+              </button>
+            ))}
 
           {!isLoading && options.length === 0 && trimmedValue.length >= minCharacters ? (
-            <div className="px-3 py-2 text-sm text-muted-foreground">
-              {statusMessage}
-            </div>
+            <div className="px-3 py-2 text-sm text-muted-foreground">{statusMessage}</div>
           ) : null}
         </div>
       ) : null}
     </div>
-  )
-}
-
+  );
+};

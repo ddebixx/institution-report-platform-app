@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Footer } from "@/components/layout/footer"
-import { Navbar } from "@/components/layout/navbar"
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 
 type SiteShellProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export const SiteShell = ({ children }: SiteShellProps) => {
   return (
@@ -16,6 +16,5 @@ export const SiteShell = ({ children }: SiteShellProps) => {
       <main className="flex-1">{children}</main>
       <Footer />
     </div>
-  )
-}
-
+  );
+};

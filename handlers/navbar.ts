@@ -1,54 +1,50 @@
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime"
+import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 type HandleDashboardNavigateParams = {
-  router: AppRouterInstance
-  setIsMobileMenuOpen: (open: boolean) => void
-}
+  router: AppRouterInstance;
+  setIsMobileMenuOpen: (open: boolean) => void;
+};
 
 export const handleDashboardNavigate = ({
   router,
   setIsMobileMenuOpen,
 }: HandleDashboardNavigateParams): void => {
-  router.push("/admin")
-  setIsMobileMenuOpen(false)
-}
+  router.push("/admin");
+  setIsMobileMenuOpen(false);
+};
 
 type HandleLogoutParams = {
-  signOut: () => Promise<void>
-  setIsMobileMenuOpen: (open: boolean) => void
-}
+  signOut: () => Promise<void>;
+  setIsMobileMenuOpen: (open: boolean) => void;
+};
 
 export const handleLogout = async ({
   signOut,
   setIsMobileMenuOpen,
 }: HandleLogoutParams): Promise<void> => {
-  await signOut()
-  setIsMobileMenuOpen(false)
-}
+  await signOut();
+  setIsMobileMenuOpen(false);
+};
 
 type HandleLoginParams = {
-  openLogin: () => void
-  setIsMobileMenuOpen: (open: boolean) => void
-}
+  openLogin: () => void;
+  setIsMobileMenuOpen: (open: boolean) => void;
+};
 
-export const handleLogin = ({
-  openLogin,
-  setIsMobileMenuOpen,
-}: HandleLoginParams): void => {
-  openLogin()
-  setIsMobileMenuOpen(false)
-}
+export const handleLogin = ({ openLogin, setIsMobileMenuOpen }: HandleLoginParams): void => {
+  openLogin();
+  setIsMobileMenuOpen(false);
+};
 
 type HandleRegisterParams = {
-  openRegister: () => void
-  setIsMobileMenuOpen: (open: boolean) => void
-}
+  openRegister: () => void;
+  setIsMobileMenuOpen: (open: boolean) => void;
+};
 
 export const handleRegister = ({
   openRegister,
   setIsMobileMenuOpen,
 }: HandleRegisterParams): void => {
-  openRegister()
-  setIsMobileMenuOpen(false)
-}
-
+  openRegister();
+  setIsMobileMenuOpen(false);
+};

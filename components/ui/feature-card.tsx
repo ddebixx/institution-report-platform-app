@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { twMerge } from "tailwind-merge"
-import { LucideIcon } from "lucide-react"
+import { useState } from "react";
+import { twMerge } from "tailwind-merge";
+import type { LucideIcon } from "lucide-react";
 
 type FeatureCardProps = {
-  icon: LucideIcon
-  title: string
-  description: string
-  className?: string
-}
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  className?: string;
+};
 
 export const FeatureCard = ({ icon: Icon, title, description, className }: FeatureCardProps) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
+    <article
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={twMerge(
@@ -39,7 +39,7 @@ export const FeatureCard = ({ icon: Icon, title, description, className }: Featu
         >
           <Icon className="size-6" />
         </div>
-        
+
         <h3 className="text-lg font-semibold text-foreground">{title}</h3>
         <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
       </div>
@@ -50,7 +50,6 @@ export const FeatureCard = ({ icon: Icon, title, description, className }: Featu
           isHovered && "scale-150"
         )}
       />
-    </div>
-  )
-}
-
+    </article>
+  );
+};

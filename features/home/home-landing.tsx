@@ -1,60 +1,59 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { FileTextIcon, ShieldIcon } from "lucide-react"
-import { twMerge } from "tailwind-merge"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FileTextIcon, ShieldIcon } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
-import { Button } from "@/components/ui/button"
-import { RegulationsSection } from "@/features/home/regulations-section"
-import { FeaturesSection } from "@/features/home/features-section"
-import { HowItWorksSection } from "@/features/home/how-it-works-section"
-import { BenefitsSection } from "@/features/home/benefits-section"
-import { StatsSection } from "@/features/home/stats-section"
-import { ReportModal } from "@/features/reports/report-modal"
-import { useAuthContext } from "@/components/auth/auth-provider"
-import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button";
+import { RegulationsSection } from "@/features/home/regulations-section";
+import { FeaturesSection } from "@/features/home/features-section";
+import { HowItWorksSection } from "@/features/home/how-it-works-section";
+import { BenefitsSection } from "@/features/home/benefits-section";
+import { ReportModal } from "@/features/reports/report-modal";
+import { useAuthContext } from "@/components/auth/auth-provider";
+import { useTranslations } from "next-intl";
 
 export const HomeLanding = () => {
-  const { user } = useAuthContext()
-  const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false)
-  const [heroVisible, setHeroVisible] = useState(false)
-  const heroRef = useRef<HTMLElement>(null)
-  const t = useTranslations()
+  const { user } = useAuthContext();
+  const [isReportModalOpen, setIsReportModalOpen] = useState<boolean>(false);
+  const [heroVisible, setHeroVisible] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+  const t = useTranslations();
 
   const openReportModal = useCallback(() => {
-    setIsReportModalOpen(true)
-  }, [])
+    setIsReportModalOpen(true);
+  }, []);
 
   const closeReportModal = useCallback(() => {
-    setIsReportModalOpen(false)
-  }, [])
+    setIsReportModalOpen(false);
+  }, []);
 
-  const isAuthenticated = useMemo(() => Boolean(user), [user])
+  const isAuthenticated = useMemo(() => Boolean(user), [user]);
 
   useEffect(() => {
     function initializeHeroAnimation() {
-      if (!heroRef.current) return
+      if (!heroRef.current) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              setHeroVisible(true)
+              setHeroVisible(true);
             }
-          })
+          });
         },
         { threshold: 0.1 }
-      )
+      );
 
-      observer.observe(heroRef.current)
+      observer.observe(heroRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
 
-    initializeHeroAnimation()
-  }, [])
+    initializeHeroAnimation();
+  }, []);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-foreground">
@@ -68,7 +67,10 @@ export const HomeLanding = () => {
         >
           <div className="absolute inset-0 -z-10">
             <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl animate-pulse" />
-            <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+            <div
+              className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-primary/5 blur-3xl animate-pulse"
+              style={{ animationDelay: "1s" }}
+            />
           </div>
 
           <div className="relative z-10 mx-auto max-w-4xl text-center">
@@ -76,7 +78,7 @@ export const HomeLanding = () => {
               <div
                 className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary backdrop-blur-sm transition-all duration-500 hover:bg-primary/20 hover:scale-105 hover:shadow-xs hover:shadow-primary/20"
                 style={{
-                  animation: heroVisible ? "scale-in 0.6s ease-out 0ms both" : undefined
+                  animation: heroVisible ? "scale-in 0.6s ease-out 0ms both" : undefined,
                 }}
               >
                 <ShieldIcon className="size-4 transition-all duration-300" />
@@ -85,7 +87,7 @@ export const HomeLanding = () => {
               <h1
                 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
                 style={{
-                  animation: heroVisible ? "slide-in-left 0.8s ease-out 200ms both" : undefined
+                  animation: heroVisible ? "slide-in-left 0.8s ease-out 200ms both" : undefined,
                 }}
               >
                 {t("hero.title")}
@@ -93,7 +95,7 @@ export const HomeLanding = () => {
               <p
                 className="mx-auto max-w-2xl text-xl leading-relaxed text-muted-foreground"
                 style={{
-                  animation: heroVisible ? "slide-in-right 0.8s ease-out 400ms both" : undefined
+                  animation: heroVisible ? "slide-in-right 0.8s ease-out 400ms both" : undefined,
                 }}
               >
                 {t("hero.subtitle")}
@@ -101,15 +103,10 @@ export const HomeLanding = () => {
               <div
                 className="flex flex-col items-center justify-center gap-4 sm:flex-row"
                 style={{
-                  animation: heroVisible ? "scale-in 0.6s ease-out 600ms both" : undefined
+                  animation: heroVisible ? "scale-in 0.6s ease-out 600ms both" : undefined,
                 }}
               >
-
-
-                {isAuthenticated ? (
-                  <>
-                  </>
-                ) : (
+                {isAuthenticated ? null : (
                   <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                     <Button
                       size="lg"
@@ -124,7 +121,7 @@ export const HomeLanding = () => {
               </div>
             </div>
           </div>
-        </section >
+        </section>
 
         <section id="features">
           <FeaturesSection />
@@ -143,9 +140,8 @@ export const HomeLanding = () => {
         <section id="regulations">
           <RegulationsSection />
         </section>
-      </main >
+      </main>
       <ReportModal open={isReportModalOpen} onClose={closeReportModal} />
-    </div >
-  )
-}
-
+    </div>
+  );
+};

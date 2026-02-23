@@ -1,16 +1,8 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
-import { Button } from "@/components/ui/button"
-import type { StepId } from "@/types/reports"
-
-type ReportFormActionsProps = {
-  activeStep: StepId
-  isSubmitting: boolean
-  primaryActionLabel: string
-  isPrimaryDisabled: boolean
-  onBack: () => void
-}
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import type { ReportFormActionsProps } from "@/types/reports";
 
 export const ReportFormActions = ({
   activeStep,
@@ -19,7 +11,7 @@ export const ReportFormActions = ({
   isPrimaryDisabled,
   onBack,
 }: ReportFormActionsProps) => {
-  const t = useTranslations("reportModal")
+  const t = useTranslations("reportModal");
 
   return (
     <div className="flex flex-col gap-3">
@@ -34,14 +26,9 @@ export const ReportFormActions = ({
           {t("actions.back")}
         </Button>
       ) : null}
-      <Button
-        type="submit"
-        className="w-full font-semibold"
-        disabled={isPrimaryDisabled}
-      >
+      <Button type="submit" className="w-full font-semibold" disabled={isPrimaryDisabled}>
         {primaryActionLabel}
       </Button>
     </div>
-  )
-}
-
+  );
+};

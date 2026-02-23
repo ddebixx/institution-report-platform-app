@@ -1,9 +1,13 @@
-import { z } from "zod"
-import type { useTranslations } from "next-intl"
+import { z } from "zod";
+import type { useTranslations } from "next-intl";
+import { reportFindingSchema } from "@/lib/schemas/reports";
 
-export function createReportFormSchema(
-  t: ReturnType<typeof useTranslations<"reportModal">>
-) {
+// AI: Form schema composes report schemas with i18n validation messages
+export function createReportFormSchema(t: ReturnType<typeof useTranslations<"reportModal">>) {
+  const findingWithValidation = reportFindingSchema.extend({
+    detail: z.string().trim().min(2, t("validation.findingDetail")),
+  });
+
   return z.object({
     reporterName: z.string().trim().min(2, t("validation.reporterName")),
     reporterEmail: z.string().trim().email(t("validation.reporterEmail")),
@@ -15,16 +19,8 @@ export function createReportFormSchema(
     reportReason: z.string().trim().optional(),
     pdf: z.instanceof(File).or(z.null()),
     reportContent: z.object({
-      findings: z.array(
-        z.object({
-          id: z.string(),
-          detail: z.string().trim().min(2, t("validation.findingDetail")),
-          regulationId: z.string().optional(),
-          pageReference: z.string().trim().optional(),
-        })
-      ),
+      findings: z.array(findingWithValidation),
       comparisonNotes: z.string().trim(),
     }),
-  })
+  });
 }
-

@@ -1,49 +1,14 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
-import { FileTextIcon, ShieldIcon, SearchIcon, UploadIcon, CheckCircleIcon } from "lucide-react"
-import { InteractiveStepper } from "@/components/ui/interactive-stepper"
-import { Accordion } from "@/components/ui/accordion"
-import { Tabs } from "@/components/ui/tabs"
+import { useTranslations } from "next-intl";
+import { FileTextIcon, ShieldIcon, SearchIcon, UploadIcon, CheckCircleIcon } from "lucide-react";
+import { InteractiveStepper } from "@/components/ui/interactive-stepper";
+import { Accordion } from "@/components/ui/accordion";
+import { Tabs } from "@/components/ui/tabs";
+import { gettingStartedSteps, faqItems } from "@/consts/shared";
 
-const DocumentationPage = () => {
-  const t = useTranslations("documentation")
-
-  const gettingStartedSteps = [
-    {
-      number: 1,
-      title: t("gettingStarted.step1.title"),
-      description: t("gettingStarted.step1.description"),
-    },
-    {
-      number: 2,
-      title: t("gettingStarted.step2.title"),
-      description: t("gettingStarted.step2.description"),
-    },
-    {
-      number: 3,
-      title: t("gettingStarted.step3.title"),
-      description: t("gettingStarted.step3.description"),
-    },
-  ]
-
-  const faqItems = [
-    {
-      id: "faq-1",
-      title: t("faq.q1.question"),
-      content: t("faq.q1.answer"),
-    },
-    {
-      id: "faq-2",
-      title: t("faq.q2.question"),
-      content: t("faq.q2.answer"),
-    },
-    {
-      id: "faq-3",
-      title: t("faq.q3.question"),
-      content: t("faq.q3.answer"),
-    },
-  ]
+export default function DocumentationPage() {
+  const t = useTranslations("documentation");
 
   const featureTabs = [
     {
@@ -92,13 +57,15 @@ const DocumentationPage = () => {
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <CheckCircleIcon className="size-6 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">{t("features.tracking.title")}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {t("features.tracking.title")}
+            </h3>
           </div>
           <p className="text-muted-foreground">{t("features.tracking.description")}</p>
         </div>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="mx-auto w-full max-w-[800px] px-4 py-12 sm:px-6">
@@ -116,14 +83,16 @@ const DocumentationPage = () => {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground">{t("overview.title")}</h2>
           <div className="relative overflow-hidden rounded-lg border border-border bg-linear-to-br from-primary/5 to-transparent p-6 shadow-sm">
-            <p className="relative z-10 leading-relaxed text-muted-foreground">{t("overview.description")}</p>
+            <p className="relative z-10 leading-relaxed text-muted-foreground">
+              {t("overview.description")}
+            </p>
             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
           </div>
         </section>
 
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">{t("gettingStarted.title")}</h2>
-          <InteractiveStepper steps={gettingStartedSteps} />
+          <InteractiveStepper steps={gettingStartedSteps(t)} />
         </section>
 
         <section className="space-y-6">
@@ -165,12 +134,9 @@ const DocumentationPage = () => {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground">{t("faq.title")}</h2>
-          <Accordion items={faqItems} />
+          <Accordion items={faqItems(t)} />
         </section>
       </div>
     </div>
-  )
+  );
 }
-
-export default DocumentationPage
-

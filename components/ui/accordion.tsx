@@ -1,40 +1,40 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { twMerge } from "tailwind-merge"
-import { ChevronDownIcon, LucideIcon } from "lucide-react"
+import { useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { ChevronDownIcon, type LucideIcon } from "lucide-react";
 
 type AccordionItemType = {
-  id: string
-  title: string
-  content: string
-  icon?: LucideIcon
-}
+  id: string;
+  title: string;
+  content: string;
+  icon?: LucideIcon;
+};
 
 type AccordionProps = {
-  items: AccordionItemType[]
-  className?: string
-  allowMultiple?: boolean
-}
+  items: AccordionItemType[];
+  className?: string;
+  allowMultiple?: boolean;
+};
 
 export const Accordion = ({ items, className, allowMultiple = false }: AccordionProps) => {
-  const [openItems, setOpenItems] = useState<string[]>([])
+  const [openItems, setOpenItems] = useState<string[]>([]);
 
   function toggleItem(id: string) {
     if (allowMultiple) {
       setOpenItems((prev) =>
         prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-      )
+      );
     } else {
-      setOpenItems((prev) => (prev.includes(id) ? [] : [id]))
+      setOpenItems((prev) => (prev.includes(id) ? [] : [id]));
     }
   }
 
   return (
     <div className={twMerge("space-y-2", className)}>
       {items.map((item) => {
-        const isOpen = openItems.includes(item.id)
-        const Icon = item.icon
+        const isOpen = openItems.includes(item.id);
+        const Icon = item.icon;
 
         return (
           <div
@@ -45,6 +45,7 @@ export const Accordion = ({ items, className, allowMultiple = false }: Accordion
             )}
           >
             <button
+              type="button"
               onClick={() => toggleItem(item.id)}
               className="flex w-full items-center justify-between gap-3 p-4 text-left transition-colors hover:bg-accent/30"
               aria-expanded={isOpen}
@@ -64,7 +65,7 @@ export const Accordion = ({ items, className, allowMultiple = false }: Accordion
                 )}
               />
             </button>
-            
+
             <div
               className={twMerge(
                 "grid transition-all duration-200 ease-in-out",
@@ -78,9 +79,8 @@ export const Accordion = ({ items, className, allowMultiple = false }: Accordion
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
-
+  );
+};

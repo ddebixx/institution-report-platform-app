@@ -1,19 +1,13 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
+import { useTranslations } from "next-intl";
 
-import type {
-  ReportDocumentCompareProps,
-  RegulationReference,
-  ReportFinding,
-} from "@/types/reports"
-import { useFilePreview } from "@/hooks/use-file-preview"
-import { PdfUploadField } from "./components/pdf-upload-field"
-import { PdfViewer } from "./components/pdf-viewer"
-import { FindingsManager } from "./components/findings-manager"
-import { ComparisonNotesField } from "./components/comparison-notes-field"
-
-export type { RegulationReference, ReportFinding }
+import type { ReportDocumentCompareProps } from "@/types/reports";
+import { useFilePreview } from "@/hooks/use-file-preview";
+import { PdfUploadField } from "./components/pdf-upload-field";
+import { PdfViewer } from "./components/pdf-viewer";
+import { FindingsManager } from "./components/findings-manager";
+import { ComparisonNotesField } from "./components/comparison-notes-field";
 
 export const ReportDocumentCompare = ({
   file,
@@ -26,8 +20,8 @@ export const ReportDocumentCompare = ({
   onFindingsChange,
   onComparisonNotesChange,
 }: ReportDocumentCompareProps) => {
-  const t = useTranslations("reportModal.compare")
-  const previewUrl = useFilePreview(file)
+  const t = useTranslations("reportModal.compare");
+  const previewUrl = useFilePreview(file);
 
   return (
     <div className="space-y-6">
@@ -61,6 +55,5 @@ export const ReportDocumentCompare = ({
 
       <ComparisonNotesField value={comparisonNotes} onChange={onComparisonNotesChange} />
     </div>
-  )
-}
-
+  );
+};

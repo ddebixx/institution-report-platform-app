@@ -1,17 +1,9 @@
-import { CheckCircleIcon, ClockIcon, FileCheckIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-type DashboardStatsProps = {
-  stats: {
-    total: number
-    available: number
-    assigned: number
-    completed: number
-  }
-}
+import { CheckCircleIcon, ClockIcon, FileCheckIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { DashboardStatsProps } from "@/types/moderator-dashboard";
 
 export const DashboardStats = ({ stats }: DashboardStatsProps) => {
-  const t = useTranslations()
+  const t = useTranslations();
 
   return (
     <div className="grid gap-6 md:grid-cols-4">
@@ -75,6 +67,5 @@ export const DashboardStats = ({ stats }: DashboardStatsProps) => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};

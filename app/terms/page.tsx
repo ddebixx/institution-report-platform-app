@@ -1,66 +1,12 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
-import { 
-  FileTextIcon, 
-  CheckCircleIcon, 
-  UserIcon, 
-  KeyIcon, 
-  FileUpIcon, 
-  CopyrightIcon, 
-  ShieldAlertIcon, 
-  RefreshCwIcon,
-  MailIcon 
-} from "lucide-react"
-import { Accordion } from "@/components/ui/accordion"
+import { useTranslations } from "next-intl";
+import { FileTextIcon, MailIcon } from "lucide-react";
+import { Accordion } from "@/components/ui/accordion";
+import { accordionItems } from "@/consts/shared";
 
-const TermsPage = () => {
-  const t = useTranslations("terms")
-
-  const accordionItems = [
-    {
-      id: "acceptance",
-      title: t("acceptance.title"),
-      content: t("acceptance.content"),
-      icon: CheckCircleIcon,
-    },
-    {
-      id: "useOfService",
-      title: t("useOfService.title"),
-      content: `${t("useOfService.description")}\n\n• ${t("useOfService.item1")}\n• ${t("useOfService.item2")}\n• ${t("useOfService.item3")}\n• ${t("useOfService.item4")}`,
-      icon: UserIcon,
-    },
-    {
-      id: "userAccounts",
-      title: t("userAccounts.title"),
-      content: `${t("userAccounts.description")}\n\n• ${t("userAccounts.item1")}\n• ${t("userAccounts.item2")}\n• ${t("userAccounts.item3")}`,
-      icon: KeyIcon,
-    },
-    {
-      id: "reportSubmission",
-      title: t("reportSubmission.title"),
-      content: `${t("reportSubmission.description")}\n\n• ${t("reportSubmission.item1")}\n• ${t("reportSubmission.item2")}\n• ${t("reportSubmission.item3")}`,
-      icon: FileUpIcon,
-    },
-    {
-      id: "intellectualProperty",
-      title: t("intellectualProperty.title"),
-      content: t("intellectualProperty.content"),
-      icon: CopyrightIcon,
-    },
-    {
-      id: "limitationOfLiability",
-      title: t("limitationOfLiability.title"),
-      content: t("limitationOfLiability.content"),
-      icon: ShieldAlertIcon,
-    },
-    {
-      id: "modifications",
-      title: t("modifications.title"),
-      content: t("modifications.content"),
-      icon: RefreshCwIcon,
-    },
-  ]
+export default function TermsPage() {
+  const t = useTranslations("terms");
 
   return (
     <div className="mx-auto w-full max-w-[900px] px-4 py-12 sm:px-6">
@@ -73,7 +19,7 @@ const TermsPage = () => {
         <p className="mt-1 text-xs text-muted-foreground/70">{t("lastUpdated")}</p>
       </div>
 
-      <Accordion items={accordionItems} allowMultiple className="mb-8" />
+      <Accordion items={accordionItems(t)} allowMultiple className="mb-8" />
 
       <div className="mt-8 rounded-lg border border-border bg-card/50 p-6 backdrop-blur-sm">
         <div className="flex items-start gap-3">
@@ -95,8 +41,5 @@ const TermsPage = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-export default TermsPage
-

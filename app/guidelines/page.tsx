@@ -1,30 +1,13 @@
-"use client"
+"use client";
 
-import { useTranslations } from "next-intl"
-import { BookOpenIcon, CheckCircleIcon, AlertCircleIcon, FileCheckIcon } from "lucide-react"
-import { InteractiveStepper } from "@/components/ui/interactive-stepper"
-import { Tabs } from "@/components/ui/tabs"
+import { useTranslations } from "next-intl";
+import { BookOpenIcon, CheckCircleIcon, AlertCircleIcon, FileCheckIcon } from "lucide-react";
+import { InteractiveStepper } from "@/components/ui/interactive-stepper";
+import { Tabs } from "@/components/ui/tabs";
+import { submissionSteps } from "@/consts/shared";
 
-const GuidelinesPage = () => {
-  const t = useTranslations("guidelines")
-
-  const submissionSteps = [
-    {
-      number: 1,
-      title: t("submission.step1.title"),
-      description: t("submission.step1.description"),
-    },
-    {
-      number: 2,
-      title: t("submission.step2.title"),
-      description: t("submission.step2.description"),
-    },
-    {
-      number: 3,
-      title: t("submission.step3.title"),
-      description: t("submission.step3.description"),
-    },
-  ]
+export default function GuidelinesPage() {
+  const t = useTranslations("guidelines");
 
   const preparationTabs = [
     {
@@ -34,7 +17,9 @@ const GuidelinesPage = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <FileCheckIcon className="size-6 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">{t("preparation.document.title")}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {t("preparation.document.title")}
+            </h3>
           </div>
           <p className="text-muted-foreground">{t("preparation.document.description")}</p>
           <ul className="space-y-3 text-muted-foreground">
@@ -67,7 +52,9 @@ const GuidelinesPage = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <CheckCircleIcon className="size-6 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">{t("preparation.content.title")}</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              {t("preparation.content.title")}
+            </h3>
           </div>
           <p className="text-muted-foreground">{t("preparation.content.description")}</p>
           <ul className="space-y-3 text-muted-foreground">
@@ -93,7 +80,7 @@ const GuidelinesPage = () => {
         </div>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="mx-auto w-full max-w-[800px] px-4 py-12 sm:px-6">
@@ -115,7 +102,7 @@ const GuidelinesPage = () => {
 
         <section className="space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">{t("submission.title")}</h2>
-          <InteractiveStepper steps={submissionSteps} />
+          <InteractiveStepper steps={submissionSteps(t)} />
         </section>
 
         <section className="space-y-6">
@@ -126,7 +113,9 @@ const GuidelinesPage = () => {
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-destructive/20 text-destructive">
                   <AlertCircleIcon className="size-5" />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground">{t("requirements.important")}</h3>
+                <h3 className="text-lg font-semibold text-foreground">
+                  {t("requirements.important")}
+                </h3>
               </div>
               <ul className="space-y-4 text-muted-foreground">
                 <li className="group flex items-start gap-3 transition-all duration-200 hover:translate-x-2">
@@ -155,7 +144,7 @@ const GuidelinesPage = () => {
                 </li>
               </ul>
             </div>
-            
+
             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-destructive/10 blur-3xl" />
           </div>
         </section>
@@ -163,14 +152,13 @@ const GuidelinesPage = () => {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground">{t("compliance.title")}</h2>
           <div className="relative overflow-hidden rounded-lg border border-border bg-linear-to-br from-primary/5 to-transparent p-6 shadow-sm">
-            <p className="relative z-10 leading-relaxed text-muted-foreground">{t("compliance.description")}</p>
+            <p className="relative z-10 leading-relaxed text-muted-foreground">
+              {t("compliance.description")}
+            </p>
             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl" />
           </div>
         </section>
       </div>
     </div>
-  )
+  );
 }
-
-export default GuidelinesPage
-

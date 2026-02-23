@@ -1,76 +1,77 @@
-import { z } from "zod"
+import { z } from "zod";
 
-import { clientEnv } from "@/lib/env"
+import { clientEnv } from "@/lib/env";
+import {
+  createReportPayloadSchema,
+  updateReportReviewPayloadSchema,
+  type CreateReportPayload,
+  type UpdateReportReviewPayload,
+} from "@/lib/schemas/reports";
+
+export type { CreateReportPayload };
 
 const createReportResponseSchema = z.object({
   reportId: z.string(),
   pdfPath: z.string().optional(),
   institutionId: z.string().optional(),
-})
+});
 
-export type CreateReportResponse = z.infer<typeof createReportResponseSchema>
-
-export type CreateReportPayload = {
-  reporterName: string
-  reporterEmail: string
-  reportedInstitution?: string
-  reportDescription?: string
-  reportContent?: Record<string, unknown>
-  institutionName?: string
-  institutionId?: string
-  numerRspo?: string
-  reportReason?: string
-  pdf: File
-}
+export type CreateReportResponse = z.infer<typeof createReportResponseSchema>;
 
 export const createReport = async (
   payload: CreateReportPayload,
   accessToken?: string
 ): Promise<CreateReportResponse> => {
-  const formData = new FormData()
-  formData.append("reporterName", payload.reporterName)
-  formData.append("reporterEmail", payload.reporterEmail)
+  const parsed = createReportPayloadSchema.safeParse(payload);
+  if (!parsed.success) {
+    throw new Error("Invalid create report payload");
+  }
+  const validPayload = parsed.data;
 
-  if (payload.reportedInstitution) {
-    formData.append("reportedInstitution", payload.reportedInstitution)
+  const formData = new FormData();
+  formData.append("reporterName", validPayload.reporterName);
+  formData.append("reporterEmail", validPayload.reporterEmail);
+
+  if (validPayload.reportedInstitution) {
+    formData.append("reportedInstitution", validPayload.reportedInstitution);
   }
 
-  if (payload.reportDescription) {
-    formData.append("reportDescription", payload.reportDescription)
+  if (validPayload.reportDescription) {
+    formData.append("reportDescription", validPayload.reportDescription);
   }
 
-  if (payload.reportContent) {
-    formData.append("reportContent", JSON.stringify(payload.reportContent))
+  if (validPayload.reportContent) {
+    formData.append("reportContent", JSON.stringify(validPayload.reportContent));
   }
 
-  if (payload.institutionName) {
-    formData.append("institutionName", payload.institutionName)
+  if (validPayload.institutionName) {
+    formData.append("institutionName", validPayload.institutionName);
   }
 
-  if (payload.institutionId) {
-    formData.append("institutionId", payload.institutionId)
+  if (validPayload.institutionId) {
+    formData.append("institutionId", validPayload.institutionId);
   }
 
-  if (payload.numerRspo) {
-    formData.append("numerRspo", payload.numerRspo)
+  if (validPayload.numerRspo) {
+    formData.append("numerRspo", validPayload.numerRspo);
   }
 
-  if (payload.reportReason) {
-    formData.append("reportReason", payload.reportReason)
+  if (validPayload.reportReason) {
+    formData.append("reportReason", validPayload.reportReason);
   }
 
-  formData.append("pdf", payload.pdf)
+  formData.append("pdf", validPayload.pdf);
 
-  const headers: HeadersInit = {}
+  const headers: HeadersInit = {};
   if (accessToken) {
-    headers.Authorization = `Bearer ${accessToken}`
+    headers.Authorization = `Bearer ${accessToken}`;
   }
 
-  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
-  const apiUrl = `${baseUrl}/reports`
-  
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
+  const apiUrl = `${baseUrl}/reports`;
+
   if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-    console.log("[createReport] Attempting to connect to:", apiUrl)
+    console.log("[createReport] Attempting to connect to:", apiUrl);
   }
 
   try {
@@ -78,53 +79,50 @@ export const createReport = async (
       method: "POST",
       headers,
       body: formData,
-    })
+    });
 
     if (!response.ok) {
-      const errorBody = await response.json().catch(() => null)
+      const errorBody = await response.json().catch(() => null);
       const errorMessage =
         typeof errorBody?.message === "string"
           ? errorBody.message
           : Array.isArray(errorBody?.message)
             ? errorBody.message.join(", ")
-            : `Failed to submit the report (${response.status} ${response.statusText})`
-      throw new Error(errorMessage)
+            : `Failed to submit the report (${response.status} ${response.statusText})`;
+      throw new Error(errorMessage);
     }
 
-    const responseData = await response.json()
-    const parsed = createReportResponseSchema.safeParse(responseData)
+    const responseData = await response.json();
+    const parsed = createReportResponseSchema.safeParse(responseData);
 
     if (!parsed.success) {
-      throw new Error("Unexpected response from the reports API")
+      throw new Error("Unexpected response from the reports API");
     }
 
-    return parsed.data
+    return parsed.data;
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
-      const errorMessage = `Unable to connect to the API at ${apiUrl}.`
-      
+      const errorMessage = `Unable to connect to the API at ${apiUrl}.`;
+
       if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
         console.error("[createReport] Connection failed:", {
           apiUrl,
           baseUrl,
           error: error instanceof Error ? error.message : String(error),
           envVar: process.env.NEXT_PUBLIC_API_BASE_URL,
-        })
+        });
       }
-      
-      throw new Error(errorMessage)
-    }
-    
-    throw error
-  }
-}
 
-export const assignReportToSelf = async (
-  reportId: string,
-  accessToken: string
-): Promise<void> => {
-  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
-  const apiUrl = `${baseUrl}/reports/${reportId}/assign`
+      throw new Error(errorMessage);
+    }
+
+    throw error;
+  }
+};
+
+export const assignReportToSelf = async (reportId: string, accessToken: string): Promise<void> => {
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
+  const apiUrl = `${baseUrl}/reports/${reportId}/assign`;
 
   const response = await fetch(apiUrl, {
     method: "POST",
@@ -132,26 +130,26 @@ export const assignReportToSelf = async (
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-  })
+  });
 
   if (!response.ok) {
-    const errorBody = await response.json().catch(() => null)
+    const errorBody = await response.json().catch(() => null);
     const errorMessage =
       typeof errorBody?.message === "string"
         ? errorBody.message
         : Array.isArray(errorBody?.message)
           ? errorBody.message.join(", ")
-          : `Failed to assign report (${response.status} ${response.statusText})`
-    throw new Error(errorMessage)
+          : `Failed to assign report (${response.status} ${response.statusText})`;
+    throw new Error(errorMessage);
   }
-}
+};
 
 export const unassignReportFromSelf = async (
   reportId: string,
   accessToken: string
 ): Promise<void> => {
-  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
-  const apiUrl = `${baseUrl}/reports/${reportId}/assign`
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
+  const apiUrl = `${baseUrl}/reports/${reportId}/assign`;
 
   const response = await fetch(apiUrl, {
     method: "DELETE",
@@ -159,37 +157,33 @@ export const unassignReportFromSelf = async (
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-  })
+  });
 
   if (!response.ok) {
-    const errorBody = await response.json().catch(() => null)
+    const errorBody = await response.json().catch(() => null);
     const errorMessage =
       typeof errorBody?.message === "string"
         ? errorBody.message
         : Array.isArray(errorBody?.message)
           ? errorBody.message.join(", ")
-          : `Failed to unassign report (${response.status} ${response.statusText})`
-    throw new Error(errorMessage)
+          : `Failed to unassign report (${response.status} ${response.statusText})`;
+    throw new Error(errorMessage);
   }
-}
-
-export type UpdateReportReviewPayload = {
-  findings: Array<{
-    id: string
-    detail: string
-    regulationId?: string
-    pageReference?: string
-  }>
-  comparisonNotes: string
-}
+};
 
 export const updateReportReview = async (
   reportId: string,
   payload: UpdateReportReviewPayload,
   accessToken: string
 ): Promise<void> => {
-  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")
-  const apiUrl = `${baseUrl}/reports/${reportId}/review`
+  const parsed = updateReportReviewPayloadSchema.safeParse(payload);
+  if (!parsed.success) {
+    throw new Error("Invalid report review payload");
+  }
+  const validPayload = parsed.data;
+
+  const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
+  const apiUrl = `${baseUrl}/reports/${reportId}/review`;
 
   const response = await fetch(apiUrl, {
     method: "PATCH",
@@ -199,21 +193,20 @@ export const updateReportReview = async (
     },
     body: JSON.stringify({
       reportContent: {
-        findings: payload.findings,
-        comparisonNotes: payload.comparisonNotes,
+        findings: validPayload.findings,
+        comparisonNotes: validPayload.comparisonNotes,
       },
     }),
-  })
+  });
 
   if (!response.ok) {
-    const errorBody = await response.json().catch(() => null)
+    const errorBody = await response.json().catch(() => null);
     const errorMessage =
       typeof errorBody?.message === "string"
         ? errorBody.message
         : Array.isArray(errorBody?.message)
           ? errorBody.message.join(", ")
-          : `Failed to update report review (${response.status} ${response.statusText})`
-    throw new Error(errorMessage)
+          : `Failed to update report review (${response.status} ${response.statusText})`;
+    throw new Error(errorMessage);
   }
-}
-
+};

@@ -1,12 +1,9 @@
-import { LoaderIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-
-type DashboardLoadingProps = {
-  message: string
-}
+import { LoaderIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { DashboardLoadingProps } from "@/types/moderator-dashboard";
 
 export const DashboardLoading = ({ message }: DashboardLoadingProps) => {
-  const t = useTranslations()
+  const t = useTranslations();
 
   return (
     <div className="mx-auto w-full max-w-[1200px] px-4 sm:px-6">
@@ -17,6 +14,5 @@ export const DashboardLoading = ({ message }: DashboardLoadingProps) => {
         </div>
       </div>
     </div>
-  )
-}
-
+  );
+};

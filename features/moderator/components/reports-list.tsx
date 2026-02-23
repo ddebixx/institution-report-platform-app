@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useCallback } from "react"
-import { AlertCircleIcon } from "lucide-react"
+import { useCallback } from "react";
+import { AlertCircleIcon } from "lucide-react";
 
 import {
   Empty,
@@ -9,21 +9,9 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty"
-import type { ModeratorReport } from "@/types/reports"
-import { ReportCard } from "./report-card"
-
-type ReportsListProps = {
-  reports: ModeratorReport[]
-  onAssign?: (reportId: string) => void
-  onUnassign?: (reportId: string) => void
-  onPreview?: (report: ModeratorReport) => void
-  onReview?: (report: ModeratorReport) => void
-  assigningReportId?: string | null
-  unassigningReportId?: string | null
-  showAssignButton?: boolean
-  emptyMessage?: string
-}
+} from "@/components/ui/empty";
+import type { ReportsListProps } from "@/types/reports";
+import { ReportCard } from "./report-card";
 
 export const ReportsList = ({
   reports,
@@ -39,20 +27,20 @@ export const ReportsList = ({
   const handleAssign = useCallback(
     (reportId: string) => {
       if (onAssign) {
-        onAssign(reportId)
+        onAssign(reportId);
       }
     },
     [onAssign]
-  )
+  );
 
   const handleUnassign = useCallback(
     (reportId: string) => {
       if (onUnassign) {
-        onUnassign(reportId)
+        onUnassign(reportId);
       }
     },
     [onUnassign]
-  )
+  );
 
   if (reports.length === 0) {
     return (
@@ -65,7 +53,7 @@ export const ReportsList = ({
           <EmptyDescription>{emptyMessage}</EmptyDescription>
         </EmptyHeader>
       </Empty>
-    )
+    );
   }
 
   return (
@@ -84,6 +72,5 @@ export const ReportsList = ({
         />
       ))}
     </div>
-  )
-}
-
+  );
+};

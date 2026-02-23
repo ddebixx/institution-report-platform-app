@@ -1,36 +1,26 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useMemo } from "react"
-import { type ChangeEvent } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Controller, useForm } from "react-hook-form"
-import { LoaderIcon, UploadIcon, XIcon } from "lucide-react"
-import { twMerge } from "tailwind-merge"
-import { toast } from "sonner"
-import { useTranslations } from "next-intl"
+import { useCallback, useEffect, useMemo } from "react";
+import type { ChangeEvent } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { LoaderIcon, UploadIcon, XIcon } from "lucide-react";
+import { twMerge } from "tailwind-merge";
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
-import { Modal } from "@/components/ui/modal"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldLabel,
-} from "@/components/ui/field"
-import { useFilePreview } from "@/hooks/use-file-preview"
-import { createOrUpdateModeratorProfile } from "@/mutations/moderators"
+import { Modal } from "@/components/ui/modal";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { useFilePreview } from "@/hooks/use-file-preview";
+import { createOrUpdateModeratorProfile } from "@/mutations/moderators";
 import {
   moderatorProfileFormSchema,
   type ModeratorProfileFormValues,
-} from "@/lib/schemas/moderator-profile-form"
-
-type ModeratorProfileModalProps = {
-  open: boolean
-  onClose: () => void
-  onSuccess: () => void
-  accessToken: string
-}
+} from "@/lib/schemas/moderator-profile-form";
+import type { ModeratorProfileModalProps } from "@/types/moderator-dashboard";
+import Image from "next/image";
 
 export const ModeratorProfileModal = ({
   open,
@@ -38,8 +28,8 @@ export const ModeratorProfileModal = ({
   onSuccess,
   accessToken,
 }: ModeratorProfileModalProps) => {
-  const t = useTranslations("moderatorProfileModal")
-  
+  const t = useTranslations("moderatorProfileModal");
+
   const form = useForm<ModeratorProfileFormValues>({
     resolver: zodResolver(moderatorProfileFormSchema),
     defaultValues: {
@@ -48,7 +38,7 @@ export const ModeratorProfileModal = ({
       image: null,
     },
     mode: "onChange",
-  })
+  });
 
   const {
     control,
@@ -57,52 +47,52 @@ export const ModeratorProfileModal = ({
     setValue,
     watch,
     formState: { errors, isSubmitting },
-  } = form
+  } = form;
 
-  const imageFile = watch("image")
-  const imagePreview = useFilePreview(imageFile ?? null)
+  const imageFile = watch("image");
+  const imagePreview = useFilePreview(imageFile ?? null);
 
   useEffect(() => {
     function resetFormOnOpen() {
       if (open) {
-        console.log("[ModeratorProfileModal] Modal opened, resetting form")
+        console.log("[ModeratorProfileModal] Modal opened, resetting form");
         reset({
           fullName: "",
           email: "",
           image: null,
-        })
+        });
       }
     }
 
-    resetFormOnOpen()
-  }, [open, reset])
+    resetFormOnOpen();
+  }, [open, reset]);
 
   const handleImageChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0] ?? null
+      const file = event.target.files?.[0] ?? null;
       if (file) {
         if (!file.type.startsWith("image/")) {
-          toast.error(t("errors.invalidImageType"))
-          return
+          toast.error(t("errors.invalidImageType"));
+          return;
         }
         if (file.size > 5 * 1024 * 1024) {
-          toast.error(t("errors.imageTooLarge"))
-          return
+          toast.error(t("errors.imageTooLarge"));
+          return;
         }
-        setValue("image", file, { shouldDirty: true, shouldValidate: false })
+        setValue("image", file, { shouldDirty: true, shouldValidate: false });
       }
     },
     [setValue, t]
-  )
+  );
 
   const handleRemoveImage = useCallback(() => {
-    setValue("image", null, { shouldDirty: true })
-  }, [setValue])
+    setValue("image", null, { shouldDirty: true });
+  }, [setValue]);
 
   const uploadInputId = useMemo(
     () => `moderator-image-upload-${Math.random().toString(36).slice(2, 9)}`,
     []
-  )
+  );
 
   const onSubmit = useCallback(
     async (data: ModeratorProfileFormValues) => {
@@ -114,29 +104,28 @@ export const ModeratorProfileModal = ({
             image: data.image ?? undefined,
           },
           accessToken
-        )
+        );
 
-        toast.success(t("success.profileCreated"))
-        onSuccess()
-        onClose()
+        toast.success(t("success.profileCreated"));
+        onSuccess();
+        onClose();
       } catch (error) {
-        const errorMessage =
-          error instanceof Error ? error.message : t("errors.createFailed")
-        toast.error(errorMessage)
+        const errorMessage = error instanceof Error ? error.message : t("errors.createFailed");
+        toast.error(errorMessage);
       }
     },
     [accessToken, onSuccess, onClose, t]
-  )
+  );
 
-  const handleClose = useCallback(() => {
+  const _handleClose = useCallback(() => {
     if (isSubmitting) {
-      return
+      return;
     }
-    onClose()
-  }, [isSubmitting, onClose])
+    onClose();
+  }, [isSubmitting, onClose]);
 
-  const isFormValid = form.formState.isValid
-  const hasValues = watch("fullName") && watch("email")
+  const isFormValid = form.formState.isValid;
+  const hasValues = watch("fullName") && watch("email");
 
   return (
     <Modal
@@ -187,9 +176,7 @@ export const ModeratorProfileModal = ({
                 {errors.fullName.message}
               </FieldDescription>
             ) : (
-              <FieldDescription>
-                {t("fullName.description")}
-              </FieldDescription>
+              <FieldDescription>{t("fullName.description")}</FieldDescription>
             )}
           </FieldContent>
         </Field>
@@ -217,23 +204,24 @@ export const ModeratorProfileModal = ({
                 {errors.email.message}
               </FieldDescription>
             ) : (
-              <FieldDescription>
-                {t("email.description")}
-              </FieldDescription>
+              <FieldDescription>{t("email.description")}</FieldDescription>
             )}
           </FieldContent>
         </Field>
-            
+
         <Field>
           <FieldLabel>{t("image.label")}</FieldLabel>
           <FieldContent>
             {imagePreview ? (
               <div className="relative inline-block">
                 <div className="relative size-32 overflow-hidden rounded-lg border border-border">
-                  <img
+                  <Image
+                    width={128}
+                    height={128}
                     src={imagePreview}
                     alt={t("image.altText")}
                     className="size-full object-cover"
+                    fill
                   />
                 </div>
                 <Button
@@ -258,12 +246,8 @@ export const ModeratorProfileModal = ({
               >
                 <UploadIcon className="size-5 text-muted-foreground" />
                 <div className="flex flex-col">
-                  <span className="font-medium text-foreground">
-                    {t("image.uploadPrompt")}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {t("image.uploadHint")}
-                  </span>
+                  <span className="font-medium text-foreground">{t("image.uploadPrompt")}</span>
+                  <span className="text-xs text-muted-foreground">{t("image.uploadHint")}</span>
                 </div>
               </label>
             )}
@@ -275,13 +259,10 @@ export const ModeratorProfileModal = ({
               className="hidden"
               disabled={isSubmitting}
             />
-            <FieldDescription>
-              {t("image.description")}
-            </FieldDescription>
+            <FieldDescription>{t("image.description")}</FieldDescription>
           </FieldContent>
         </Field>
       </div>
     </Modal>
-  )
-}
-
+  );
+};

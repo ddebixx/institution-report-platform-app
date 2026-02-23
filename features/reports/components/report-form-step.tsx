@@ -1,36 +1,21 @@
-"use client"
+"use client";
 
-import { useCallback, useMemo } from "react"
-import {
-  Controller,
-  type Control,
-  type FieldErrors,
-} from "react-hook-form"
-import { useTranslations } from "next-intl"
+import { useCallback, useMemo } from "react";
+import { Controller } from "react-hook-form";
+import { useTranslations } from "next-intl";
 
-import {
-  UniversalSearchInput,
-  type UniversalSearchOption,
-} from "@/components/ui/universal-search"
+import { UniversalSearchInput } from "@/components/ui/universal-search";
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import type { ReportFormValues } from "@/types/reports"
-import type { InstitutionSearchResult } from "@/fetchers/institutions"
-import { mapInstitutionToOption } from "@/lib/reports"
-import { MIN_SCHOOL_SEARCH_CHARACTERS } from "@/consts/reports"
-
-type ReportFormStep1Props = {
-  control: Control<ReportFormValues>
-  errors: FieldErrors<ReportFormValues>
-  onInstitutionSearch: (query: string) => Promise<InstitutionSearchResult[]>
-  onInstitutionSelect: (option: UniversalSearchOption) => void
-}
+} from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { mapInstitutionToOption } from "@/lib/reports";
+import { MIN_SCHOOL_SEARCH_CHARACTERS } from "@/consts/reports";
+import type { ReportFormStep1Props } from "@/types/reports";
 
 export const ReportFormStep1 = ({
   control,
@@ -38,7 +23,7 @@ export const ReportFormStep1 = ({
   onInstitutionSearch,
   onInstitutionSelect,
 }: ReportFormStep1Props) => {
-  const t = useTranslations("reportModal")
+  const t = useTranslations("reportModal");
 
   const institutionSearchStatusText = useMemo(
     () => ({
@@ -51,15 +36,16 @@ export const ReportFormStep1 = ({
       idle: t("fields.institutionSearch.status.idle"),
     }),
     [t]
-  )
+  );
 
   const handleInstitutionSearch = useCallback(
     async (query: string) => {
-      const results = await onInstitutionSearch(query)
-      return results.map(mapInstitutionToOption)
+      const results = await onInstitutionSearch(query);
+
+      return results.map(mapInstitutionToOption);
     },
     [onInstitutionSearch]
-  )
+  );
 
   return (
     <div className="space-y-4">
@@ -162,6 +148,5 @@ export const ReportFormStep1 = ({
         </Field>
       </FieldGroup>
     </div>
-  )
-}
-
+  );
+};

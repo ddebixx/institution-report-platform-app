@@ -1,6 +1,6 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClient } from "@supabase/supabase-js";
 
-import { clientEnv } from "./env"
+import { clientEnv } from "./env";
 
 export const supabaseClient = createClient(
   clientEnv.NEXT_PUBLIC_SUPABASE_URL,
@@ -11,5 +11,4 @@ export const supabaseClient = createClient(
       autoRefreshToken: true,
     },
   }
-)
-
+);

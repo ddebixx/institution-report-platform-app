@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { FileIcon, ShieldIcon, SparklesIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-import { twMerge } from "tailwind-merge"
+import { useEffect, useRef, useState } from "react";
+import { FileIcon, ShieldIcon, SparklesIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 type Regulation = {
-  icon: typeof FileIcon
-  key: "primary" | "secondary" | "tertiary"
-}
+  icon: typeof FileIcon;
+  key: "primary" | "secondary" | "tertiary";
+};
 
 const regulations: Regulation[] = [
   { icon: FileIcon, key: "primary" },
   { icon: ShieldIcon, key: "secondary" },
   { icon: SparklesIcon, key: "tertiary" },
-]
+];
 
 export const RegulationsSection = () => {
-  const t = useTranslations("regulations")
-  const [visibleRegulations, setVisibleRegulations] = useState<Set<number>>(new Set())
-  const sectionRef = useRef<HTMLElement>(null)
+  const t = useTranslations("regulations");
+  const [visibleRegulations, setVisibleRegulations] = useState<Set<number>>(new Set());
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function handleIntersection() {
-      if (!sectionRef.current) return
+      if (!sectionRef.current) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -31,33 +31,33 @@ export const RegulationsSection = () => {
             if (entry.isIntersecting) {
               regulations.forEach((_, index) => {
                 setTimeout(() => {
-                  setVisibleRegulations((prev) => new Set([...prev, index]))
-                }, index * 150)
-              })
+                  setVisibleRegulations((prev) => new Set([...prev, index]));
+                }, index * 150);
+              });
             }
-          })
+          });
         },
         { threshold: 0.1 }
-      )
+      );
 
-      observer.observe(sectionRef.current)
+      observer.observe(sectionRef.current);
 
       return () => {
-        observer.disconnect()
-      }
+        observer.disconnect();
+      };
     }
 
-    handleIntersection()
-  }, [])
+    handleIntersection();
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full p-6"
-    >
+    <section ref={sectionRef} className="relative w-full p-6">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
+        <div
+          className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse"
+          style={{ animationDelay: "1.5s" }}
+        />
       </div>
 
       <div className="relative z-10 mb-12">
@@ -65,24 +65,20 @@ export const RegulationsSection = () => {
           <FileIcon className="size-4" />
           {t("title")}
         </div>
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">
-          {t("title")}
-        </h2>
-        <p className="max-w-3xl text-lg text-muted-foreground">
-          {t("description")}
-        </p>
+        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
+        <p className="max-w-3xl text-lg text-muted-foreground">{t("description")}</p>
       </div>
 
       <div className="relative z-10 grid gap-6 md:grid-cols-3">
         {regulations.map((regulation, index) => {
-          const Icon = regulation.icon
-          const isVisible = visibleRegulations.has(index)
-          const delay = index * 150
+          const Icon = regulation.icon;
+          const isVisible = visibleRegulations.has(index);
+          const delay = index * 150;
           const animationStyle = isVisible
             ? {
                 animation: `scale-in 0.6s ease-out ${delay}ms both`,
               }
-            : { opacity: 0 }
+            : { opacity: 0 };
 
           return (
             <article
@@ -110,13 +106,12 @@ export const RegulationsSection = () => {
               </div>
 
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
-              
+
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.15)]" />
             </article>
-          )
+          );
         })}
       </div>
     </section>
-  )
-}
-
+  );
+};

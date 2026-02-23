@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { ShieldIcon, MailIcon, FileTextIcon, ArrowRightIcon } from "lucide-react"
-import { useTranslations } from "next-intl"
-import Link from "next/link"
+import { ShieldIcon, MailIcon, FileTextIcon, ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export const Footer = () => {
-  const t = useTranslations("footer")
+  const t = useTranslations("footer");
 
   return (
     <footer className="relative border-t border-border/60 bg-background/90 backdrop-blur-sm">
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-primary/2 via-transparent to-primary/2 opacity-30" />
-      
+
       <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
       <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl opacity-50" />
 
@@ -23,9 +23,7 @@ export const Footer = () => {
               </div>
               <span className="text-xl font-bold text-foreground">{t("title")}</span>
             </div>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {t("subtitle")}
-            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">{t("subtitle")}</p>
           </div>
 
           <div className="space-y-4">
@@ -49,7 +47,7 @@ export const Footer = () => {
                 >
                   <ArrowRightIcon className="size-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <span>{t("quickLinks.howItWorks")}</span>
-                  </Link>
+                </Link>
               </li>
               <li>
                 <Link
@@ -138,7 +136,7 @@ export const Footer = () => {
                 {t("legal.privacy")}
               </Link>
               <Link
-                  href="/terms"
+                href="/terms"
                 className="transition-all duration-300 hover:translate-x-0.5 hover:text-primary"
               >
                 {t("legal.terms")}
@@ -148,6 +146,5 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
-  )
-}
-
+  );
+};

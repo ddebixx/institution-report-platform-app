@@ -1,32 +1,31 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export function useFilePreview(file: File | null): string | null {
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
     function syncPreviewUrl() {
       if (!file) {
-        setPreviewUrl(null)
-        return undefined
+        setPreviewUrl(null);
+        return undefined;
       }
 
-      const objectUrl = URL.createObjectURL(file)
-      setPreviewUrl(objectUrl)
+      const objectUrl = URL.createObjectURL(file);
+      setPreviewUrl(objectUrl);
 
       return () => {
-        URL.revokeObjectURL(objectUrl)
-      }
+        URL.revokeObjectURL(objectUrl);
+      };
     }
 
-    const cleanup = syncPreviewUrl()
+    const cleanup = syncPreviewUrl();
 
     return () => {
       if (cleanup) {
-        cleanup()
+        cleanup();
       }
-    }
-  }, [file])
+    };
+  }, [file]);
 
-  return previewUrl
+  return previewUrl;
 }
-
