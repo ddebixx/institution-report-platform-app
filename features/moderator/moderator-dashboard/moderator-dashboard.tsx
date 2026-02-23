@@ -4,13 +4,13 @@ import { useAuthContext } from "@/components/auth/auth-provider";
 import { MODERATOR_TABS } from "@/consts/moderator-dashboard";
 import { useModeratorDashboard } from "@/hooks/use-moderator-dashboard";
 import { calculateStats, getCurrentReports } from "@/lib/moderator-dashboard";
-import { DashboardLoading } from "./components/dashboard-loading";
-import { DashboardStats } from "./components/dashboard-stats";
-import { DashboardTabs } from "./components/dashboard-tabs";
-import { ModeratorProfileModal } from "./components/moderator-profile-modal";
-import { ReportPreviewModal } from "./components/report-preview-modal";
-import { ReportReviewModal } from "./components/report-review-modal";
-import { ReportsList } from "./components/reports-list";
+import { DashboardLoading } from "./dashboard-loading";
+import { DashboardStats } from "./dashboard-stats";
+import { DashboardTabs } from "./dashboard-tabs";
+import { ModeratorProfileModal } from "./moderator-profile-modal";
+import { ReportPreviewModal } from "./report-preview-modal";
+import { ReportReviewModal } from "./report-review-modal";
+import { ReportsList } from "./reports-list";
 
 export const ModeratorDashboard = () => {
   const { accessToken } = useAuthContext();

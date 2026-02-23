@@ -1,82 +1,80 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
-import { CalendarIcon, MailIcon, UserIcon, BuildingIcon, HashIcon } from "lucide-react";
-import { twMerge } from "tailwind-merge";
-import { useTranslations } from "next-intl";
+import { useMemo } from "react";
+import {
+  CalendarIcon,
+  MailIcon,
+  UserIcon,
+  BuildingIcon,
+  HashIcon,
+  CheckCircleIcon,
+} from "lucide-react";
 
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
-import { PdfViewer } from "@/features/reports/components/pdf-viewer";
+import { PdfViewer } from "@/features/reports/report-modal/pdf-viewer";
 import { Separator } from "@/components/ui/separator";
-import type { ReportPreviewModalProps } from "@/types/reports";
+import { FindingsManager } from "@/features/reports/report-modal/findings-manager";
+import { ComparisonNotesField } from "@/features/reports/report-modal/comparison-notes-field";
+import type { ReportReviewModalProps } from "@/types/reports";
 import { getPdfUrl } from "@/lib/storage";
 import { REFERENCE_REGULATION_URL } from "@/consts/reports";
+import { createRegulationReferences } from "@/lib/reports";
+import { useTranslations } from "next-intl";
+import { useAuthContext } from "@/components/auth/auth-provider";
+import { useReportReviewForm } from "@/hooks/use-report-review";
 import { formatReportDate } from "@/utils/format-date";
-import { getReportStatusBadgeClass } from "@/utils/report-status";
 
-export const ReportPreviewModal = ({
-  open,
-  report,
-  onClose,
-  onAssign,
-  onUnassign,
-  isAssigning = false,
-  isUnassigning = false,
-}: ReportPreviewModalProps) => {
-  const t = useTranslations("reportPreviewModal");
-  const pdfUrl = useMemo(() => {
-    if (!report?.pdfPath) {
-      return null;
-    }
-    return getPdfUrl(report.pdfPath);
-  }, [report?.pdfPath]);
+export const ReportReviewModal = ({ open, report, onClose, onUpdate }: ReportReviewModalProps) => {
+  const t = useTranslations("reportReviewModal");
+  const tReportModal = useTranslations("reportModal");
+  const { accessToken } = useAuthContext();
 
-  const handleAssign = useCallback(() => {
-    if (report && onAssign) {
-      onAssign(report.id);
-    }
-  }, [report, onAssign]);
+  const {
+    findings,
+    setFindings,
+    comparisonNotes,
+    setComparisonNotes,
+    isSubmitting,
+    handleSave,
+    handleClose,
+  } = useReportReviewForm({
+    report,
+    accessToken,
+    onUpdate,
+    onClose,
+    successMessage: t("successMessage"),
+    errorMessage: t("errorMessage"),
+  });
 
-  const handleUnassign = useCallback(() => {
-    if (report && onUnassign) {
-      onUnassign(report.id);
-    }
-  }, [report, onUnassign]);
+  const pdfUrl = useMemo(() => getPdfUrl(report?.pdfPath), [report?.pdfPath]);
 
-  if (!report) {
-    return null;
-  }
+  const regulationReferences = useMemo(
+    () => createRegulationReferences(tReportModal),
+    [tReportModal]
+  );
+
+  if (!report) return null;
 
   return (
     <Modal
       open={open}
       title={t("title")}
       description={t("description")}
-      onClose={onClose}
+      onClose={handleClose}
       panelClassName="max-w-[1200px]"
       footer={
         <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={onClose}>
-            {t("close")}
+          <Button variant="ghost" onClick={handleClose} disabled={isSubmitting}>
+            {t("cancel")}
           </Button>
-          <div className="flex items-center gap-2">
-            {report?.status === "assigned" && onUnassign && (
-              <Button variant="outline" onClick={handleUnassign} disabled={isUnassigning}>
-                {isUnassigning ? t("unassigning") : t("unassign")}
-              </Button>
-            )}
-            {onAssign && (
-              <Button onClick={handleAssign} disabled={isAssigning}>
-                {isAssigning ? t("assigning") : t("assignToMe")}
-              </Button>
-            )}
-          </div>
+          <Button onClick={handleSave} disabled={isSubmitting}>
+            {isSubmitting ? t("saving") : t("saveReview")}
+          </Button>
         </div>
       }
     >
       <div className="space-y-6">
-        {/* Header Section */}
         <div className="space-y-4 rounded-lg border border-border bg-card p-6 shadow-sm">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 space-y-3">
@@ -93,18 +91,14 @@ export const ReportPreviewModal = ({
                 </div>
               )}
             </div>
-            <span
-              className={twMerge(
-                "inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium capitalize",
-                getReportStatusBadgeClass(report.status)
-              )}
-            >
-              {report.status}
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center rounded-full bg-blue-100 px-4 py-1.5 text-sm font-medium capitalize text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+                {report.status}
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Report Details Grid */}
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-4 rounded-lg border border-border bg-card p-5 shadow-sm">
             <h4 className="text-sm font-semibold text-foreground">{t("reporterInformation")}</h4>
@@ -145,17 +139,6 @@ export const ReportPreviewModal = ({
                     <p className="font-medium text-foreground">{t("assigned")}</p>
                     <p className="text-xs text-muted-foreground">
                       {formatReportDate(report.assignedAt)}
-                    </p>
-                  </div>
-                </div>
-              )}
-              {report.completedAt && (
-                <div className="flex items-center gap-3 text-sm">
-                  <CalendarIcon className="size-4 shrink-0 text-muted-foreground" />
-                  <div className="flex-1">
-                    <p className="font-medium text-foreground">{t("completed")}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {formatReportDate(report.completedAt)}
                     </p>
                   </div>
                 </div>
@@ -219,7 +202,6 @@ export const ReportPreviewModal = ({
           </div>
         )}
 
-        {/* PDF Viewers */}
         <div className="grid gap-4 lg:grid-cols-2">
           <PdfViewer
             title={t("submittedDocument")}
@@ -236,6 +218,21 @@ export const ReportPreviewModal = ({
               label: t("openInNewTab"),
             }}
           />
+        </div>
+
+        <div className="space-y-6 rounded-lg border border-border bg-card p-6 shadow-sm">
+          <div className="flex items-center gap-2">
+            <CheckCircleIcon className="size-5 text-primary" />
+            <h3 className="text-lg font-semibold text-foreground">{t("reviewAndFindings")}</h3>
+          </div>
+
+          <FindingsManager
+            regulations={regulationReferences}
+            findings={findings}
+            onFindingsChange={setFindings}
+          />
+
+          <ComparisonNotesField value={comparisonNotes} onChange={setComparisonNotes} />
         </div>
       </div>
     </Modal>

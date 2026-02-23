@@ -39,8 +39,8 @@ export const StatsSection = () => {
 
                   if (!Number.isNaN(numericValue) && numericValue > 0) {
                     const duration = 2000;
-                    const steps = 60;
-                    const increment = numericValue / steps;
+                    const stepsCount = 60;
+                    const increment = numericValue / stepsCount;
                     let current = 0;
 
                     const timer = setInterval(() => {
@@ -50,7 +50,7 @@ export const StatsSection = () => {
                         clearInterval(timer);
                       }
                       setAnimatedValues((prev) => ({ ...prev, [index]: current }));
-                    }, duration / steps);
+                    }, duration / stepsCount);
                   } else {
                     setAnimatedValues((prev) => ({ ...prev, [index]: 0 }));
                   }

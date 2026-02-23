@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 
 import type { ReportDocumentCompareProps } from "@/types/reports";
 import { useFilePreview } from "@/hooks/use-file-preview";
-import { PdfUploadField } from "./components/pdf-upload-field";
-import { PdfViewer } from "./components/pdf-viewer";
-import { FindingsManager } from "./components/findings-manager";
-import { ComparisonNotesField } from "./components/comparison-notes-field";
+import { PdfUploadField } from "./pdf-upload-field";
+import { PdfViewer } from "./pdf-viewer";
+import { FindingsManager } from "./findings-manager";
+import { ComparisonNotesField } from "./comparison-notes-field";
 
 export const ReportDocumentCompare = ({
   file,

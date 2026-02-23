@@ -10,11 +10,11 @@ import { handleInstitutionSearch as handleInstitutionSearchHandler } from "@/han
 import { REFERENCE_REGULATION_URL } from "@/consts/reports";
 import { createRegulationReferences, createStepDefinitions } from "@/lib/reports";
 import { useReportForm } from "@/hooks/use-report-form";
-import { ReportDocumentCompare } from "@/features/reports/report-document-compare";
-import { ReportFormStep1 } from "./components/report-form-step";
-import { ReportFormProgress } from "./components/report-form-progress";
-import { ReportModalFooter } from "./components/report-modal-footer";
-import { ReportFormActions } from "./components/report-form-actions";
+import { ReportDocumentCompare } from "./report-document-compare";
+import { ReportFormStep1 } from "./report-form-step";
+import { ReportFormProgress } from "./report-form-progress";
+import { ReportModalFooter } from "./report-modal-footer";
+import { ReportFormActions } from "./report-form-actions";
 
 export const ReportModal = ({ open, onClose }: ReportModalProps) => {
   const t = useTranslations("reportModal");

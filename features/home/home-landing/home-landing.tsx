@@ -5,11 +5,11 @@ import { FileTextIcon, ShieldIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "@/components/ui/button";
-import { RegulationsSection } from "@/features/home/regulations-section";
-import { FeaturesSection } from "@/features/home/features-section";
-import { HowItWorksSection } from "@/features/home/how-it-works-section";
-import { BenefitsSection } from "@/features/home/benefits-section";
-import { ReportModal } from "@/features/reports/report-modal";
+import { ReportModal } from "@/features/reports";
+import { BenefitsSection } from "./benefits-section";
+import { FeaturesSection } from "./features-section";
+import { HowItWorksSection } from "./how-it-works-section";
+import { RegulationsSection } from "./regulations-section";
 import { useAuthContext } from "@/components/auth/auth-provider";
 import { useTranslations } from "next-intl";
 
@@ -134,8 +134,6 @@ export const HomeLanding = () => {
         <section id="benefits">
           <BenefitsSection />
         </section>
-
-        {/* <StatsSection /> */}
 
         <section id="regulations">
           <RegulationsSection />

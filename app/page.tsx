@@ -1,4 +1,4 @@
-import { HomeLanding } from "@/features/home/home-landing";
+import { HomeLanding } from "@/features/home";
 
 const HomePage = () => {
   return <HomeLanding />;

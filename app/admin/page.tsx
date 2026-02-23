@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useAuthContext } from "@/components/auth/auth-provider";
-import { ModeratorDashboard } from "@/features/moderator/moderator-dashboard";
+import { ModeratorDashboard } from "@/features/moderator";
 
 export default function AdminPage() {
   const router = useRouter();

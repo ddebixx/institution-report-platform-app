@@ -53,7 +53,7 @@ export const HowItWorksSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full max-w-[1200px] mx-auto p-6">
+    <section ref={sectionRef} className="relative mx-auto w-full max-w-[1200px] p-6">
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
         <div
@@ -81,8 +81,8 @@ export const HowItWorksSection = () => {
               : { opacity: 0 };
 
             return (
-              <>
-                <div key={step.key} className="relative flex-1" style={animationStyle}>
+              <div key={step.key} className="flex w-full items-stretch gap-4">
+                <div className="relative flex-1" style={animationStyle}>
                   <div
                     className={twMerge(
                       "group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700",
@@ -111,14 +111,11 @@ export const HowItWorksSection = () => {
                 </div>
 
                 {!isLast && (
-                  <div
-                    key={`arrow-${step.key}`}
-                    className="hidden items-center justify-center lg:flex lg:flex-shrink-0"
-                  >
+                  <div className="hidden items-center justify-center lg:flex lg:flex-shrink-0">
                     <ArrowRightIcon className="size-6 text-primary/40 transition-all duration-300 hover:text-primary/60 hover:drop-shadow-[0_0_4px_rgba(0,0,0,0.1)]" />
                   </div>
                 )}
-              </>
+              </div>
             );
           })}
         </div>
