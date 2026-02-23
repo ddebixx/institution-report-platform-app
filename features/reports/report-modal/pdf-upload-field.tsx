@@ -14,6 +14,7 @@ export const PdfUploadField = ({ file, fileError, onFileChange }: PdfUploadField
   const handleFileInputChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       const nextFile = event.target.files?.[0] ?? null;
+
       onFileChange(nextFile);
     },
     [onFileChange]

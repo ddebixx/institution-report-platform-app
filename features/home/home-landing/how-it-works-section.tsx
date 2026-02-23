@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FileTextIcon, EyeIcon, CheckCircleIcon, ArrowRightIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { twMerge } from "tailwind-merge";
 
 type Step = {
   icon: typeof FileTextIcon;
@@ -18,42 +17,23 @@ const steps: Step[] = [
   { icon: ArrowRightIcon, number: 4, key: "step4" },
 ];
 
+const viewport = { once: true, amount: 0.1 };
+
 export const HowItWorksSection = () => {
   const t = useTranslations("howItWorks");
-  const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set());
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    function handleIntersection() {
-      if (!sectionRef.current) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              steps.forEach((_, index) => {
-                setTimeout(() => {
-                  setVisibleSteps((prev) => new Set([...prev, index]));
-                }, index * 150);
-              });
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(sectionRef.current);
-
-      return () => {
-        observer.disconnect();
-      };
-    }
-
-    handleIntersection();
-  }, []);
 
   return (
-    <section ref={sectionRef} className="relative mx-auto w-full max-w-[1200px] p-6">
+    <motion.section
+      className="relative mx-auto w-full max-w-[1200px] p-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      variants={{
+        visible: {
+          transition: { staggerChildren: 0.15 },
+        },
+      }}
+    >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
         <div
@@ -71,24 +51,21 @@ export const HowItWorksSection = () => {
         <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-8 lg:flex lg:flex-row lg:items-stretch lg:gap-4">
           {steps.map((step, index) => {
             const Icon = step.icon;
-            const isVisible = visibleSteps.has(index);
             const isLast = index === steps.length - 1;
-            const delay = index * 150;
-            const animationStyle = isVisible
-              ? {
-                  animation: `scale-in 0.8s ease-out ${delay}ms both`,
-                }
-              : { opacity: 0 };
-
             return (
               <div key={step.key} className="flex w-full items-stretch gap-4">
-                <div className="relative flex-1" style={animationStyle}>
-                  <div
-                    className={twMerge(
-                      "group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700",
-                      isVisible && "opacity-100 scale-100"
-                    )}
-                  >
+                <motion.div
+                  className="relative flex-1"
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.95 },
+                    visible: {
+                      opacity: 1,
+                      scale: 1,
+                      transition: { duration: 0.8 },
+                    },
+                  }}
+                >
+                  <div className="group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700">
                     <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
                       {step.number}
                     </div>
@@ -105,10 +82,9 @@ export const HowItWorksSection = () => {
                     </p>
 
                     <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
-
                     <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]" />
                   </div>
-                </div>
+                </motion.div>
 
                 {!isLast && (
                   <div className="hidden items-center justify-center lg:flex lg:flex-shrink-0">
@@ -120,6 +96,6 @@ export const HowItWorksSection = () => {
           })}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };

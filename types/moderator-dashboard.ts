@@ -1,5 +1,5 @@
 import type { ModeratorReport } from "@/types/reports";
-import type { TabId, Tab } from "@/consts/moderator-dashboard";
+import type { CheckCircleIcon, FileCheckIcon } from "lucide-react";
 
 export type ModeratorDashboardStats = {
   total: number;
@@ -10,6 +10,13 @@ export type ModeratorDashboardStats = {
 
 export type DashboardStatsProps = {
   stats: ModeratorDashboardStats;
+};
+
+export type UseModeratorProfileFormParams = {
+  open: boolean;
+  accessToken: string;
+  onSuccess: () => void;
+  onClose: () => void;
 };
 
 export type DashboardTabsStats = {
@@ -44,4 +51,23 @@ export type ReportsState = {
 
 export type UseModeratorDashboardProps = {
   accessToken: string | null;
+};
+
+export type DashboardStatValueKey = "total" | "available" | "assigned" | "completed";
+
+export type DashboardStatCardTheme = "primary" | "blue" | "yellow" | "green";
+
+export type DashboardStatCardConfig = {
+  labelKey: string;
+  valueKey: DashboardStatValueKey;
+  icon: typeof FileCheckIcon;
+  theme: DashboardStatCardTheme;
+};
+
+export type TabId = "available" | "assigned" | "completed";
+
+export type Tab = {
+  id: TabId;
+  labelKey: string;
+  icon: typeof CheckCircleIcon;
 };

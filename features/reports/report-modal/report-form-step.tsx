@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
-import { UniversalSearchInput } from "@/components/ui/universal-search";
+import { UniversalSearchInput } from "@/components/universal-search/universal-search";
 import {
   Field,
   FieldContent,

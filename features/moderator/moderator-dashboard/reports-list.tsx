@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import { AlertCircleIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   Empty,
@@ -10,6 +11,10 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import {
+  MODERATOR_EMPTY_LIST_DEFAULT_KEY,
+  MODERATOR_EMPTY_LIST_TITLE_KEY,
+} from "@/consts/moderator-dashboard";
 import type { ReportsListProps } from "@/types/reports";
 import { ReportCard } from "./report-card";
 
@@ -22,8 +27,14 @@ export const ReportsList = ({
   assigningReportId,
   unassigningReportId,
   showAssignButton = false,
-  emptyMessage = "No reports available",
+  emptyMessageKey,
+  emptyMessage,
 }: ReportsListProps) => {
+  const t = useTranslations();
+  const emptyText = emptyMessageKey
+    ? t(emptyMessageKey)
+    : (emptyMessage ?? t(MODERATOR_EMPTY_LIST_DEFAULT_KEY));
+
   const handleAssign = useCallback(
     (reportId: string) => {
       if (onAssign) {
@@ -49,8 +60,8 @@ export const ReportsList = ({
           <EmptyMedia variant="icon">
             <AlertCircleIcon />
           </EmptyMedia>
-          <EmptyTitle>No reports found</EmptyTitle>
-          <EmptyDescription>{emptyMessage}</EmptyDescription>
+          <EmptyTitle>{t(MODERATOR_EMPTY_LIST_TITLE_KEY)}</EmptyTitle>
+          <EmptyDescription>{emptyText}</EmptyDescription>
         </EmptyHeader>
       </Empty>
     );

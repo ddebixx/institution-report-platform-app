@@ -1,5 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
+
+import { getTabCount } from "@/lib/moderator-dashboard";
 import type { DashboardTabsProps } from "@/types/moderator-dashboard";
 
 export const DashboardTabs = ({ tabs, activeTab, stats, onTabChange }: DashboardTabsProps) => {
@@ -11,12 +13,7 @@ export const DashboardTabs = ({ tabs, activeTab, stats, onTabChange }: Dashboard
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
-          const count =
-            tab.id === "available"
-              ? stats.available
-              : tab.id === "assigned"
-                ? stats.assigned
-                : stats.completed;
+          const count = getTabCount(tab.id, stats);
 
           return (
             <button

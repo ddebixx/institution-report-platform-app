@@ -1,3 +1,4 @@
+import type { PendingFinding } from "@/features/reports/report-modal/findings-manager-types";
 import type { ReportFormValues } from "@/types/reports";
 
 export const REFERENCE_REGULATION_URL =
@@ -21,4 +22,10 @@ export const DEFAULT_REPORT_FORM_VALUES: ReportFormValues = {
   numerRspo: "",
   reportReason: "",
   pdf: null,
+};
+
+export const PENDING_FINDING_INIT: PendingFinding = {
+  detail: "",
+  pageReference: "",
+  regulationId: "",
 };

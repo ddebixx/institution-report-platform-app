@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
-import { useAuthContext } from "@/components/auth/auth-provider";
+import { useAuthContext } from "@/providers/auth-provider";
 import { AuthModal } from "@/features/auth/auth-modal";
 
 type AuthModalContextValue = {
@@ -55,9 +55,7 @@ export const AuthModalProvider = ({ children }: AuthModalProviderProps) => {
 export const useAuthModal = (): AuthModalContextValue => {
   const context = useContext(AuthModalContext);
 
-  if (!context) {
-    throw new Error("useAuthModal must be used within AuthModalProvider");
-  }
+  if (!context) throw new Error("useAuthModal must be used within AuthModalProvider");
 
   return context;
 };

@@ -21,19 +21,16 @@ export const LocaleProvider = ({ children }: LocaleProviderProps) => {
   const [locale, setLocaleState] = useState<SupportedLocale>(defaultLocale);
 
   useEffect(() => {
-    function initializeLocaleWithAutoDetection() {
-      const initialLocale = getInitialLocale();
-      setLocaleState(initialLocale);
-    }
-
-    initializeLocaleWithAutoDetection();
+    const initialLocale = getInitialLocale();
+    setLocaleState(initialLocale);
   }, []);
 
   const setLocale = useCallback((nextLocale: SupportedLocale) => {
     setLocaleState(nextLocale);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("locale", nextLocale);
-    }
+
+    if (typeof window === "undefined") return;
+
+    localStorage.setItem("locale", nextLocale);
   }, []);
 
   const messages = useMemo(() => messagesByLocale[locale], [locale]);

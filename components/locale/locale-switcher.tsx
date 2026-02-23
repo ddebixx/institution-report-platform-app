@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { type ChangeEvent, useCallback } from "react";
 import { Globe2Icon } from "lucide-react";
 
 import { useLocaleContext } from "@/components/locale/locale-provider";
@@ -10,8 +10,9 @@ export const LocaleSwitcher = () => {
   const { locale, setLocale } = useLocaleContext();
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLSelectElement>) => {
+    (event: ChangeEvent<HTMLSelectElement>) => {
       const nextLocale = event.target.value as SupportedLocale;
+
       setLocale(nextLocale);
     },
     [setLocale]

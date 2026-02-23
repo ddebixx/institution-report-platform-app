@@ -16,7 +16,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import type { ReportCardProps } from "@/types/reports";
 import { formatReportDateShort } from "@/utils/format-date";
-import { getReportStatusBadgeClass } from "@/utils/report-status";
+import { getReportStatusBadgeClass, getReportStatusLabelKey } from "@/utils/report-status";
 
 export const ReportCard = ({
   report,
@@ -30,51 +30,13 @@ export const ReportCard = ({
 }: ReportCardProps) => {
   const t = useTranslations("reportCard");
 
-  const handleAssign = useCallback(() => {
-    if (onAssign) {
-      onAssign(report.id);
-    }
-  }, [onAssign, report.id]);
-
-  const handleUnassign = useCallback(() => {
-    if (onUnassign) {
-      onUnassign(report.id);
-    }
-  }, [onUnassign, report.id]);
-
-  const handlePreview = useCallback(() => {
-    if (onPreview) {
-      onPreview(report);
-    }
-  }, [onPreview, report]);
-
-  const handleReview = useCallback(() => {
-    if (onReview) {
-      onReview(report);
-    }
-  }, [onReview, report]);
-
   const formatDate = useCallback(
     (dateString?: string) =>
       formatReportDateShort(dateString, { emptyLabel: t("dates.notAvailable") }),
     [t]
   );
 
-  const getStatusLabel = useCallback(
-    (status: string) => {
-      switch (status) {
-        case "pending":
-          return t("status.pending");
-        case "assigned":
-          return t("status.assigned");
-        case "completed":
-          return t("status.completed");
-        default:
-          return status;
-      }
-    },
-    [t]
-  );
+  const statusLabel = t(getReportStatusLabelKey(report.status));
 
   return (
     <div className="group relative flex h-[340px] flex-col overflow-hidden rounded-xl border border-border/50 bg-card/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xs hover:shadow-primary/10">
@@ -98,7 +60,7 @@ export const ReportCard = ({
               getReportStatusBadgeClass(report.status)
             )}
           >
-            {getStatusLabel(report.status)}
+            {statusLabel}
           </span>
         </div>
 
@@ -154,7 +116,12 @@ export const ReportCard = ({
 
       <div className="relative mt-auto flex shrink-0 flex-wrap items-center justify-end gap-2 border-t border-border/50 pt-4">
         {onPreview && (
-          <Button variant="outline" onClick={handlePreview} size="sm" className="shrink-0 gap-2">
+          <Button
+            variant="outline"
+            onClick={() => onPreview(report)}
+            size="sm"
+            className="shrink-0 gap-2"
+          >
             <EyeIcon className="size-4" />
             {t("actions.preview")}
           </Button>
@@ -162,7 +129,7 @@ export const ReportCard = ({
         {report.status === "assigned" && onUnassign && (
           <Button
             variant="outline"
-            onClick={handleUnassign}
+            onClick={() => onUnassign(report.id)}
             disabled={isUnassigning}
             size="sm"
             className="shrink-0 gap-2"
@@ -172,14 +139,14 @@ export const ReportCard = ({
           </Button>
         )}
         {report.status === "assigned" && onReview && (
-          <Button onClick={handleReview} size="sm" className="shrink-0 gap-2">
+          <Button onClick={() => onReview(report)} size="sm" className="shrink-0 gap-2">
             <FileCheckIcon className="size-4" />
             {t("actions.review")}
           </Button>
         )}
         {showAssignButton && onAssign && (
           <Button
-            onClick={handleAssign}
+            onClick={() => onAssign(report.id)}
             disabled={isAssigning}
             size="sm"
             className="shrink-0 min-w-[120px]"

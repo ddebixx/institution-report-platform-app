@@ -5,10 +5,19 @@ import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import type { ReportFinding } from "@/types/reports";
+import { FindingRow } from "@/features/reports/report-modal/finding-row";
+import type { PendingFinding } from "@/features/reports/report-modal/findings-manager-types";
+import { createFinding, createRegulationLookup } from "@/lib/reports";
 import type { FindingsManagerProps } from "@/types/reports";
-import { generateFindingId, createRegulationLookup } from "@/lib/reports";
+import { PENDING_FINDING_INIT } from "@/consts/reports";
 
 export const FindingsManager = ({
   regulations,
@@ -16,38 +25,33 @@ export const FindingsManager = ({
   onFindingsChange,
 }: FindingsManagerProps) => {
   const t = useTranslations("reportModal.compare");
-  const [pendingDetail, setPendingDetail] = useState<string>("");
-  const [pendingPageReference, setPendingPageReference] = useState<string>("");
-  const [pendingRegulationId, setPendingRegulationId] = useState<string>("");
+  const [pending, setPending] = useState<PendingFinding>(PENDING_FINDING_INIT);
 
   const regulationLookup = useMemo(() => createRegulationLookup(regulations), [regulations]);
 
+  const resetPending = useCallback(() => {
+    setPending(PENDING_FINDING_INIT);
+  }, []);
+
   const handleAddFinding = useCallback(() => {
-    const trimmedDetail = pendingDetail.trim();
+    const trimmed = pending.detail.trim();
+    if (!trimmed) return;
 
-    if (!trimmedDetail) {
-      return;
-    }
-
-    const nextFinding: ReportFinding = {
-      id: generateFindingId(),
-      detail: trimmedDetail,
-      pageReference: pendingPageReference.trim() || undefined,
-      regulationId: pendingRegulationId || undefined,
-    };
-
-    onFindingsChange([...findings, nextFinding]);
-    setPendingDetail("");
-    setPendingPageReference("");
-    setPendingRegulationId("");
-  }, [findings, onFindingsChange, pendingDetail, pendingPageReference, pendingRegulationId]);
+    onFindingsChange([
+      ...findings,
+      createFinding(pending.detail, pending.pageReference, pending.regulationId),
+    ]);
+    resetPending();
+  }, [findings, onFindingsChange, pending, resetPending]);
 
   const handleRemoveFinding = useCallback(
     (findingId: string) => {
-      onFindingsChange(findings.filter((finding) => finding.id !== findingId));
+      onFindingsChange(findings.filter((f) => f.id !== findingId));
     },
     [findings, onFindingsChange]
   );
+
+  const canAdd = Boolean(pending.detail.trim());
 
   return (
     <div className="space-y-4 rounded-md border border-border/60 bg-background p-4">
@@ -56,32 +60,35 @@ export const FindingsManager = ({
       <div className="grid gap-3 sm:grid-cols-2">
         <Input
           placeholder={t("highlights.pagePlaceholder")}
-          value={pendingPageReference}
-          onChange={(event) => setPendingPageReference(event.target.value)}
+          value={pending.pageReference}
+          onChange={(e) => setPending((prev) => ({ ...prev, pageReference: e.target.value }))}
         />
-        <select
-          className="h-10 rounded-md border border-input bg-background px-3 text-sm text-foreground shadow-xs transition focus:border-ring focus:outline-none focus:ring-2 focus:ring-ring/40"
-          value={pendingRegulationId}
-          onChange={(event) => setPendingRegulationId(event.target.value)}
+        <Select
+          value={pending.regulationId || undefined}
+          onValueChange={(value) => setPending((prev) => ({ ...prev, regulationId: value }))}
         >
-          <option value="">{t("highlights.regulationPlaceholder")}</option>
-          {regulations.map((regulation) => (
-            <option key={regulation.id} value={regulation.id}>
-              {regulation.title}
-            </option>
-          ))}
-        </select>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder={t("highlights.regulationPlaceholder")} />
+          </SelectTrigger>
+          <SelectContent>
+            {regulations.map((regulation) => (
+              <SelectItem key={regulation.id} value={regulation.id}>
+                {regulation.title}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Textarea
-        value={pendingDetail}
-        onChange={(event) => setPendingDetail(event.target.value)}
+        value={pending.detail}
+        onChange={(e) => setPending((prev) => ({ ...prev, detail: e.target.value }))}
         placeholder={t("highlights.detailPlaceholder")}
         rows={3}
       />
 
       <div className="flex justify-end">
-        <Button type="button" onClick={handleAddFinding} disabled={!pendingDetail.trim()}>
+        <Button type="button" onClick={handleAddFinding} disabled={!canAdd}>
           {t("highlights.add")}
         </Button>
       </div>
@@ -91,36 +98,15 @@ export const FindingsManager = ({
           <p className="text-sm text-muted-foreground">{t("highlights.empty")}</p>
         ) : (
           findings.map((finding) => (
-            <div
+            <FindingRow
               key={finding.id}
-              className="flex items-start justify-between gap-3 rounded-md border border-border/60 bg-muted/30 p-3"
-            >
-              <div className="space-y-1">
-                <p className="text-sm text-foreground">{finding.detail}</p>
-                <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-                  {finding.pageReference ? (
-                    <span className="rounded-full bg-background px-2 py-0.5">
-                      {t("highlights.pageLabel", { page: finding.pageReference })}
-                    </span>
-                  ) : null}
-                  {finding.regulationId && regulationLookup[finding.regulationId] ? (
-                    <span className="rounded-full bg-background px-2 py-0.5">
-                      {t("highlights.regulationLabel", {
-                        regulation: regulationLookup[finding.regulationId].title,
-                      })}
-                    </span>
-                  ) : null}
-                </div>
-              </div>
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => handleRemoveFinding(finding.id)}
-              >
-                {t("highlights.remove")}
-              </Button>
-            </div>
+              finding={finding}
+              regulationLookup={regulationLookup}
+              onRemove={handleRemoveFinding}
+              pageLabel={(p) => t("highlights.pageLabel", p)}
+              regulationLabel={(p) => t("highlights.regulationLabel", p)}
+              removeLabel={t("highlights.remove")}
+            />
           ))
         )}
       </div>

@@ -1,14 +1,14 @@
 "use client";
 
-import { useAuthContext } from "@/components/auth/auth-provider";
-import { MODERATOR_TABS } from "@/consts/moderator-dashboard";
+import { MODERATOR_EMPTY_LIST_KEYS, MODERATOR_TABS } from "@/consts/moderator-dashboard";
 import { useModeratorDashboard } from "@/hooks/use-moderator-dashboard";
 import { calculateStats, getCurrentReports } from "@/lib/moderator-dashboard";
+import { useAuthContext } from "@/providers/auth-provider";
 import { DashboardLoading } from "./dashboard-loading";
 import { DashboardStats } from "./dashboard-stats";
 import { DashboardTabs } from "./dashboard-tabs";
-import { ModeratorProfileModal } from "./moderator-profile-modal";
-import { ReportPreviewModal } from "./report-preview-modal";
+import { ModeratorProfileModal } from "@/features/moderator/moderator-dashboard/moderator-profile-modal/moderator-profile-modal";
+import { ReportPreviewModal } from "@/features/moderator/moderator-dashboard/report-preview-modal";
 import { ReportReviewModal } from "./report-review-modal";
 import { ReportsList } from "./reports-list";
 
@@ -53,13 +53,9 @@ export const ModeratorDashboard = () => {
     completedReports,
   });
 
-  if (isCheckingProfile) {
-    return <DashboardLoading message="admin.loading" />;
-  }
+  if (isCheckingProfile) return <DashboardLoading message="admin.loading" />;
 
-  if (isLoading) {
-    return <DashboardLoading message="admin.loadingReports" />;
-  }
+  if (isLoading) return <DashboardLoading message="admin.loadingReports" />;
 
   return (
     <div className="mx-auto w-full max-w-[1200px] space-y-8 px-4 py-8 sm:px-6">
@@ -79,7 +75,7 @@ export const ModeratorDashboard = () => {
             onPreview={handlePreview}
             assigningReportId={assigningReportId}
             showAssignButton={true}
-            emptyMessage="No available reports to assign"
+            emptyMessageKey={MODERATOR_EMPTY_LIST_KEYS.available}
           />
         )}
         {activeTab === "assigned" && (
@@ -89,14 +85,14 @@ export const ModeratorDashboard = () => {
             onReview={handleReview}
             onUnassign={handleUnassign}
             unassigningReportId={unassigningReportId}
-            emptyMessage="No assigned reports"
+            emptyMessageKey={MODERATOR_EMPTY_LIST_KEYS.assigned}
           />
         )}
         {activeTab === "completed" && (
           <ReportsList
             reports={currentReports}
             onPreview={handlePreview}
-            emptyMessage="No completed reports"
+            emptyMessageKey={MODERATOR_EMPTY_LIST_KEYS.completed}
           />
         )}
       </div>

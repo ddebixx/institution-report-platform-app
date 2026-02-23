@@ -1,5 +1,18 @@
 import type { ReportStatus } from "@/types/reports";
 
+export function getReportStatusLabelKey(status: ReportStatus): string {
+  switch (status) {
+    case "pending":
+      return "status.pending";
+    case "assigned":
+      return "status.assigned";
+    case "completed":
+      return "status.completed";
+    default:
+      return status;
+  }
+}
+
 export function getReportStatusBadgeClass(status: ReportStatus): string {
   switch (status) {
     case "pending":

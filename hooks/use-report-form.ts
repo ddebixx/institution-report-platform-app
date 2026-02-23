@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
 import type { ReportFormValues, StepId } from "@/types/reports";
-import type { UniversalSearchOption } from "@/components/ui/universal-search";
+import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import { DEFAULT_REPORT_FORM_VALUES } from "@/consts/reports";
 import { createReportFormSchema } from "@/lib/schemas/report-form";
 import { buildReportPayload } from "@/lib/reports";

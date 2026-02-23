@@ -2,7 +2,6 @@ import { z } from "zod";
 import type { useTranslations } from "next-intl";
 import { reportFindingSchema } from "@/lib/schemas/reports";
 
-// AI: Form schema composes report schemas with i18n validation messages
 export function createReportFormSchema(t: ReturnType<typeof useTranslations<"reportModal">>) {
   const findingWithValidation = reportFindingSchema.extend({
     detail: z.string().trim().min(2, t("validation.findingDetail")),

@@ -2,8 +2,8 @@
 
 import { ThemeProvider } from "next-themes";
 
-import { AuthProvider } from "@/components/auth/auth-provider";
-import { AuthModalProvider } from "@/components/auth/auth-modal-provider";
+import { AuthProvider } from "@/providers/auth-provider";
+import { AuthModalProvider } from "@/providers/auth-modal-provider";
 import { LocaleProvider } from "@/components/locale/locale-provider";
 import { Toaster } from "@/components/ui/sonner";
 

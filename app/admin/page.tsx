@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { useAuthContext } from "@/components/auth/auth-provider";
+import { useAuthContext } from "@/providers/auth-provider";
 import { ModeratorDashboard } from "@/features/moderator";
 
 export default function AdminPage() {

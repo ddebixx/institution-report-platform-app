@@ -3,7 +3,7 @@
 import { type FormEvent, useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useAuthContext } from "@/components/auth/auth-provider";
+import { useAuthContext } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";

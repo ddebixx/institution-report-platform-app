@@ -1,6 +1,6 @@
 import type { Control, FieldErrors } from "react-hook-form";
 import type { InstitutionSearchResult } from "@/fetchers/institutions";
-import type { UniversalSearchOption } from "@/components/ui/universal-search";
+import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import type {
   ReportFinding,
   RegulationReference,
@@ -45,6 +45,7 @@ export type ReportsListProps = {
   assigningReportId?: string | null;
   unassigningReportId?: string | null;
   showAssignButton?: boolean;
+  emptyMessageKey?: string;
   emptyMessage?: string;
 };
 

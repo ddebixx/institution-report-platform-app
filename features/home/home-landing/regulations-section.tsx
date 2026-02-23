@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FileIcon, ShieldIcon, SparklesIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { twMerge } from "tailwind-merge";
 
 type Regulation = {
   icon: typeof FileIcon;
@@ -16,42 +15,23 @@ const regulations: Regulation[] = [
   { icon: SparklesIcon, key: "tertiary" },
 ];
 
+const viewport = { once: true, amount: 0.1 };
+
 export const RegulationsSection = () => {
   const t = useTranslations("regulations");
-  const [visibleRegulations, setVisibleRegulations] = useState<Set<number>>(new Set());
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    function handleIntersection() {
-      if (!sectionRef.current) return;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              regulations.forEach((_, index) => {
-                setTimeout(() => {
-                  setVisibleRegulations((prev) => new Set([...prev, index]));
-                }, index * 150);
-              });
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      observer.observe(sectionRef.current);
-
-      return () => {
-        observer.disconnect();
-      };
-    }
-
-    handleIntersection();
-  }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full p-6">
+    <motion.section
+      className="relative w-full p-6"
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewport}
+      variants={{
+        visible: {
+          transition: { staggerChildren: 0.15 },
+        },
+      }}
+    >
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 right-0 h-64 w-64 rounded-full bg-primary/3 blur-3xl animate-pulse" />
         <div
@@ -70,24 +50,20 @@ export const RegulationsSection = () => {
       </div>
 
       <div className="relative z-10 grid gap-6 md:grid-cols-3">
-        {regulations.map((regulation, index) => {
+        {regulations.map((regulation) => {
           const Icon = regulation.icon;
-          const isVisible = visibleRegulations.has(index);
-          const delay = index * 150;
-          const animationStyle = isVisible
-            ? {
-                animation: `scale-in 0.6s ease-out ${delay}ms both`,
-              }
-            : { opacity: 0 };
-
           return (
-            <article
+            <motion.article
               key={regulation.key}
-              className={twMerge(
-                "group relative overflow-hidden rounded-2xl border border-border/20 bg-background/90 p-6 shadow-xs backdrop-blur-sm transition-all duration-700",
-                isVisible && "opacity-100 scale-100"
-              )}
-              style={animationStyle}
+              className="group relative overflow-hidden rounded-2xl border border-border/20 bg-background/90 p-6 shadow-xs backdrop-blur-sm"
+              variants={{
+                hidden: { opacity: 0, scale: 0.95 },
+                visible: {
+                  opacity: 1,
+                  scale: 1,
+                  transition: { duration: 0.6 },
+                },
+              }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
 
@@ -106,12 +82,11 @@ export const RegulationsSection = () => {
               </div>
 
               <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
-
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.15)]" />
-            </article>
+            </motion.article>
           );
         })}
       </div>
-    </section>
+    </motion.section>
   );
 };

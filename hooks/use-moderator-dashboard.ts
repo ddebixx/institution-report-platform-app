@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ModeratorReport } from "@/types/reports";
-import type { TabId } from "@/consts/moderator-dashboard";
+import type { TabId } from "@/types/moderator-dashboard";
 import {
   handleAssign as handleAssignReport,
   handlePreviewAssign as handlePreviewAssignReport,

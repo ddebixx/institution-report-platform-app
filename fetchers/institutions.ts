@@ -36,16 +36,13 @@ export const searchInstitutions = async (
     const errorMessage =
       typeof errorBody?.message === "string" ? errorBody.message : "Failed to search institutions";
 
-    throw new InstitutionSearchError(errorMessage, response.status);
+    throw new Error(errorMessage);
   }
 
   const parsed = institutionSearchResponseSchema.safeParse(await response.json());
 
   if (!parsed.success) {
-    throw new InstitutionSearchError(
-      "Unexpected response from institution search endpoint",
-      response.status
-    );
+    throw new Error("Unexpected response from institution search endpoint");
   }
 
   if (Array.isArray(parsed.data)) {
