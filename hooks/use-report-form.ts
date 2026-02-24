@@ -9,7 +9,7 @@ import type { UniversalSearchOption } from "@/components/universal-search/univer
 import { DEFAULT_REPORT_FORM_VALUES } from "@/consts/reports";
 import { createReportFormSchema } from "@/lib/schemas/report-form";
 import { buildReportPayload } from "@/lib/reports";
-import { createReport } from "@/mutations/reports";
+import { useCreateReportMutation } from "@/hooks/use-create-report-mutation";
 
 type UseReportFormOptions = {
   accessToken: string | null;
@@ -38,6 +38,11 @@ export function useReportForm({
   const t = useTranslations("reportModal");
   const [activeStep, setActiveStep] = useState<StepId>(1);
 
+  const createReportMutation = useCreateReportMutation({
+    accessToken,
+    onSuccess,
+  });
+
   const reportFormSchema = useMemo(() => createReportFormSchema(t), [t]);
 
   const form = useForm<ReportFormValues>({
@@ -49,7 +54,7 @@ export function useReportForm({
   const { setValue, setError, watch, trigger, handleSubmit, reset } = form;
 
   const pdfFile = watch("pdf");
-  const isSubmitting = form.formState.isSubmitting;
+  const isSubmitting = createReportMutation.isPending;
 
   const handleInstitutionSelect = useCallback(
     (option: UniversalSearchOption) => {
@@ -94,31 +99,15 @@ export function useReportForm({
     async (values: ReportFormValues) => {
       if (!values.pdf) {
         setError("pdf", { type: "manual", message: t("errors.pdfRequired") });
-
         setActiveStep(2);
-
         toast.error(t("errors.pdfRequired"));
-
         return;
       }
 
       const payload = buildReportPayload(values);
-
-      try {
-        const result = await createReport(payload, accessToken ?? undefined);
-
-        toast.success(t("success.title"), {
-          description: t("success.description", { id: result.reportId }),
-        });
-
-        onSuccess();
-      } catch (error) {
-        const message = error instanceof Error ? error.message : t("errors.submit");
-
-        toast.error(message);
-      }
+      await createReportMutation.mutateAsync(payload);
     },
-    [accessToken, onSuccess, setError, t]
+    [createReportMutation, setError, t]
   );
 
   const handleFormSubmit = useCallback(

@@ -1,15 +1,5 @@
-import { z } from "zod";
-
 import { clientEnv } from "@/lib/env";
-import type { ModeratorProfile } from "@/fetchers/moderators";
-
-const moderatorProfileResponseSchema = z.object({
-  uuid: z.string(),
-  fullname: z.string(),
-  email: z.string(),
-  image: z.string().optional().nullable(),
-  createdAt: z.string(),
-});
+import { moderatorProfileSchema, type ModeratorProfile } from "@/lib/schemas/moderator-profile";
 
 export type CreateOrUpdateModeratorProfilePayload = {
   fullName: string;
@@ -24,7 +14,6 @@ export const createOrUpdateModeratorProfile = async (
   const formData = new FormData();
   formData.append("fullName", payload.fullName);
   formData.append("email", payload.email);
-
   if (payload.image) {
     formData.append("image", payload.image);
   }
@@ -52,11 +41,9 @@ export const createOrUpdateModeratorProfile = async (
   }
 
   const responseData = await response.json();
-  const parsed = moderatorProfileResponseSchema.safeParse(responseData);
-
+  const parsed = moderatorProfileSchema.safeParse(responseData);
   if (!parsed.success) {
     throw new Error("Unexpected response from the moderator profile API");
   }
-
   return parsed.data;
 };

@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { toast } from "sonner";
 import type { ModeratorReport, ReportFinding } from "@/types/reports";
-import { updateReportReview } from "@/mutations/reports";
+import { useUpdateReportReviewMutation } from "@/hooks/use-update-report-review-mutation";
 
 type UseReportReviewFormProps = {
   report: ModeratorReport | null;
@@ -22,35 +21,19 @@ export function useReportReviewForm({
 }: UseReportReviewFormProps) {
   const [findings, setFindings] = useState<ReportFinding[]>([]);
   const [comparisonNotes, setComparisonNotes] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSave = useCallback(async () => {
-    if (!report || !accessToken) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    try {
-      await updateReportReview(report.id, { findings, comparisonNotes }, accessToken);
-      toast.success(successMessage);
-      onUpdate?.();
-      onClose();
-    } catch (error) {
-      const message = error instanceof Error ? error.message : errorMessage;
-      toast.error(message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [
-    report,
+  const updateReviewMutation = useUpdateReportReviewMutation({
     accessToken,
-    findings,
-    comparisonNotes,
-    onUpdate,
-    onClose,
+    reportId: report?.id ?? null,
+    onSuccess: onUpdate,
     successMessage,
     errorMessage,
-  ]);
+  });
+
+  const handleSave = useCallback(async () => {
+    if (!report || !accessToken) return;
+    await updateReviewMutation.mutateAsync({ findings, comparisonNotes });
+  }, [report, accessToken, findings, comparisonNotes, updateReviewMutation]);
 
   const handleClose = useCallback(() => {
     setFindings([]);
@@ -63,7 +46,7 @@ export function useReportReviewForm({
     setFindings,
     comparisonNotes,
     setComparisonNotes,
-    isSubmitting,
+    isSubmitting: updateReviewMutation.isPending,
     handleSave,
     handleClose,
   };

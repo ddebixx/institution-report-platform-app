@@ -7,14 +7,12 @@ import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import { MODERATOR_PROFILE_FORM_DEFAULTS } from "@/consts/moderator-profile";
-import {
-  handleModeratorProfileImageChange,
-  submitModeratorProfile,
-} from "@/handlers/moderator-profile";
+import { handleModeratorProfileImageChange } from "@/handlers/moderator-profile";
 import {
   moderatorProfileFormSchema,
   type ModeratorProfileFormValues,
 } from "@/lib/schemas/moderator-profile-form";
+import { useCreateOrUpdateModeratorProfileMutation } from "@/hooks/use-create-or-update-moderator-profile-mutation";
 import { useFilePreview } from "@/hooks/use-file-preview";
 import type { UseModeratorProfileFormParams } from "@/types/moderator-dashboard";
 
@@ -25,6 +23,14 @@ export function useModeratorProfileForm({
   onClose,
 }: UseModeratorProfileFormParams) {
   const t = useTranslations("moderatorProfileModal");
+
+  const createOrUpdateProfileMutation = useCreateOrUpdateModeratorProfileMutation({
+    accessToken,
+    onSuccess,
+    onClose,
+    successMessage: t("success.profileCreated"),
+    errorMessage: t("errors.createFailed"),
+  });
 
   const form = useForm<ModeratorProfileFormValues>({
     resolver: zodResolver(moderatorProfileFormSchema),
@@ -55,15 +61,13 @@ export function useModeratorProfileForm({
 
   const onSubmit = useCallback(
     async (data: ModeratorProfileFormValues) => {
-      await submitModeratorProfile(data, {
-        accessToken,
-        onSuccess,
-        onClose,
-        successMessage: t("success.profileCreated"),
-        errorMessage: t("errors.createFailed"),
+      await createOrUpdateProfileMutation.mutateAsync({
+        fullName: data.fullName.trim(),
+        email: data.email.trim(),
+        image: data.image ?? undefined,
       });
     },
-    [accessToken, onClose, onSuccess, t]
+    [createOrUpdateProfileMutation]
   );
 
   const uploadInputId = useMemo(
@@ -75,7 +79,7 @@ export function useModeratorProfileForm({
   const email = watch("email");
   const hasValues = Boolean(fullName && email);
   const isFormValid = formState.isValid;
-  const isSubmitting = formState.isSubmitting;
+  const isSubmitting = createOrUpdateProfileMutation.isPending;
 
   return {
     form,

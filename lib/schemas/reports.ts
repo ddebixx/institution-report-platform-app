@@ -75,6 +75,12 @@ export const createReportPayloadSchema = z.object({
   pdf: z.instanceof(File),
 });
 
+export const createReportResponseSchema = z.object({
+  reportId: z.string(),
+  pdfPath: z.string().optional(),
+  institutionId: z.string().optional(),
+});
+
 export type ReportFinding = z.infer<typeof reportFindingSchema>;
 export type ReportStatus = z.infer<typeof reportStatusSchema>;
 export type RegulationReference = z.infer<typeof regulationReferenceSchema>;
@@ -84,3 +90,4 @@ export type StepId = z.infer<typeof stepIdSchema>;
 export type ReportFormValues = z.infer<typeof reportFormValuesSchema>;
 export type UpdateReportReviewPayload = z.infer<typeof updateReportReviewPayloadSchema>;
 export type CreateReportPayload = z.infer<typeof createReportPayloadSchema>;
+export type CreateReportResponse = z.infer<typeof createReportResponseSchema>;

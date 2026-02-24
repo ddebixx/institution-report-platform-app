@@ -1,14 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import type { ModeratorReport } from "@/types/reports";
 import type { TabId } from "@/types/moderator-dashboard";
-import {
-  handleAssign as handleAssignReport,
-  handlePreviewAssign as handlePreviewAssignReport,
-  handleUnassign as handleUnassignReport,
-  handlePreviewUnassign as handlePreviewUnassignReport,
-} from "@/handlers/moderator-dashboard";
 import { useModeratorProfileQuery } from "@/hooks/use-moderator-profile-query";
 import { useReportsQueries } from "@/hooks/use-reports-queries";
+import { useAssignReportMutation } from "@/hooks/use-assign-report-mutation";
+import { useUnassignReportMutation } from "@/hooks/use-unassign-report-mutation";
 import type { UseModeratorDashboardProps } from "@/types/moderator-dashboard";
 
 export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProps) {
@@ -39,6 +35,16 @@ export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProp
 
   const isLoading = isCheckingProfile || isReportsLoading;
 
+  const assignReportMutation = useAssignReportMutation({
+    accessToken,
+    onSuccess: refetchReports,
+  });
+
+  const unassignReportMutation = useUnassignReportMutation({
+    accessToken,
+    onSuccess: refetchReports,
+  });
+
   useEffect(() => {
     function showProfileModalWhenNoProfile() {
       if (!accessToken || isCheckingProfile) return;
@@ -50,22 +56,17 @@ export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProp
     showProfileModalWhenNoProfile();
   }, [accessToken, isCheckingProfile, profile]);
 
-  const loadReports = useCallback(async () => {
-    await refetchReports();
-  }, [refetchReports]);
-
   const handleAssign = useCallback(
     async (reportId: string) => {
       if (!accessToken) return;
-
-      await handleAssignReport({
-        reportId,
-        accessToken,
-        setAssigningReportId,
-        loadReports,
-      });
+      setAssigningReportId(reportId);
+      try {
+        await assignReportMutation.mutateAsync(reportId);
+      } finally {
+        setAssigningReportId(null);
+      }
     },
-    [accessToken, loadReports]
+    [accessToken, assignReportMutation]
   );
 
   const handleTabChange = useCallback((tabId: TabId) => {
@@ -91,50 +92,47 @@ export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProp
   const handlePreviewAssign = useCallback(
     async (reportId: string) => {
       if (!accessToken) return;
-
-      await handlePreviewAssignReport({
-        reportId,
-        accessToken,
-        setAssigningReportId,
-        setPreviewReport,
-        loadReports,
-      });
+      setAssigningReportId(reportId);
+      try {
+        await assignReportMutation.mutateAsync(reportId);
+        setPreviewReport(null);
+      } finally {
+        setAssigningReportId(null);
+      }
     },
-    [accessToken, loadReports]
+    [accessToken, assignReportMutation]
   );
 
   const handleUnassign = useCallback(
     async (reportId: string) => {
       if (!accessToken) return;
-
-      await handleUnassignReport({
-        reportId,
-        accessToken,
-        setUnassigningReportId,
-        loadReports,
-      });
+      setUnassigningReportId(reportId);
+      try {
+        await unassignReportMutation.mutateAsync(reportId);
+      } finally {
+        setUnassigningReportId(null);
+      }
     },
-    [accessToken, loadReports]
+    [accessToken, unassignReportMutation]
   );
 
   const handlePreviewUnassign = useCallback(
     async (reportId: string) => {
       if (!accessToken) return;
-
-      await handlePreviewUnassignReport({
-        reportId,
-        accessToken,
-        setUnassigningReportId,
-        setPreviewReport,
-        loadReports,
-      });
+      setUnassigningReportId(reportId);
+      try {
+        await unassignReportMutation.mutateAsync(reportId);
+        setPreviewReport(null);
+      } finally {
+        setUnassigningReportId(null);
+      }
     },
-    [accessToken, loadReports]
+    [accessToken, unassignReportMutation]
   );
 
   const handleReviewUpdate = useCallback(async () => {
-    await loadReports();
-  }, [loadReports]);
+    await refetchReports();
+  }, [refetchReports]);
 
   const handleProfileModalClose = useCallback(() => {
     setShowProfileModal(false);
