@@ -23,7 +23,6 @@ export const useUpdateReportReviewMutation = ({
   successMessage = "Review saved successfully",
   errorMessage = "Failed to save review",
 }: UseUpdateReportReviewMutationParams) => {
-
   return useMutation({
     mutationFn: (payload: UpdateReportReviewPayload) =>
       updateReportReview(reportId!, payload, accessToken!),

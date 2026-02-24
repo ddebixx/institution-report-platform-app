@@ -49,12 +49,14 @@ export const createReport = async (
   const response = await fetch(`${clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "")}/reports`, {
     method: "POST",
     headers,
-    body: formData
+    body: formData,
   });
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
-    const errorMessage = errorBody?.message ?? `Failed to submit the report (${response.status} ${response.statusText})`;
+    const errorMessage =
+      errorBody?.message ??
+      `Failed to submit the report (${response.status} ${response.statusText})`;
     throw new Error(errorMessage);
   }
 
