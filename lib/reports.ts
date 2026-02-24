@@ -1,5 +1,5 @@
 import type { RegulationReference, ReportFinding } from "@/types/reports";
-import type { InstitutionSearchResult } from "@/fetchers/institutions";
+import type { InstitutionSearchResult } from "@/lib/schemas/institutions";
 import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import type { CreateReportPayload } from "@/mutations/reports";
 import type { ReportFormValues } from "@/types/reports";

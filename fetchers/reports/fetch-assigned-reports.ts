@@ -1,22 +1,14 @@
-import { z } from "zod";
-
 import { clientEnv } from "@/lib/env";
+import {
+  moderatorReportsResponseSchema,
+  type ModeratorReport,
+} from "@/lib/schemas/reports";
 
-const moderatorProfileSchema = z.object({
-  uuid: z.string(),
-  fullname: z.string(),
-  email: z.string(),
-  image: z.string().optional().nullable(),
-  createdAt: z.string(),
-});
-
-export type ModeratorProfile = z.infer<typeof moderatorProfileSchema>;
-
-export const fetchModeratorProfile = async (
+export const fetchAssignedReports = async (
   accessToken: string
-): Promise<ModeratorProfile | null> => {
+): Promise<ModeratorReport[]> => {
   const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
-  const apiUrl = `${baseUrl}/moderators/profile`;
+  const apiUrl = `${baseUrl}/reports/assigned`;
 
   const response = await fetch(apiUrl, {
     method: "GET",
@@ -26,10 +18,6 @@ export const fetchModeratorProfile = async (
     },
   });
 
-  if (response.status === 404) {
-    return null;
-  }
-
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     const errorMessage =
@@ -37,15 +25,15 @@ export const fetchModeratorProfile = async (
         ? errorBody.message
         : Array.isArray(errorBody?.message)
           ? errorBody.message.join(", ")
-          : `Failed to fetch moderator profile (${response.status} ${response.statusText})`;
+          : `Failed to fetch assigned reports (${response.status} ${response.statusText})`;
     throw new Error(errorMessage);
   }
 
   const responseData = await response.json();
-  const parsed = moderatorProfileSchema.safeParse(responseData);
+  const parsed = moderatorReportsResponseSchema.safeParse(responseData);
 
   if (!parsed.success) {
-    throw new Error("Unexpected response from the moderator profile API");
+    throw new Error("Unexpected response from the reports API");
   }
 
   return parsed.data;

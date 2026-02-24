@@ -1,5 +1,5 @@
 import type { Control, FieldErrors } from "react-hook-form";
-import type { InstitutionSearchResult } from "@/fetchers/institutions";
+import type { InstitutionSearchResult } from "@/lib/schemas/institutions";
 import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import type {
   ReportFinding,

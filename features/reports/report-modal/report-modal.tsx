@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useAuthContext } from "@/providers/auth-provider";
 import { Modal } from "@/components/ui/modal";
 import type { ReportModalProps } from "@/types/reports";
-import { handleInstitutionSearch as handleInstitutionSearchHandler } from "@/handlers/report-modal";
+import { useInstitutionSearchFetch } from "@/hooks/use-institution-search-query";
 import { REFERENCE_REGULATION_URL } from "@/consts/reports";
 import { createRegulationReferences, createStepDefinitions } from "@/lib/reports";
 import { useReportForm } from "@/hooks/use-report-form";
@@ -19,6 +19,7 @@ import { ReportFormActions } from "./report-form-actions";
 export const ReportModal = ({ open, onClose }: ReportModalProps) => {
   const t = useTranslations("reportModal");
   const { accessToken } = useAuthContext();
+  const fetchInstitutionSearch = useInstitutionSearchFetch();
 
   const stepDefinitions = useMemo(() => createStepDefinitions(t), [t]);
 
@@ -26,9 +27,9 @@ export const ReportModal = ({ open, onClose }: ReportModalProps) => {
 
   const handleInstitutionSearch = useCallback(
     async (query: string) => {
-      return await handleInstitutionSearchHandler({ query, accessToken });
+      return await fetchInstitutionSearch(query, accessToken ?? undefined);
     },
-    [accessToken]
+    [fetchInstitutionSearch, accessToken]
   );
 
   const handleClose = useCallback(() => {

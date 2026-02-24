@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { ModeratorReport } from "@/types/reports";
 import type { TabId } from "@/types/moderator-dashboard";
 import {
@@ -6,81 +6,54 @@ import {
   handlePreviewAssign as handlePreviewAssignReport,
   handleUnassign as handleUnassignReport,
   handlePreviewUnassign as handlePreviewUnassignReport,
-  loadReports as loadReportsHandler,
 } from "@/handlers/moderator-dashboard";
-import { fetchModeratorProfile } from "@/fetchers/moderators";
+import { useModeratorProfileQuery } from "@/hooks/use-moderator-profile-query";
+import { useReportsQueries } from "@/hooks/use-reports-queries";
 import type { UseModeratorDashboardProps } from "@/types/moderator-dashboard";
 
 export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProps) {
   const [activeTab, setActiveTab] = useState<TabId>("available");
-  const [availableReports, setAvailableReports] = useState<ModeratorReport[]>([]);
-  const [assignedReports, setAssignedReports] = useState<ModeratorReport[]>([]);
-  const [completedReports, setCompletedReports] = useState<ModeratorReport[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [assigningReportId, setAssigningReportId] = useState<string | null>(null);
   const [unassigningReportId, setUnassigningReportId] = useState<string | null>(null);
   const [previewReport, setPreviewReport] = useState<ModeratorReport | null>(null);
   const [reviewReport, setReviewReport] = useState<ModeratorReport | null>(null);
   const [showProfileModal, setShowProfileModal] = useState(false);
-  const [isCheckingProfile, setIsCheckingProfile] = useState(true);
-  const profileCheckTokenRef = useRef<string | null>(null);
 
-  const loadReports = useCallback(async () => {
-    if (!accessToken) return;
+  const {
+    profile,
+    isLoading: isCheckingProfile,
+    refetch: refetchProfile,
+  } = useModeratorProfileQuery({
+    accessToken,
+  });
 
-    await loadReportsHandler({
-      accessToken,
-      setAvailableReports,
-      setAssignedReports,
-      setCompletedReports,
-      setIsLoading,
-    });
-  }, [accessToken]);
+  const {
+    availableReports,
+    assignedReports,
+    completedReports,
+    isLoading: isReportsLoading,
+    refetchAll: refetchReports,
+  } = useReportsQueries({
+    accessToken:
+      accessToken && profile !== undefined && profile !== null ? accessToken : null,
+  });
+
+  const isLoading = isCheckingProfile || isReportsLoading;
 
   useEffect(() => {
-    async function checkModeratorProfileAndLoadReports() {
-      if (!accessToken) {
-        setIsCheckingProfile(false);
-        profileCheckTokenRef.current = null;
-        return;
-      }
-
-      if (profileCheckTokenRef.current === accessToken) {
-        return;
-      }
-
-      profileCheckTokenRef.current = accessToken;
-
-      try {
-        const profile = await fetchModeratorProfile(accessToken);
-        setIsCheckingProfile(false);
-
-        if (!profile) {
-          console.log("[ModeratorDashboard] No profile found, showing modal");
-          setShowProfileModal(true);
-          setIsLoading(false);
-        } else {
-          console.log("[ModeratorDashboard] Profile found, loading reports");
-          await loadReports();
-        }
-      } catch (error) {
-        console.error("[ModeratorDashboard] Failed to check moderator profile:", error);
-
-        setIsCheckingProfile(false);
-        setIsLoading(false);
-
-        const errorMessage = error instanceof Error ? error.message : String(error);
-
-        console.log("[ModeratorDashboard] Error occurred, showing modal. Error:", errorMessage);
-
+    function showProfileModalWhenNoProfile() {
+      if (!accessToken || isCheckingProfile) return;
+      if (profile === null) {
         setShowProfileModal(true);
-
-        profileCheckTokenRef.current = null;
       }
     }
 
-    checkModeratorProfileAndLoadReports();
-  }, [accessToken, loadReports]);
+    showProfileModalWhenNoProfile();
+  }, [accessToken, isCheckingProfile, profile]);
+
+  const loadReports = useCallback(async () => {
+    await refetchReports();
+  }, [refetchReports]);
 
   const handleAssign = useCallback(
     async (reportId: string) => {
@@ -170,10 +143,9 @@ export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProp
 
   const handleProfileModalSuccess = useCallback(async () => {
     setShowProfileModal(false);
-    profileCheckTokenRef.current = null;
-    setIsLoading(true);
-    await loadReports();
-  }, [loadReports]);
+    await refetchProfile();
+    await refetchReports();
+  }, [refetchProfile, refetchReports]);
 
   return {
     activeTab,

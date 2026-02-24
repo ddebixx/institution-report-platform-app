@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import type { InstitutionSearchResult } from "@/fetchers/institutions";
+import type { InstitutionSearchResult } from "@/lib/schemas/institutions";
 
 const CSV_FILE_PATH = (() => {
   const basePath = process.cwd();

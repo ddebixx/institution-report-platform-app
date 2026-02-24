@@ -1,47 +1,7 @@
 import { toast } from "sonner";
 
 import { assignReportToSelf, unassignReportFromSelf } from "@/mutations/reports";
-import {
-  fetchAssignedReports,
-  fetchAvailableReports,
-  fetchCompletedReports,
-} from "@/fetchers/reports";
 import type { ModeratorReport } from "@/types/reports";
-
-type LoadReportsParams = {
-  accessToken: string;
-  setAvailableReports: (reports: ModeratorReport[]) => void;
-  setAssignedReports: (reports: ModeratorReport[]) => void;
-  setCompletedReports: (reports: ModeratorReport[]) => void;
-  setIsLoading: (loading: boolean) => void;
-};
-
-export const loadReports = async ({
-  accessToken,
-  setAvailableReports,
-  setAssignedReports,
-  setCompletedReports,
-  setIsLoading,
-}: LoadReportsParams): Promise<void> => {
-  setIsLoading(true);
-
-  try {
-    const [available, assigned, completed] = await Promise.all([
-      fetchAvailableReports(accessToken),
-      fetchAssignedReports(accessToken),
-      fetchCompletedReports(accessToken),
-    ]);
-
-    setAvailableReports(available);
-    setAssignedReports(assigned);
-    setCompletedReports(completed);
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Failed to load reports";
-    toast.error(errorMessage);
-  } finally {
-    setIsLoading(false);
-  }
-};
 
 type HandleAssignParams = {
   reportId: string;
