@@ -1,23 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Session, User } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 import { supabaseClient } from "@/lib/supabase-client";
-
-type AuthMode = "login" | "register";
-
-type AuthController = {
-  user: User | null;
-  accessToken: string | null;
-  isInitializing: boolean;
-  isAuthenticating: boolean;
-  authMode: AuthMode;
-  setAuthMode: (mode: AuthMode) => void;
-  signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
-  refreshSession: () => Promise<void>;
-};
+import type { AuthController, AuthMode } from "@/types/auth";
 
 const getAccessTokenFromSession = (session: Session | null) => session?.access_token ?? null;
 
@@ -117,7 +103,7 @@ export const useAuthController = (): AuthController => {
 
   const accessToken = useMemo(() => getAccessTokenFromSession(session), [session]);
 
-  const user = useMemo<User | null>(() => session?.user ?? null, [session]);
+  const user = useMemo(() => session?.user ?? null, [session]);
 
   return {
     user,

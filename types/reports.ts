@@ -1,4 +1,4 @@
-import type { Control, FieldErrors } from "react-hook-form";
+import type { Control, FieldErrors, UseFormReturn } from "react-hook-form";
 import type { InstitutionSearchResult } from "@/lib/schemas/institutions";
 import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import type {
@@ -133,4 +133,33 @@ export type ReportFormStep1Props = {
   errors: FieldErrors<ReportFormValues>;
   onInstitutionSearch: (query: string) => Promise<InstitutionSearchResult[]>;
   onInstitutionSelect: (option: UniversalSearchOption) => void;
+};
+
+export type UseReportFormOptions = {
+  accessToken: string | null;
+  onSuccess: () => void;
+};
+
+export type UseReportFormReturn = {
+  form: UseFormReturn<ReportFormValues>;
+  activeStep: StepId;
+  setActiveStep: (step: StepId) => void;
+  handleInstitutionSelect: (option: UniversalSearchOption) => void;
+  handleFileChange: (file: File | null) => void;
+  handleFindingsChange: (findings: ReportFormValues["reportContent"]["findings"]) => void;
+  handleComparisonNotesChange: (value: string) => void;
+  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handleClose: () => void;
+  primaryActionLabel: string;
+  isPrimaryDisabled: boolean;
+  modalPanelClassName: string;
+};
+
+export type UseReportReviewFormProps = {
+  report: ModeratorReport | null;
+  accessToken: string | null;
+  onUpdate?: () => void;
+  onClose: () => void;
+  successMessage: string;
+  errorMessage: string;
 };

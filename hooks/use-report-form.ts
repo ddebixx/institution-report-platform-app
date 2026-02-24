@@ -1,35 +1,21 @@
 import { useCallback, useMemo, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, type UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 
-import type { ReportFormValues, StepId } from "@/types/reports";
+import type {
+  ReportFormValues,
+  StepId,
+  UseReportFormOptions,
+  UseReportFormReturn,
+} from "@/types/reports";
 import type { UniversalSearchOption } from "@/components/universal-search/universal-search";
 import { DEFAULT_REPORT_FORM_VALUES } from "@/consts/reports";
 import { createReportFormSchema } from "@/lib/schemas/report-form";
 import { buildReportPayload } from "@/lib/reports";
 import { useCreateReportMutation } from "@/hooks/use-create-report-mutation";
-
-type UseReportFormOptions = {
-  accessToken: string | null;
-  onSuccess: () => void;
-};
-
-type UseReportFormReturn = {
-  form: UseFormReturn<ReportFormValues>;
-  activeStep: StepId;
-  setActiveStep: (step: StepId) => void;
-  handleInstitutionSelect: (option: UniversalSearchOption) => void;
-  handleFileChange: (file: File | null) => void;
-  handleFindingsChange: (findings: ReportFormValues["reportContent"]["findings"]) => void;
-  handleComparisonNotesChange: (value: string) => void;
-  handleFormSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
-  handleClose: () => void;
-  primaryActionLabel: string;
-  isPrimaryDisabled: boolean;
-  modalPanelClassName: string;
-};
+import { validateFirstStepAndSyncReporterFields } from "@/hooks/use-report-form/helpers";
 
 export function useReportForm({
   accessToken,
@@ -115,31 +101,12 @@ export function useReportForm({
       event.preventDefault();
 
       if (activeStep === 1) {
-        const formValues = form.getValues();
-
-        const formElement = event.currentTarget;
-        const allInputs = formElement.querySelectorAll<HTMLInputElement>("input");
-        const nameInput = Array.from(allInputs).find(
-          (input) =>
-            input.name === "reporterName" ||
-            input.getAttribute("name") === "reporterName" ||
-            input.placeholder?.toLowerCase().includes("name")
-        );
-        const emailInput = Array.from(allInputs).find(
-          (input) =>
-            input.name === "reporterEmail" ||
-            input.getAttribute("name") === "reporterEmail" ||
-            input.type === "email"
-        );
-
-        if (nameInput?.value && !formValues.reporterName) {
-          setValue("reporterName", nameInput.value, { shouldValidate: true });
-        }
-        if (emailInput?.value && !formValues.reporterEmail) {
-          setValue("reporterEmail", emailInput.value, { shouldValidate: true });
-        }
-
-        const isStepValid = await trigger(["reporterName", "reporterEmail", "institutionName"]);
+        const isStepValid = await validateFirstStepAndSyncReporterFields({
+          event,
+          form,
+          setValue,
+          trigger,
+        });
 
         if (!isStepValid) {
           return;

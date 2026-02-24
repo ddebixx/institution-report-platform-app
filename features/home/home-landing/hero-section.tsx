@@ -5,14 +5,11 @@ import { FileTextIcon, ShieldIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
-
-type HeroSectionProps = {
-  isAuthenticated: boolean;
-  onOpenReportModal: () => void;
-};
+import type { HeroSectionProps } from "./types";
 
 export const HeroSection = ({ isAuthenticated, onOpenReportModal }: HeroSectionProps) => {
   const t = useTranslations();
+
   return (
     <motion.section
       className="relative w-full p-6"

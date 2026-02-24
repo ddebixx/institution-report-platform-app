@@ -9,15 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { handleAuthSubmit } from "@/handlers/auth-modal";
-
-type AuthModalMode = "login" | "register";
-
-type AuthModalProps = {
-  open: boolean;
-  mode: AuthModalMode;
-  onClose: () => void;
-  onModeChange: (mode: AuthModalMode) => void;
-};
+import type { AuthModalMode, AuthModalProps } from "@/features/auth/types";
 
 export const AuthModal = ({ open, mode, onClose, onModeChange }: AuthModalProps) => {
   const router = useRouter();

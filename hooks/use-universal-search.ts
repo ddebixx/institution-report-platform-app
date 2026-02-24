@@ -6,6 +6,7 @@ import type {
   UniversalSearchOption,
   UniversalSearchStatusText,
 } from "@/components/universal-search/universal-search-types";
+import { runUniversalSearchEffect } from "@/hooks/use-universal-search/helpers";
 
 type UseUniversalSearchParams = {
   value: string;
@@ -36,59 +37,19 @@ export const useUniversalSearch = ({
   );
 
   useEffect(() => {
-    function resetForShortQuery() {
-      setIsOpen(false);
-      setOptions([]);
-      setIsLoading(false);
-      setStatusMessage(statusText.minChars);
-    }
-
-    async function searchWhenEligible() {
-      if (justSelectedRef.current) {
-        justSelectedRef.current = false;
-        return;
-      }
-
-      if (trimmedValue.length < minCharacters) return resetForShortQuery();
-
-      setIsLoading(true);
-      setStatusMessage(statusText.loading);
-
-      const nextRequestId = requestCounterRef.current + 1;
-
-      requestCounterRef.current = nextRequestId;
-
-      try {
-        const result = await fetchResults(trimmedValue);
-
-        if (requestCounterRef.current !== nextRequestId) return;
-
-        setOptions(result);
-        setStatusMessage(result.length ? statusText.idle : statusText.empty);
-        setIsOpen(true);
-      } catch (error) {
-        if (requestCounterRef.current !== nextRequestId) return;
-
-        const errorMessage = error instanceof Error ? error.message : statusText.error;
-        setOptions([]);
-        setStatusMessage(errorMessage);
-        setIsOpen(true);
-      } finally {
-        if (requestCounterRef.current === nextRequestId) setIsLoading(false);
-      }
-    }
-
-    searchWhenEligible();
-  }, [
-    fetchResults,
-    minCharacters,
-    statusText.empty,
-    statusText.error,
-    statusText.idle,
-    statusText.loading,
-    statusText.minChars,
-    trimmedValue,
-  ]);
+    void runUniversalSearchEffect({
+      value,
+      minCharacters,
+      statusText,
+      fetchResults,
+      requestCounterRef,
+      justSelectedRef,
+      setOptions,
+      setIsOpen,
+      setIsLoading,
+      setStatusMessage,
+    });
+  }, [value, minCharacters, statusText, fetchResults]);
 
   const handleOptionMouseDown = useCallback(
     (event: MouseEvent<HTMLButtonElement>, option: UniversalSearchOption) => {

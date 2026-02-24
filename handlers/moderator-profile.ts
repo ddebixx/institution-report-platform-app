@@ -20,6 +20,7 @@ export function handleModeratorProfileImageChange(
   if (!file) return;
 
   const errorKey = validateProfileImageFile(file);
+
   if (errorKey) {
     toast.error(t(`errors.${errorKey}`));
     return;

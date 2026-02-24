@@ -10,10 +10,9 @@ export const updateReportReview = async (
   accessToken: string
 ): Promise<void> => {
   const parsed = updateReportReviewPayloadSchema.safeParse(payload);
-  if (!parsed.success) {
+  if (!parsed.success || !parsed.data) {
     throw new Error("Invalid report review payload");
   }
-  const validPayload = parsed.data;
 
   const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
   const apiUrl = `${baseUrl}/reports/${reportId}/review`;
@@ -26,8 +25,8 @@ export const updateReportReview = async (
     },
     body: JSON.stringify({
       reportContent: {
-        findings: validPayload.findings,
-        comparisonNotes: validPayload.comparisonNotes,
+        findings: parsed.data.findings,
+        comparisonNotes: parsed.data.comparisonNotes,
       },
     }),
   });

@@ -18,11 +18,8 @@ export const unassignReportFromSelf = async (
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     const errorMessage =
-      typeof errorBody?.message === "string"
-        ? errorBody.message
-        : Array.isArray(errorBody?.message)
-          ? errorBody.message.join(", ")
-          : `Failed to unassign report (${response.status} ${response.statusText})`;
+      errorBody?.message ?? `Failed to unassign report (${response.status} ${response.statusText})`;
+
     throw new Error(errorMessage);
   }
 };

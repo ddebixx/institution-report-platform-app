@@ -71,3 +71,42 @@ export type Tab = {
   labelKey: string;
   icon: typeof CheckCircleIcon;
 };
+
+export type ReportPreviewHeaderProps = {
+  report: ModeratorReport;
+  unnamedLabel: string;
+  rspoLabel: (params: { number: string }) => string;
+};
+
+export type ReportPreviewTimelineProps = {
+  report: Pick<ModeratorReport, "createdAt" | "assignedAt" | "completedAt">;
+  title: string;
+  createdLabel: string;
+  assignedLabel: string;
+  completedLabel: string;
+};
+
+export type ReportPreviewSubmittedContentProps = {
+  content: import("@/types/reports").ReportContent;
+  title: string;
+  findingsTitle: (params: { count: number }) => string;
+  comparisonNotesTitle: string;
+  pageLabel: (params: { page: string }) => string;
+  regulationLabel: (params: { regulation: string }) => string;
+};
+
+export type ReportPreviewReporterInfoProps = {
+  report: Pick<ModeratorReport, "reporterName" | "reporterEmail">;
+  title: string;
+  reporterNameLabel: string;
+  emailLabel: string;
+};
+
+export type ReportPreviewPdfSectionProps = {
+  pdfUrl: string | null;
+  pdfFileName: string | undefined;
+  submittedDocumentTitle: string;
+  referenceRegulationTitle: string;
+  noPdfText: string;
+  openInNewTabLabel: string;
+};

@@ -32,6 +32,7 @@ export const createReport = async (
 
   for (const [key, formKey] of optionalFields) {
     const value = validPayload[key];
+
     if (typeof value === "string" && value.length > 0) {
       formData.append(formKey, value);
     }

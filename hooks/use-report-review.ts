@@ -1,15 +1,6 @@
 import { useCallback, useState } from "react";
-import type { ModeratorReport, ReportFinding } from "@/types/reports";
+import type { ReportFinding, UseReportReviewFormProps } from "@/types/reports";
 import { useUpdateReportReviewMutation } from "@/hooks/use-update-report-review-mutation";
-
-type UseReportReviewFormProps = {
-  report: ModeratorReport | null;
-  accessToken: string | null;
-  onUpdate?: () => void;
-  onClose: () => void;
-  successMessage: string;
-  errorMessage: string;
-};
 
 export function useReportReviewForm({
   report,

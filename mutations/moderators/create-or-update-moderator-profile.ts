@@ -12,8 +12,10 @@ export const createOrUpdateModeratorProfile = async (
   accessToken: string
 ): Promise<ModeratorProfile> => {
   const formData = new FormData();
+
   formData.append("fullName", payload.fullName);
   formData.append("email", payload.email);
+
   if (payload.image) {
     formData.append("image", payload.image);
   }
@@ -32,18 +34,18 @@ export const createOrUpdateModeratorProfile = async (
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     const errorMessage =
-      typeof errorBody?.message === "string"
-        ? errorBody.message
-        : Array.isArray(errorBody?.message)
-          ? errorBody.message.join(", ")
-          : `Failed to create/update moderator profile (${response.status} ${response.statusText})`;
+      errorBody?.message ??
+      `Failed to create/update moderator profile (${response.status} ${response.statusText})`;
+
     throw new Error(errorMessage);
   }
 
   const responseData = await response.json();
   const parsed = moderatorProfileSchema.safeParse(responseData);
-  if (!parsed.success) {
+
+  if (!parsed.success || !parsed.data) {
     throw new Error("Unexpected response from the moderator profile API");
   }
+
   return parsed.data;
 };
