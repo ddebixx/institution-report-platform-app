@@ -3,8 +3,8 @@
 import { type ChangeEvent, useCallback } from "react";
 import { useTranslations } from "next-intl";
 
-import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field/field";
+import { Textarea } from "@/components/ui/textarea/textarea";
 import type { ComparisonNotesFieldProps } from "@/types/reports";
 
 export const ComparisonNotesField = ({ value, onChange }: ComparisonNotesFieldProps) => {

@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { BookOpenIcon, CheckCircleIcon, AlertCircleIcon, FileCheckIcon } from "lucide-react";
-import { InteractiveStepper } from "@/components/ui/interactive-stepper";
-import { Tabs } from "@/components/ui/tabs";
+import { InteractiveStepper } from "@/components/ui/interactive-stepper/interactive-stepper";
+import { Tabs } from "@/components/ui/tabs/tabs";
 import { submissionSteps } from "@/consts/shared";
 
 export default function GuidelinesPage() {

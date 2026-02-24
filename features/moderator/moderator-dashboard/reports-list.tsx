@@ -10,7 +10,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty";
+} from "@/components/ui/empty/empty";
 import {
   MODERATOR_EMPTY_LIST_DEFAULT_KEY,
   MODERATOR_EMPTY_LIST_TITLE_KEY,

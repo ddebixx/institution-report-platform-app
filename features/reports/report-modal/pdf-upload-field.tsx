@@ -4,7 +4,7 @@ import { type ChangeEvent, useCallback, useMemo } from "react";
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field/field";
 import type { PdfUploadFieldProps } from "@/types/reports";
 
 export const PdfUploadField = ({ file, fileError, onFileChange }: PdfUploadFieldProps) => {

@@ -3,7 +3,7 @@
 import { type ChangeEvent, useCallback } from "react";
 import { Globe2Icon } from "lucide-react";
 
-import { useLocaleContext } from "@/components/locale/locale-provider";
+import { useLocaleContext } from "@/providers/locale-provider";
 import { supportedLocales, type SupportedLocale } from "@/locales/messages";
 
 export const LocaleSwitcher = () => {

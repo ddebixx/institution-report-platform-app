@@ -4,10 +4,10 @@ import { type FormEvent, useCallback, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { useAuthContext } from "@/providers/auth-provider";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Modal } from "@/components/ui/modal";
-import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
+import { Button } from "@/components/ui/button/button";
+import { Input } from "@/components/ui/input/input";
+import { Modal } from "@/components/ui/modal/modal";
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field/field";
 import { handleAuthSubmit } from "@/handlers/auth-modal";
 import type { AuthModalMode, AuthModalProps } from "@/features/auth/types";
 

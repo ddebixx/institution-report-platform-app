@@ -2,9 +2,9 @@
 
 import { useTranslations } from "next-intl";
 import { FileTextIcon, ShieldIcon, SearchIcon, UploadIcon, CheckCircleIcon } from "lucide-react";
-import { InteractiveStepper } from "@/components/ui/interactive-stepper";
-import { Accordion } from "@/components/ui/accordion";
-import { Tabs } from "@/components/ui/tabs";
+import { InteractiveStepper } from "@/components/ui/interactive-stepper/interactive-stepper";
+import { Accordion } from "@/components/ui/accordion/accordion";
+import { Tabs } from "@/components/ui/tabs/tabs";
 import { gettingStartedSteps, faqItems } from "@/consts/shared";
 
 export default function DocumentationPage() {

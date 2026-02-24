@@ -2,7 +2,7 @@
 
 import { type ChangeEvent, useCallback, useEffect, useRef } from "react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input/input";
 import { UniversalSearchDropdown } from "@/components/universal-search/universal-search-dropdown";
 import { useUniversalSearch } from "@/hooks/use-universal-search";
 

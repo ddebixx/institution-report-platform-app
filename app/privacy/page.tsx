@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { ShieldIcon, MailIcon } from "lucide-react";
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion/accordion";
 import { privacyItems } from "@/consts/shared";
 
 export default function PrivacyPage() {

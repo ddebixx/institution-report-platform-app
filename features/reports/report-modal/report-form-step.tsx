@@ -11,8 +11,8 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/field/field";
+import { Input } from "@/components/ui/input/input";
 import { mapInstitutionToOption } from "@/lib/reports";
 import { MIN_SCHOOL_SEARCH_CHARACTERS } from "@/consts/reports";
 import type { ReportFormStep1Props } from "@/types/reports";

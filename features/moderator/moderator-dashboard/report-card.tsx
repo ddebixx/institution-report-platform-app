@@ -13,7 +13,7 @@ import {
 import { twMerge } from "tailwind-merge";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 import type { ReportCardProps } from "@/types/reports";
 import { formatReportDateShort } from "@/utils/format-date";
 import { getReportStatusBadgeClass, getReportStatusLabelKey } from "@/utils/report-status";

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { FileTextIcon, MailIcon } from "lucide-react";
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion/accordion";
 import { accordionItems } from "@/consts/shared";
 
 export default function TermsPage() {

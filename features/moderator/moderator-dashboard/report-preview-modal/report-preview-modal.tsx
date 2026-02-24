@@ -3,8 +3,8 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
+import { Button } from "@/components/ui/button/button";
+import { Modal } from "@/components/ui/modal/modal";
 import { getPdfUrl } from "@/lib/storage";
 import type { ReportPreviewModalProps } from "@/types/reports";
 import { ReportPreviewHeader } from "./report-preview-header";

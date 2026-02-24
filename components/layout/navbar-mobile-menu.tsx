@@ -3,7 +3,7 @@
 import { LogInIcon, LogOutIcon, XIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 import type { NavbarMobileMenuProps } from "@/components/layout/navbar-types";
 
 export const NavbarMobileMenu = ({

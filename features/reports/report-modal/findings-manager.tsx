@@ -3,16 +3,16 @@
 import { useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button/button";
+import { Input } from "@/components/ui/input/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/components/ui/select/select";
+import { Textarea } from "@/components/ui/textarea/textarea";
 import { FindingRow } from "@/features/reports/report-modal/finding-row";
 import type { PendingFinding } from "@/features/reports/report-modal/findings-manager-types";
 import { createFinding, createRegulationLookup } from "@/lib/reports";

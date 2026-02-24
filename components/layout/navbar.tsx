@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 
 import { LocaleSwitcher } from "@/components/locale/locale-switcher";
 import { useAuthModal } from "@/providers/auth-modal-provider";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 import { useAuthContext } from "@/providers/auth-provider";
 import { getNavbarActions } from "@/handlers/navbar";
 import { useMobileMenu } from "@/hooks/use-mobile-menu";

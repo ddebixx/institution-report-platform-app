@@ -2,8 +2,8 @@
 
 import { LoaderIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Modal } from "@/components/ui/modal";
+import { Button } from "@/components/ui/button/button";
+import { Modal } from "@/components/ui/modal/modal";
 import { ModeratorProfileFormBody } from "./moderator-profile-form";
 import { useModeratorProfileForm } from "@/hooks/use-moderator-profile-form";
 import type { ModeratorProfileModalProps } from "@/types/moderator-dashboard";

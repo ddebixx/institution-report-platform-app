@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { useAuthContext } from "@/providers/auth-provider";
-import { Modal } from "@/components/ui/modal";
+import { Modal } from "@/components/ui/modal/modal";
 import type { ReportModalProps } from "@/types/reports";
 import { useInstitutionSearchFetch } from "@/hooks/use-institution-search-query";
 import { REFERENCE_REGULATION_URL } from "@/consts/reports";

@@ -4,7 +4,7 @@ import { LogInIcon, LogOutIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { LocaleSwitcher } from "@/components/locale/locale-switcher";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 import type { NavbarDesktopActionsProps } from "@/components/layout/navbar-types";
 
 export const NavbarDesktopActions = ({

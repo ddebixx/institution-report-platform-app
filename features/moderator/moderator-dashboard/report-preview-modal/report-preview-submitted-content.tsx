@@ -1,6 +1,6 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator/separator";
 import type { ReportContent } from "@/types/reports";
 
 type ReportPreviewSubmittedContentProps = {

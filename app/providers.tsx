@@ -6,8 +6,8 @@ import { ThemeProvider } from "next-themes";
 import { queryClient, asyncStoragePersister } from "@/lib/queryClient";
 import { AuthProvider } from "@/providers/auth-provider";
 import { AuthModalProvider } from "@/providers/auth-modal-provider";
-import { LocaleProvider } from "@/components/locale/locale-provider";
-import { Toaster } from "@/components/ui/sonner";
+import { LocaleProvider } from "@/providers/locale-provider";
+import { Toaster } from "@/components/ui/sonner/sonner";
 
 type ProvidersProps = {
   children: React.ReactNode;

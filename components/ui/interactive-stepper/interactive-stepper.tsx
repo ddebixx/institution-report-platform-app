@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { CheckIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button/button";
 
 type Step = {
   number: number;

@@ -10,7 +10,7 @@ import {
   ArrowRightIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { Accordion } from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion/accordion";
 import { commonIssuesItems } from "@/consts/shared";
 
 export default function SupportPage() {

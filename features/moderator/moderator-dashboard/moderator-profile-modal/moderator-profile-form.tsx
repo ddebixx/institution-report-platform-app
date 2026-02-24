@@ -6,9 +6,9 @@ import { UploadIcon, XIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
-import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button/button";
+import { Field, FieldContent, FieldDescription, FieldLabel } from "@/components/ui/field/field";
+import { Input } from "@/components/ui/input/input";
 import { MODERATOR_PROFILE_IMAGE_ACCEPT } from "@/consts/moderator-profile";
 import type { ModeratorProfileFormValues } from "@/lib/schemas/moderator-profile-form";
 
