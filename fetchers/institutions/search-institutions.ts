@@ -13,21 +13,16 @@ export const searchInstitutions = async (
     return [];
   }
 
-  const response = await fetch(
-    `/api/institutions/search?q=${encodeURIComponent(trimmedQuery)}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`/api/institutions/search?q=${encodeURIComponent(trimmedQuery)}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     const errorMessage =
-      typeof errorBody?.message === "string"
-        ? errorBody.message
-        : "Failed to search institutions";
+      typeof errorBody?.message === "string" ? errorBody.message : "Failed to search institutions";
 
     throw new Error(errorMessage);
   }

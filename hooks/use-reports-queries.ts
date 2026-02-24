@@ -63,7 +63,7 @@ export const useReportsQueries = ({
       queryClient.invalidateQueries({ queryKey: reportKeys.assigned(accessToken) }),
       queryClient.invalidateQueries({ queryKey: reportKeys.completed(accessToken) }),
     ]);
-  }, [accessToken, queryClient]);
+  }, [accessToken]);
 
   return {
     availableReports: available.data ?? [],

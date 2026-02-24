@@ -1,8 +1,5 @@
 import { clientEnv } from "@/lib/env";
-import {
-  moderatorProfileSchema,
-  type ModeratorProfile,
-} from "@/lib/schemas/moderator-profile";
+import { moderatorProfileSchema, type ModeratorProfile } from "@/lib/schemas/moderator-profile";
 
 export const fetchModeratorProfile = async (
   accessToken: string

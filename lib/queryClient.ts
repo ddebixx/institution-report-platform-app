@@ -3,17 +3,13 @@ import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 
 const asyncLocalStorage = {
   getItem: (key: string): Promise<string | null> =>
-    Promise.resolve(
-      typeof window !== "undefined" ? window.localStorage.getItem(key) : null
-    ),
+    Promise.resolve(typeof window !== "undefined" ? window.localStorage.getItem(key) : null),
   setItem: (key: string, value: string): Promise<void> =>
     Promise.resolve(
       void (typeof window !== "undefined" && window.localStorage.setItem(key, value))
     ),
   removeItem: (key: string): Promise<void> =>
-    Promise.resolve(
-      void (typeof window !== "undefined" && window.localStorage.removeItem(key))
-    ),
+    Promise.resolve(void (typeof window !== "undefined" && window.localStorage.removeItem(key))),
 };
 
 export const queryClient = new QueryClient({
@@ -34,7 +30,6 @@ export const queryClient = new QueryClient({
     },
   },
 });
-
 
 const PERSISTER_KEY = "institution-report-query-cache";
 

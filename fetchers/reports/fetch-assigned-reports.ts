@@ -1,12 +1,7 @@
 import { clientEnv } from "@/lib/env";
-import {
-  moderatorReportsResponseSchema,
-  type ModeratorReport,
-} from "@/lib/schemas/reports";
+import { moderatorReportsResponseSchema, type ModeratorReport } from "@/lib/schemas/reports";
 
-export const fetchAssignedReports = async (
-  accessToken: string
-): Promise<ModeratorReport[]> => {
+export const fetchAssignedReports = async (accessToken: string): Promise<ModeratorReport[]> => {
   const baseUrl = clientEnv.NEXT_PUBLIC_API_BASE_URL.replace(/\/$/, "");
   const apiUrl = `${baseUrl}/reports/assigned`;
 

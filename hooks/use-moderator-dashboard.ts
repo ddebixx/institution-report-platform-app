@@ -34,8 +34,7 @@ export function useModeratorDashboard({ accessToken }: UseModeratorDashboardProp
     isLoading: isReportsLoading,
     refetchAll: refetchReports,
   } = useReportsQueries({
-    accessToken:
-      accessToken && profile !== undefined && profile !== null ? accessToken : null,
+    accessToken: accessToken && profile !== undefined && profile !== null ? accessToken : null,
   });
 
   const isLoading = isCheckingProfile || isReportsLoading;

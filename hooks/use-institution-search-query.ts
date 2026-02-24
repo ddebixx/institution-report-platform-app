@@ -12,7 +12,6 @@ export const useInstitutionSearchFetch = (): ((
   query: string,
   accessToken?: string
 ) => Promise<InstitutionSearchResult[]>) => {
-
   return useCallback(
     async (query: string, accessToken?: string): Promise<InstitutionSearchResult[]> => {
       const trimmed = query.trim();
@@ -26,6 +25,6 @@ export const useInstitutionSearchFetch = (): ((
         staleTime: 60 * 1000,
       });
     },
-    [queryClient]
+    []
   );
 };
