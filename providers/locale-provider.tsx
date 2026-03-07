@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { NextIntlClientProvider } from "next-intl";
 
-import { defaultLocale, messagesByLocale, type SupportedLocale } from "@/locales/messages";
+import { defaultLocale, messagesByLocale, type SupportedLocale } from "@/locales";
 import { getInitialLocale } from "@/lib/locale-detection";
 
 type LocaleContextValue = {

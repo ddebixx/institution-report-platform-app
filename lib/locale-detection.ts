@@ -1,4 +1,4 @@
-import { isSupportedLocale, type SupportedLocale, defaultLocale } from "@/locales/messages";
+import { isSupportedLocale, type SupportedLocale, defaultLocale } from "@/locales";
 
 const detectBrowserLocale = (): SupportedLocale => {
   if (typeof window === "undefined") {
