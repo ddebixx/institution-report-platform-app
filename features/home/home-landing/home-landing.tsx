@@ -27,7 +27,7 @@ export const HomeLanding = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-gradient-to-b from-slate-50 via-white to-slate-100 text-foreground">
-      <main className="mx-auto flex max-w-[1200px] flex-col items-center gap-16 px-4 pb-24 pt-16 sm:px-6">
+      <main className="mx-auto flex max-w-[1200px] flex-col items-center gap-10 px-4 pb-16 pt-8 sm:gap-16 sm:px-6 sm:pb-24 sm:pt-16">
         <HeroSection isAuthenticated={isAuthenticated} onOpenReportModal={openReportModal} />
 
         <section id="features">

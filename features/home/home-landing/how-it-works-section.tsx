@@ -24,7 +24,7 @@ export const HowItWorksSection = () => {
 
   return (
     <motion.section
-      className="relative mx-auto w-full max-w-[1200px] p-6"
+      className="relative mx-auto w-full max-w-[1200px] p-4 sm:p-6"
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
@@ -42,20 +42,24 @@ export const HowItWorksSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mb-16 text-center">
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{t("subtitle")}</p>
+      <div className="relative z-10 mb-10 text-center sm:mb-16">
+        <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:mb-4 sm:text-4xl">
+          {t("title")}
+        </h2>
+        <p className="mx-auto max-w-2xl px-2 text-base text-muted-foreground sm:px-0 sm:text-lg">
+          {t("subtitle")}
+        </p>
       </div>
 
       <div className="relative z-10">
-        <div className="flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-8 lg:flex lg:flex-row lg:items-stretch lg:gap-4">
+        <div className="flex flex-col gap-6 md:grid md:grid-cols-2 md:gap-8 lg:flex lg:flex-row lg:items-stretch lg:gap-4">
           {steps.map((step, index) => {
             const Icon = step.icon;
             const isLast = index === steps.length - 1;
             return (
-              <div key={step.key} className="flex w-full items-stretch gap-4">
+              <div key={step.key} className="flex min-w-0 w-full items-stretch gap-4">
                 <motion.div
-                  className="relative flex-1"
+                  className="relative min-w-0 flex-1"
                   variants={{
                     hidden: { opacity: 0, scale: 0.95 },
                     visible: {
@@ -65,19 +69,22 @@ export const HowItWorksSection = () => {
                     },
                   }}
                 >
-                  <div className="group relative flex h-full max-h-[360px] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700">
-                    <div className="absolute -top-4 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-sm font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)]">
+                  <div className="group relative flex h-full min-h-0 max-h-[none] flex-col items-center rounded-2xl border border-border/20 bg-card/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700 lg:max-h-[360px]">
+                    <div className="absolute -top-4 left-1/2 flex h-9 w-9 flex-shrink-0 -translate-x-1/2 items-center justify-center rounded-full border-4 border-background bg-primary text-xs font-bold text-primary-foreground shadow-xs transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_10px_rgba(0,0,0,0.1)] sm:h-10 sm:w-10 sm:text-sm">
                       {step.number}
                     </div>
 
-                    <div className="mb-6 mt-4 flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30">
-                      <Icon className="size-10 transition-all duration-300 group-hover:scale-110" />
+                    <div className="mb-4 mt-3 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary transition-all duration-500 group-hover:scale-110 group-hover:from-primary/30 group-hover:to-primary/20 group-hover:shadow-xs group-hover:shadow-primary/30 sm:mb-6 sm:mt-4 sm:h-20 sm:w-20">
+                      <Icon
+                        className="size-8 transition-all duration-300 group-hover:scale-110 sm:size-10"
+                        aria-hidden
+                      />
                     </div>
 
-                    <h3 className="mb-3 text-center text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
+                    <h3 className="mb-2 text-center text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary sm:mb-3 sm:text-xl">
                       {t(`${step.key}.title`)}
                     </h3>
-                    <p className="text-center text-sm leading-relaxed text-muted-foreground">
+                    <p className="text-center text-xs leading-relaxed text-muted-foreground sm:text-sm">
                       {t(`${step.key}.desc`)}
                     </p>
 

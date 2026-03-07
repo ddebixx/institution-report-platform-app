@@ -12,7 +12,7 @@ export const HeroSection = ({ isAuthenticated, onOpenReportModal }: HeroSectionP
 
   return (
     <motion.section
-      className="relative w-full p-6"
+      className="relative w-full p-4 sm:p-6"
       initial={{ opacity: 0, y: 32 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
@@ -37,7 +37,7 @@ export const HeroSection = ({ isAuthenticated, onOpenReportModal }: HeroSectionP
             {t("hero.badge")}
           </motion.div>
           <motion.h1
-            className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl"
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -45,7 +45,7 @@ export const HeroSection = ({ isAuthenticated, onOpenReportModal }: HeroSectionP
             {t("hero.title")}
           </motion.h1>
           <motion.p
-            className="mx-auto max-w-2xl text-xl leading-relaxed text-muted-foreground"
+            className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl"
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}

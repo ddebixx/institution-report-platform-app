@@ -86,7 +86,7 @@ export const StatsSection = () => {
   return (
     <motion.section
       ref={sectionRef}
-      className="relative w-full p-6"
+      className="relative w-full p-4 sm:p-6"
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
@@ -111,11 +111,13 @@ export const StatsSection = () => {
         />
       </div>
 
-      <div className="relative z-10 mb-12 text-center">
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
+      <div className="relative z-10 mb-8 text-center sm:mb-12">
+        <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:mb-4 sm:text-4xl">
+          {t("title")}
+        </h2>
       </div>
 
-      <div className="relative z-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="relative z-10 grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
           <StatCard
             key={stat.key}
@@ -145,7 +147,7 @@ function StatCard({ stat, index, isInView, label }: StatCardProps) {
 
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-6 text-center shadow-xs backdrop-blur-sm transition-all duration-700 sm:p-8"
+      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-background/90 p-4 text-center shadow-xs backdrop-blur-sm transition-all duration-700 sm:p-6 lg:p-8"
       variants={{
         hidden: { opacity: 0, y: 32, scale: 0.95 },
         visible: {
@@ -159,11 +161,11 @@ function StatCard({ stat, index, isInView, label }: StatCardProps) {
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity duration-500 group-hover:opacity-5" />
 
       <div className="relative z-10">
-        <div className="mb-2 text-5xl font-bold text-primary transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+        <div className="mb-2 text-3xl font-bold text-primary transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(0,0,0,0.3)] sm:text-4xl lg:text-5xl">
           {displayValue}
-          {stat.suffix ? <span className="text-3xl">{stat.suffix}</span> : null}
+          {stat.suffix ? <span className="text-2xl sm:text-3xl">{stat.suffix}</span> : null}
         </div>
-        <div className="text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+        <div className="text-xs font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground sm:text-sm">
           {label}
         </div>
       </div>

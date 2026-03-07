@@ -29,7 +29,7 @@ export const FeaturesSection = () => {
 
   return (
     <motion.section
-      className="relative w-full p-6"
+      className="relative w-full p-4 sm:p-6"
       initial="hidden"
       whileInView="visible"
       viewport={viewport}
@@ -43,22 +43,26 @@ export const FeaturesSection = () => {
       <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse" />
       <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl animate-pulse" />
 
-      <div className="relative z-10 mb-12 text-center">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-          <ShieldCheckIcon className="size-4" />
+      <div className="relative z-10 mb-8 text-center sm:mb-12">
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary sm:mb-4 sm:px-4 sm:py-2 sm:text-sm">
+          <ShieldCheckIcon className="size-3.5 sm:size-4" aria-hidden />
           {t("title")}
         </div>
-        <h2 className="mb-4 text-4xl font-bold tracking-tight text-foreground">{t("title")}</h2>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">{t("subtitle")}</p>
+        <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:mb-4 sm:text-4xl">
+          {t("title")}
+        </h2>
+        <p className="mx-auto max-w-2xl px-2 text-base text-muted-foreground sm:px-0 sm:text-lg">
+          {t("subtitle")}
+        </p>
       </div>
 
-      <div className="relative z-10 grid gap-6 md:grid-cols-2">
+      <div className="relative z-10 grid gap-4 sm:gap-6 md:grid-cols-2">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
             <motion.div
               key={feature.key}
-              className="group relative overflow-hidden rounded-2xl border border-border/20 bg-background/80 p-6 shadow-xs backdrop-blur-sm transition-all duration-700"
+              className="group relative overflow-hidden rounded-2xl border border-border/20 bg-background/80 p-4 shadow-xs backdrop-blur-sm transition-all duration-700 sm:p-6"
               variants={{
                 hidden: { opacity: 0, y: 48, scale: 0.95 },
                 visible: {
@@ -73,13 +77,16 @@ export const FeaturesSection = () => {
               <div className="absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_20px_rgba(0,0,0,0.1)]" />
 
               <div className="relative z-10">
-                <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-primary/10 p-3 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20 group-hover:shadow-xs group-hover:shadow-primary/20">
-                  <Icon className="size-6 transition-all duration-300 group-hover:scale-110" />
+                <div className="mb-3 inline-flex items-center justify-center rounded-xl bg-primary/10 p-2.5 text-primary transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/20 group-hover:shadow-xs group-hover:shadow-primary/20 sm:mb-4 sm:p-3">
+                  <Icon
+                    className="size-5 transition-all duration-300 group-hover:scale-110 sm:size-6"
+                    aria-hidden
+                  />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
+                <h3 className="mb-1.5 text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary sm:mb-2 sm:text-xl">
                   {t(`${feature.key}.title`)}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
+                <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   {t(`${feature.key}.desc`)}
                 </p>
               </div>
